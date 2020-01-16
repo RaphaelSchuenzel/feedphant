@@ -1,0 +1,473 @@
+    a, abbr, acronym, address, applet, article, aside, audio, b, big, blockquote, body, canvas, caption, center, cite, code, dd, del, details, dfn, div, dl, dt, em, embed, fieldset, figcaption, figure, footer, form, h1, h2, h3, h4, h5, h6, header, hgroup, html, i, iframe, img, ins, kbd, label, legend, li, mark, menu, nav, object, ol, output, p, pre, q, ruby, s, samp, section, small, span, strike, strong, sub, summary, sup, table, tbody, td, tfoot, th, thead, time, tr, tt, u, ul, var, video, input {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        vertical-align: baseline;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    html, body, #app, #__nuxt, #__layout {
+        height: 100%;
+        width: 100%;
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+        text-size-adjust: 100%;
+        -moz-osx-font-smoothing: grayscale;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+        -webkit-tap-highlight-color: rgba(0,0,0,0);
+        overflow: hidden;
+    }
+
+    body {
+        font-family: proxima-nova, "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, "Noto Sans", sans-serif;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+        font-weight: 700;
+    }
+
+    #app {
+        background-color: var(--background);
+        background-attachment: fixed;
+        background-position: center center;
+        background-size: cover;
+    }
+
+    header, main {
+        position: relative;
+    }
+
+    /* Global Classes */
+
+    .container {
+        width: 100%;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 30px;
+    }
+
+    .disabled {
+        opacity: .2;
+        pointer-events: none;
+        -webkit-touch-callout: none;
+          -webkit-user-select: none;
+           -khtml-user-select: none;
+             -moz-user-select: none;
+              -ms-user-select: none;
+                  user-select: none;
+    }
+
+    .noselect {
+        -webkit-touch-callout: none;
+          -webkit-user-select: none;
+           -khtml-user-select: none;
+             -moz-user-select: none;
+              -ms-user-select: none;
+                  user-select: none;
+    }
+
+        /* Height & Width */
+
+        .h-100 {
+            height: 100%;
+        }
+
+        .w-100 {
+            width: 100%;
+        }   
+
+        /* Font Sizes */
+
+        .fs-48 {
+            font-size: 48px;
+        } .fs-32 {
+            font-size: 32px;
+        } .fs-24 {
+            font-size: 24px;
+        } .fs-18 {
+            font-size: 18px;
+        } .fs-16 {
+            font-size: 16px;
+        } .fs-14 {
+            font-size: 14px;
+        } .fs-12 {
+            font-size: 12px;
+        }
+
+        /* Shadows */
+
+        .bs-s {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .15) !important;
+        }
+
+        .h-bs-s:hover, .h-bs-s:focus, .h-bs-s:active {
+            box-shadow: 0 1px 2px rgba(0, 0, 0, .15) !important;
+        }
+
+        .bs-m {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .15) !important;
+        }
+
+        .h-bs-m:hover, .h-bs-m:focus, .h-bs-m:active {
+            box-shadow: 0 2px 4px rgba(0, 0, 0, .15) !important;
+        }
+
+        /* Alerts */
+
+        .alert {
+            border: 3px solid;
+            border-radius: 2px;
+        }
+
+        /* Forms */
+        form .btn {
+            margin-top: 5px;
+        }
+
+        .form-control {
+            height: unset;
+            line-height: unset;
+            padding: 10px 15px;
+            box-shadow: 0 1px 0 0 hsla(0,0%,100%,.02), inset 0 1px 1px 0 rgba(0,0,0,.1);
+            border: none;
+            border-radius: 2px;
+            transition: none;
+        }
+
+        .form-control:focus {
+            box-shadow: 0 1px 0 0 hsla(0,0%,100%,.02), inset 0 1px 1px 0 rgba(0,0,0,.1), 0 0 0 0.2rem rgba(0,123,255,.25);
+        }
+
+        /* Input Placeholders */
+        .form-control::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+            color: var(--text-2);
+            opacity: .7;
+        }
+        .form-control::-moz-placeholder { /* Firefox 19+ */
+            color: var(--text-2);
+            opacity: .7;
+        }
+        .form-control:-ms-input-placeholder { /* IE 10+ */
+            color: var(--text-2);
+            opacity: .7;
+        }
+        .form-control:-moz-placeholder { /* Firefox 18- */
+            color: var(--text-2);
+            opacity: .7;
+        }
+
+        .form-group label {
+            margin-left: 4px;
+            margin-bottom: 8px;
+        }
+
+        .alert.form-alert {
+            margin-top: 20px;
+        }
+
+        /* Buttons */
+
+        .btn {
+            cursor: pointer;
+            padding: .6rem 15px;
+            font-size: 16px;
+            font-weight: 400;
+            transition: none;
+            border: 2px solid;
+            border-radius: 2px;
+        }
+
+        .btn.btn-bold {
+            font-weight: 500;
+        }
+
+        .btn.btn-large {
+            padding: .6rem 30px;
+        }
+
+        .btn .material-icons {
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+
+        .btn .text {
+            vertical-align: text-top;
+        }
+
+        /* Loaders */
+
+        .loader-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            max-width: 500px;
+        }
+
+        .loader-wrapper .loader-inner {
+            text-align: center;
+        }
+
+        .loader-wrapper .loader-logo {
+            max-width: 280px;
+            margin-bottom: 30px;
+        }
+
+        .loader-wrapper .loader-status {
+            margin-top: 20px;
+        }
+
+        .loader-wrapper .loader {
+            margin: 0 auto;
+        }
+
+        .loader-wrapper .loader.loader-1 {
+            -webkit-animation: loader-1 750ms infinite linear;
+                    animation: loader-1 750ms infinite linear;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            border-top-color: rgba(255, 255, 255, 0.7);
+            height: 3em;
+            width: 3em;
+        }
+
+        @-webkit-keyframes loader-1 {
+            to {
+                -webkit-transform: rotate(360deg);
+                        transform: rotate(360deg);
+            }
+        }
+
+        @keyframes loader-1 {
+            to {
+                -webkit-transform: rotate(360deg);
+                        transform: rotate(360deg);
+            }
+        }
+
+        /* Colors */
+
+            /* General Colors */
+            
+            .c-primary {
+                color: var(--primary) !important;
+            }
+
+            .c-primary-contrast {
+                color: var(--primary-contrast) !important;
+            }
+
+            .c-background {
+                color: var(--background) !important;
+            }
+
+            .c-background-shade {
+                color: var(--background-shade) !important;
+            }
+
+            .c-text-1 {
+                color: var(--text-1) !important;
+            }
+
+            .c-text-2 {
+                color: var(--text-2) !important;
+            }
+
+            /* Background Colors */
+
+            .bc-primary {
+                background-color: var(--primary) !important;
+            }
+
+            .bc-primary-shade {
+                background-color: var(--primary-shade) !important;
+            }
+
+            .bc-primary-contrast {
+                background-color: var(--primary-contrast) !important;
+            }
+
+            .bc-background {
+                background-color: var(--background) !important;
+            }
+
+            .bc-background-shade {
+                background-color: var(--background-shade) !important;
+            }
+
+            .bc-text-1 {
+                background-color: var(--text-1) !important;
+            }
+
+            .bc-text-2 {
+                background-color: var(--text-2) !important;
+            }
+
+            /* Border Colors */
+
+            .bdc-primary {
+                border-color: var(--primary) !important;
+            }
+
+            .bdc-primary-shade {
+                border-color: var(--primary-shade) !important;
+            }
+
+            .bdc-background {
+                border-color: var(--background) !important;
+            }
+
+            .bdc-background-shade {
+                border-color: var(--background-shade) !important;
+            }
+
+            .bdc-text-1 {
+                border-color: var(--text-1) !important;
+            }
+
+            .bdc-text-2 {
+                border-color: var(--text-2) !important;
+            }
+
+            /* Effects */
+
+                /* Hover Effects */
+
+                    /* Color Effects */
+
+                    .h-c-primary:hover, .h-c-primary:focus, .h-c-primary:active {
+                        color: var(--primary) !important;
+                    }
+
+                    .h-c-primary-contrast:hover, .h-c-primary-contrast:focus, .h-c-primary-contrast:active {
+                        color: var(--primary-contrast) !important;
+                    }
+
+                    .h-c-background:hover, .h-c-background:focus, .h-c-background:active {
+                        color: var(--background) !important;
+                    }
+
+                    .h-c-text-1:hover, .h-c-text-1:focus, .h-c-text-1:active {
+                        color: var(--text-1) !important;
+                    }
+
+                    .h-c-text-2:hover, .h-c-text-2:focus, .h-c-text-2:active {
+                        color: var(--text-2) !important;
+                    }
+
+                    /* Background Color Effects */
+
+                    .h-bc-primary:hover, .h-bc-primary:focus, .h-bc-primary:active {
+                        background-color: var(--primary) !important;
+                    }
+
+                    .h-bc-primary-shade:hover, .h-bc-primary-shade:focus, .h-bc-primary-shade:active {
+                        background-color: var(--primary-shade) !important;
+                    }
+
+                    .h-bc-background:hover, .h-bc-background:focus, .h-bc-background:active {
+                        background-color: var(--background) !important;
+                    }
+
+                    .h-bc-background-shade:hover, .h-bc-background-shade:focus, .h-bc-background-shade:active {
+                        background-color: var(--background-shade) !important;
+                    }
+
+                    .h-bc-text-1:hover, .h-bc-text-1:focus, .h-bc-text-1:active {
+                        background-color: var(--text-1) !important;
+                    }
+
+                    .h-bc-text-2:hover, .h-bc-text-2:focus, .h-bc-text-2:active {
+                        background-color: var(--text-2) !important;
+                    }
+
+                    /* Border Color Effects */
+
+                    .h-bdc-primary:hover, .h-bdc-primary:focus, .h-bdc-primary:active {
+                        border-color: var(--primary) !important;
+                    }
+
+                    .h-bdc-background:hover, .h-bdc-background:focus, .h-bdc-background:active {
+                        border-color: var(--background) !important;
+                    }
+
+                    .h-bdc-text-1:hover, .h-bdc-text-1:focus, .h-bdc-text-1:active {
+                        border-color: var(--text-1) !important;
+                    }
+
+                    .h-bdc-text-2:hover, .h-bdc-text-2:focus, .h-bdc-text-2:active {
+                        border-color: var(--text-2) !important;
+                    }
+                
+                /* Click Effects */
+
+                    /* Color Effects */
+
+                    .c-c-primary:focus, .c-c-primary:active {
+                        color: var(--primary) !important;
+                    }
+
+                    .c-c-primary-contrast:focus, .c-c-primary-contrast:active {
+                        color: var(--primary-contrast) !important;
+                    }
+
+                    .c-c-background:focus, .c-c-background:active {
+                        color: var(--background) !important;
+                    }
+
+                    .c-c-text-1:focus, .c-c-text-1:active {
+                        color: var(--text-1) !important;
+                    }
+
+                    .c-c-text-2:focus, .c-c-text-2:active {
+                        color: var(--text-2) !important;
+                    }
+
+                    /* Background Color Effects */
+
+                    .c-bc-primary:focus, .c-bc-primary:active {
+                        background-color: var(--primary) !important;
+                    }
+
+                    .c-bc-primary-shade:focus, .c-bc-primary-shade:active {
+                        background-color: var(--primary-shade) !important;
+                    }
+
+                    .c-bc-background:focus, .c-bc-background:active {
+                        background-color: var(--background) !important;
+                    }
+
+                    .c-bc-background-shade:focus, .c-bc-background-shade:active {
+                        background-color: var(--background-shade) !important;
+                    }
+
+                    .c-bc-text-1:focus, .c-bc-text-1:active {
+                        background-color: var(--text-1) !important;
+                    }
+
+                    .c-bc-text-2:focus, .c-bc-text-2:active {
+                        background-color: var(--text-2) !important;
+                    }
+
+                    /* Border Color Effects */
+
+                    .c-bdc-primary:focus, .c-bdc-primary:active {
+                        border-color: var(--primary) !important;
+                    }
+
+                    .c-bdc-background:focus, .c-bdc-background:active {
+                        border-color: var(--background) !important;
+                    }
+
+                    .c-bdc-text-1:focus, .c-bdc-text-1:active {
+                        border-color: var(--text-1) !important;
+                    }
+
+                    .c-bdc-text-2:focus, .c-bdc-text-2:active {
+                        border-color: var(--text-2) !important;
+                    }
