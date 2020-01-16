@@ -75,7 +75,10 @@
                 </div>
             </div>
 
-            <div id="other-posts" v-if="featured" class="bdc-background-shade">
+            <!-- Other Posts -->
+            <!-- Note: WIP / Concept. Not in working state, removed for now. -->
+
+            <!-- <div id="other-posts" v-if="featured" class="bdc-background-shade">
                 <h1 id="other-posts-head" class="fs-18 c-text-1">Featured Posts</h1>
 
                 <div id="other-posts-inner" class="h-100 w-100">
@@ -107,7 +110,7 @@
                         <nuxt-link :to=" '/board/' + board.name " class="btn btn-large c-text-1 bdc-background-shade h-bc-background-shade h-bdc-primary">View More</nuxt-link>
                     </div>
                 </div>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>
@@ -147,6 +150,16 @@
                     return false;
                 }
             },
+
+            /* 
+                Note: Will break when refreshing if the requested post is not part of the initial board posts API response.
+            
+                This is, due to the initial board posts request only requesting the first 20 posts for the given filter.
+
+                Possible solutions:
+                - A seperate GET API call for the specifically requested post (would possibly need a seperate API route)
+                - A seperate GET API call for a range of posts starting from the requested post on.
+            */
             post () {
                 const self = this;
 
@@ -163,8 +176,10 @@
                 } else {
                     return false;
                 }
-            },
-            featured () {
+            }
+
+            /* Note: WIP / Concept. Not in working state, removed for now. */
+            /* featured () {
                 const self = this;
 
                 if (self.board && self.board.posts && self.board.posts.length > 0) {
@@ -191,7 +206,7 @@
                 } else {
                     return false;
                 }
-            }
+            } */
         },
         watch: {
             '$route.fullPath' () {
@@ -201,7 +216,7 @@
 
                 setTimeout(function () {
                     self.loadingFallback = false;
-                }, 1000);
+                }, 500);
             },
             post (newVal, oldVal) {
                 const self = this;
@@ -245,7 +260,7 @@
 
                     setTimeout(() => {
                         self.loadingFallback = false;
-                    }, 1000);
+                    }, 500);
                 }
             }
         },
@@ -376,6 +391,9 @@
             }
 
     /* Other Posts */
+    /* Note: WIP / Concept. Not in working state, removed for now. */
+
+    /*
 
     #other-posts {
         border-top: 2px solid;
@@ -384,7 +402,9 @@
         overflow: hidden;
     }
 
-        /* Head */
+    */
+
+        /* Head
 
         #other-posts #other-posts-head {
             font-weight: 400;
@@ -392,13 +412,17 @@
             margin-bottom: 30px;
         }
 
-        /* Inner */
+        */
+
+        /* Inner
 
         #other-posts #other-posts-inner {
             position: relative;
         }
 
-            /* Featured Posts */
+        */
+
+            /* Featured Posts
 
             #other-posts #other-posts-more {
                 display: flex;
@@ -414,14 +438,18 @@
                 #other-posts #other-posts-more h1 {
                     margin-bottom: 15px;
                 }
+            
+            */
 
-                /* Featured Posts Button */
+                /* Featured Posts Button
                 
                 #other-posts #other-posts-more .btn {
                     border: 2px solid;
                 }
 
-            /* Post */
+                 */
+
+            /* Post
 
             #other-posts .post {
                 height: 145px;
@@ -433,7 +461,9 @@
                 overflow: hidden;
             }
 
-                /* Post Vote Action */
+            */
+
+                /* Post Vote Action
                 
                 #other-posts .post .post-vote {
                     cursor: pointer;
@@ -452,7 +482,9 @@
                     margin-top: -20px;
                 }
 
-                /* Post View */
+                */
+
+                /* Post View
 
                 #other-posts .post .post-view {
                     margin: 0;
@@ -460,7 +492,9 @@
                     text-decoration: none;
                 }
 
-                    /* Post Content */
+                */
+
+                    /* Post Content
 
                     #other-posts .post .post-content {
                         padding: 15px 30px 0 30px;
@@ -481,7 +515,9 @@
                         margin-bottom: 5px;
                     }
 
-                    /* Post Comment */
+                    */
+
+                    /* Post Comment
 
                     #other-posts .post .post-comment {
                         width: 60px;
@@ -491,4 +527,6 @@
                         text-align: center;
                         overflow: hidden;
                     }
+
+                    */
 </style>

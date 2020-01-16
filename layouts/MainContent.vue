@@ -96,7 +96,8 @@
     }
 
     main #view-container #content-wrapper #content-inner {
-        overflow: auto;
+        overflow: hidden;
+        overflow-y: scroll;
     }
 
     main #view-container #content-wrapper #content-inner.content-container {
