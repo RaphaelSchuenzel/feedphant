@@ -30,7 +30,8 @@ module.exports = {
     plugins: [
         '@/plugins/api',
         { src: '@/plugins/moment', mode: 'client' },
-        { src: '@/plugins/consoleWarning', mode: 'client' }
+        { src: '@/plugins/consoleWarning', mode: 'client' },
+        { src: '@/plugins/scrollToTop', mode: 'client' }
     ],
 
     // Nuxt.js dev-modules
