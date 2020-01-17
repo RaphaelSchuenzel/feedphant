@@ -15,7 +15,11 @@ module.exports = {
     },
 
     // Progress Bar Styling
-    loading: { color: '#fff' },
+    loading: {
+        throttle: 500,
+        duration: 2000,
+        continuous: true
+    },
     
     // Global CSS
     css: [

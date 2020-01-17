@@ -33,13 +33,14 @@
 
     #app {
         background-color: var(--background);
-        background-attachment: fixed;
-        background-position: center center;
-        background-size: cover;
     }
 
     header, main {
         position: relative;
+    }
+
+    .nuxt-progress {
+        background: var(--primary) !important;
     }
 
     /* Global Classes */

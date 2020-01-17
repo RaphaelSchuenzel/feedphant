@@ -1,5 +1,5 @@
 <template>
-    <div :style="rootStyle" class="h-100 w-100">
+    <div class="h-100 w-100">
         <!-- Modals -->
         <AuthModal v-if="modals.auth" :page="page" @close="modals.auth = false" />
 
@@ -61,17 +61,23 @@
                     : this.$tinycolor(text1Color).brighten(30).toString()
                 );
 
-                return {
-                    'background-color': 'var(--background-shade)' || '#000',
-                    '--theme': this.theme || '#000',
-                    '--primary': this.page.brand.colors.primary || '#000',
-                    '--primary-shade': primaryShadeColor || '#000',
-                    '--primary-contrast': primaryContrastColor || '#000',
-                    '--background': this.page.brand.colors.background || '#000',
-                    '--background-shade': backgroundShadeColor || '#000',
-                    '--text-1': text1Color || '#000',
-                    '--text-2': text2Color || '#000'
-                }
+                const style = `
+                    :root {
+                        --theme: ${this.theme} !important;
+                        --primary: ${this.page.brand.colors.primary} !important;
+                        --primary-shade: ${primaryShadeColor} !important;
+                        --primary-contrast: ${primaryContrastColor} !important;
+                        --background: ${this.page.brand.colors.background} !important;
+                        --background-shade: ${backgroundShadeColor} !important;
+                        --text-1: ${text1Color} !important;
+                        --text-2: ${text2Color} !important;
+                    }
+                `
+
+                // minify style
+                const styleString = style.replace(/\n/g, '').replace(/\s\s+/g, ' ');
+
+                return styleString;
             },
             session () {
                 return this.$store.state.session;
@@ -85,6 +91,12 @@
                     {
                         rel: 'icon',
                         href: this.page.brand.icon_url
+                    }
+                ],
+                style: [
+                    {
+                        cssText: this.rootStyle,
+                        type: 'text/css'
                     }
                 ],
                 meta: [
