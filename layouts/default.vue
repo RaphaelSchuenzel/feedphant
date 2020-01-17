@@ -11,6 +11,8 @@
 </template>
 
 <script>
+    import tinycolor from 'tinycolor2'
+    
     import AuthModal from '../components/modals/auth.vue'
 
     import HeaderContent from './HeaderContent.vue'
@@ -35,30 +37,30 @@
                 return this.$store.state.hub.data;
             },
             theme () {
-                const isDark = this.$tinycolor(this.page.brand.colors.background).isDark();
+                const isDark = tinycolor(this.page.brand.colors.background).isDark();
                 
                 return (isDark) ? '255' : '000';
             },
             rootStyle () {
                 const theme = this.theme;
 
-                const text1Color = this.$tinycolor.mostReadable(this.page.brand.colors.background, [ '#' + theme ], { includeFallbackColors: true }).toHexString();
+                const text1Color = tinycolor.mostReadable(this.page.brand.colors.background, [ '#' + theme ], { includeFallbackColors: true }).toHexString();
                 
-                const primaryContrastColor = this.$tinycolor.mostReadable(this.page.brand.colors.primary, [ text1Color ], { includeFallbackColors: true }).toHexString();
+                const primaryContrastColor = tinycolor.mostReadable(this.page.brand.colors.primary, [ text1Color ], { includeFallbackColors: true }).toHexString();
 
                 const primaryShadeColor = ((theme === '255')
-                    ? this.$tinycolor(this.page.brand.colors.primary).darken(10).toString()
-                    : this.$tinycolor(this.page.brand.colors.primary).brighten(10).toString()
+                    ? tinycolor(this.page.brand.colors.primary).darken(10).toString()
+                    : tinycolor(this.page.brand.colors.primary).brighten(10).toString()
                 );
 
                 const backgroundShadeColor = ((theme === '255')
-                    ? this.$tinycolor(this.page.brand.colors.background).brighten(5).toString()
-                    : this.$tinycolor(this.page.brand.colors.background).darken(5).toString()
+                    ? tinycolor(this.page.brand.colors.background).brighten(5).toString()
+                    : tinycolor(this.page.brand.colors.background).darken(5).toString()
                 );
 
                 const text2Color = ((theme === '255')
-                    ? this.$tinycolor(text1Color).darken(30).toString()
-                    : this.$tinycolor(text1Color).brighten(30).toString()
+                    ? tinycolor(text1Color).darken(30).toString()
+                    : tinycolor(text1Color).brighten(30).toString()
                 );
 
                 const style = `

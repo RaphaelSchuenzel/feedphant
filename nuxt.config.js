@@ -6,11 +6,11 @@ module.exports = {
     head: {
         meta: [
             { charset: 'utf-8' },
-            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' }
         ],
         link: [
-            { rel: 'stylesheet', href:'https://use.typekit.net/qrh8grj.css' },
-            { reL: 'stylesheet', href:'https://fonts.googleapis.com/icon?family=Material+Icons' }
+            { rel: 'stylesheet', href: 'https://use.typekit.net/qrh8grj.css' },
+            { reL: 'stylesheet', href: 'https://fonts.googleapis.com/icon?family=Material+Icons' }
         ]
     },
 
@@ -29,8 +29,8 @@ module.exports = {
     // Plugins to load before mounting the App
     plugins: [
         '@/plugins/api',
-        '@/plugins/moment',
-        '@/plugins/tinycolor'
+        { src: '@/plugins/moment', mode: 'client' },
+        { src: '@/plugins/consoleWarning', mode: 'client' }
     ],
 
     // Nuxt.js dev-modules
