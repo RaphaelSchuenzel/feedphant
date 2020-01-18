@@ -221,7 +221,7 @@
             post (newVal, oldVal) {
                 const self = this;
                 
-                if (self.board && self.post && self.post.comment_count > 0 && newVal && newVal.id && newVal !== oldVal) {
+                if (self.board && self.post && self.post.comment_count > 0 && !self.post.comments.loaded && newVal && newVal.id && newVal !== oldVal) {
                     self.$store.dispatch('boards/getBoardPostComments', {
                         url: window.location.hostname,
                         filters: {
@@ -247,7 +247,7 @@
                         });
                     }
 
-                    if (self.post && self.post.comment_count > 0) {
+                    if (self.post && self.post.comment_count > 0 && !self.post.comments.loaded) {
                         self.$store.dispatch('boards/getBoardPostComments', {
                             url: window.location.hostname,
                             filters: {

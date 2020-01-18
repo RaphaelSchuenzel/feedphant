@@ -60,6 +60,16 @@ const mutations = {
     },
     setBoardPosts (state, { payload, board }) {
         const index = state.data.findIndex(item => item.id === board.id);
+
+        const posts = [...payload.data];
+
+        posts.forEach((post) => {
+            post.comments = {};
+
+            post.comments.data = {};
+            post.comments.loaded = false;
+        });
+
         state.data[index].posts = payload.data;
 
         return state.data[index].posts;
@@ -74,8 +84,6 @@ const mutations = {
                 const post = board.posts.find(function (el) {
                     return el.id === payload.post.id;
                 });
-
-                post.comments = {};
 
                 post.comments.data = payload.data;
                 post.comments.loaded = true;
