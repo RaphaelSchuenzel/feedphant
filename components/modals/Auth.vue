@@ -1,6 +1,6 @@
 <template>
     <div id="auth">
-        <div id="modal-mask" @click="closeModal()">
+        <div id="modal-mask" @click="closeModal()" class="h-100 w-100">
             <div id="modal-wrapper">
                 <div id="modal-container" class="bc-background bdc-primary">
 
@@ -228,8 +228,6 @@
         z-index: 9998;
         top: 0;
         left: 0;
-        width: 100%;
-        height: 100%;
         background-color: rgba(0, 0, 0, .6);
         display: table;
         transition: opacity .1s ease;
