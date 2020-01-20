@@ -21,41 +21,56 @@
                             <div v-if="!submitting.active && !submitting.fallback">
 
                                 <!-- Email Auth -->
-                                <form id="email-auth" v-on:submit.prevent="authSubmit">
-                                    <div v-if="mode === 'sign-up'" class="form-group">
+                                <b-form id="email-auth" @submit.prevent="authSubmit">
+                                    <b-form-group v-if="mode === 'sign-up'">
                                         <label class="fs-14" for="authUsernameInput">Username</label>
-                                        <input
+                                        <b-input
                                             id="authUsernameInput"
                                             v-model="inputs.username.content"
-                                            class="form-control bc-background-shade"
+                                            :state="!(inputs.validated && inputs.username.error.active)"
+                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
                                             type="username"
                                             aria-describedby="emailHelp"
                                             placeholder="Enter Username"
-                                        >
-                                    </div>
+                                        />
 
-                                    <div class="form-group">
+                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.username.error.active)" v-if="inputs.username.error.message" class="fs-14">
+                                            {{ inputs.username.error.message }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
+
+                                    <b-form-group>
                                         <label class="fs-14" for="authEmailInput">Email Address</label>
-                                        <input
+                                        <b-input
                                             id="authEmailInput"
                                             v-model="inputs.email.content"
-                                            class="form-control bc-background-shade"
+                                            :state="!(inputs.validated && inputs.email.error.active)"
+                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
                                             type="email"
                                             aria-describedby="emailHelp"
                                             placeholder="Enter Email"
-                                        >
-                                    </div>
+                                        />
 
-                                    <div class="form-group">
+                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.email.error.active)" v-if="inputs.email.error.message" class="fs-14">
+                                            {{ inputs.email.error.message }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
+
+                                    <b-form-group>
                                         <label class="fs-14" for="authPasswordInput">Password</label>
-                                        <input
+                                        <b-input
                                             id="authPasswordInput"
                                             v-model="inputs.password.content"
-                                            class="form-control bc-background-shade"
+                                            :state="!(inputs.validated && inputs.password.error.active)"
+                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
                                             type="password"
                                             placeholder="Enter Password"
-                                        >
-                                    </div>
+                                        />
+
+                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.password.error.active)" v-if="inputs.password.error.message" class="fs-14">
+                                            {{ inputs.password.error.message }}
+                                        </b-form-invalid-feedback>
+                                    </b-form-group>
 
                                     <div class="form-submit">
                                         <button v-if="mode === 'log-in'" class="btn btn-bold btn-large c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary" type="submit">Log In</button>
@@ -66,9 +81,9 @@
                                             <span v-else-if="mode === 'sign-up'">Already have an account? <a v-on:click="mode = 'log-in'">Log In</a></span>
                                         </p>
                                     </div>
-                                </form>
+                                </b-form>
 
-                                <div v-if="inputs.error" class="form-alert alert alert-danger" role="alert">{{ inputs.error }}</div>
+                                <div v-if="inputs.error.active" class="form-alert alert alert-danger" role="alert">{{ inputs.error.message }}</div>
 
                                 <div id="auth-options" class="w-100 row bdc-background-shade">
 
@@ -134,19 +149,32 @@
             return {
                 mode: 'log-in',
                 inputs: {
+                    validated: false,
+                    error: {
+                        message: null,
+                        active: false
+                    },
                     username: {
                         content: '',
-                        error: false
+                        error: {
+                            message: null,
+                            active: false
+                        }
                     },
                     email: {
                         content: '',
-                        error: false
+                        error: {
+                            message: null,
+                            active: false
+                        }
                     },
                     password: {
                         content: '',
-                        error: false
-                    },
-                    error: ''
+                        error: {
+                            message: null,
+                            active: false
+                        }
+                    }
                 },
                 submitting: {
                     active: false,
@@ -171,46 +199,96 @@
                     return this.$emit('close');
                 }
             },
+            validateAuthInputs (mode) {
+                const inputs = {};
+                let error = false;
+
+                const re = {
+                    email: /\S+@\S+\.\S+/
+                }
+
+                if (re.email.test(this.inputs.email.content)) {
+                    this.inputs.email.error.message = null;
+                    this.inputs.email.error.active = false;
+
+                    inputs.email = this.inputs.email.content;
+                } else {
+                    this.inputs.email.error.message = 'Invalid Email Address Format.';
+                    this.inputs.email.error.active = true;
+
+                    error = true;
+                }
+
+                if (this.inputs.password.content) {
+                    inputs.password = this.inputs.password.content;
+                } else {
+                    this.inputs.password.error.message = 'This field cannot be blank.';
+                    this.inputs.password.error.active = true;
+
+                    error = true;
+                }
+
+                if (mode === 'sign-up') {
+                    if (this.inputs.username.content) {
+                        inputs.username = this.inputs.username.content;
+                    } else {
+                        this.inputs.username.error.message = 'This field cannot be blank.';
+                        this.inputs.username.error.active = true;
+
+                        error = true;
+                    }
+                }
+
+                this.inputs.validated = true;
+
+                if (!error && inputs) {
+                    return inputs;
+                } else {
+                    return false;
+                }
+            },
             authSubmit () {
                 const self = this;
 
                 if (!self.submitting.active && !self.submitting.fallback) {
-                    self.submitting.active 		= true;
-                    self.submitting.fallback 	= true;
+                    const inputs = self.validateAuthInputs(self.mode);
 
-                    setTimeout(function () {
-                        self.submitting.fallback = false;
-                    }, 500);
+                    if (inputs) {
+                        self.submitting.active 		= true;
+                        self.submitting.fallback 	= true;
 
-                    if (!self.sso || !self.sso.enable) {
-                        const credentials = {};
+                        setTimeout(function () {
+                            self.submitting.fallback = false;
+                        }, 500);
 
-                        credentials.username 	= self.inputs.username.content;
-                        credentials.email 		= self.inputs.email.content;
-                        credentials.password 	= self.inputs.password.content;
-
-                        self.$store.dispatch('authAction', { mode: self.mode, credentials })
-                            .then((response) => {
-                                // respond
-                            }, (error) => {
-                                if (error && error.response) {
-                                    if (error.response.status && error.response.status === 401) {
-                                        self.inputs.error = 'You have entered an invalid username and / or password.';
-                                    } else if (error.response.data.detail) {
-                                        self.inputs.error = error.response.data.detail;
+                        if (!self.sso || !self.sso.enable) {
+                            self.$store.dispatch('session/authAction', { mode: self.mode, inputs })
+                                .then((response) => {
+                                    // respond
+                                }, (error) => {
+                                    if (error && error.response) {
+                                        if (error.response.status && (error.response.status === 400 || error.response.status === 401)) {
+                                            self.inputs.error.message = 'You have entered an invalid username and / or password.';
+                                            self.inputs.error.active = true;
+                                        } else if (error.response.data.detail) {
+                                            self.inputs.error.message = error.response.data.detail;
+                                            self.inputs.error.active = true;
+                                        } else {
+                                            self.inputs.error.message = 'An internal server error occured. Please try again later.';
+                                            self.inputs.error.active = true;
+                                        }
                                     } else {
                                         self.inputs.error = 'An internal server error occured. Please try again later.';
+                                        self.inputs.error.active = true;
                                     }
-                                } else {
-                                    self.inputs.error = 'An internal server error occured. Please try again later.';
-                                }
 
-                                self.submitting.active = false;
+                                    self.submitting.active = false;
 
-                                return self.submitting.active;
-                            });
-                    } else {
-                        // sso
+                                    return self.submitting.active;
+                                });
+                        } else {
+                            // sso
+                        }
                     }
                 } else {
                     return false;

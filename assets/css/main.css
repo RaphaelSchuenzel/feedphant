@@ -133,9 +133,9 @@
         .form-control {
             height: unset;
             line-height: unset;
-            padding: 10px 15px;
+            padding: 9px 15px;
             box-shadow: 0 1px 0 0 hsla(0,0%,100%,.02), inset 0 1px 1px 0 rgba(0,0,0,.1);
-            border: none;
+            border: 2px solid;
             border-radius: 2px;
             transition: none;
         }
@@ -163,8 +163,16 @@
         }
 
         .form-group label {
-            margin-left: 4px;
             margin-bottom: 8px;
+        }
+
+        .was-validated .form-control:valid, .form-control.is-valid {
+            background-image: none;
+        }
+
+        .form-group .invalid-feedback {
+            font-weight: 500;
+            margin-top: 4px;
         }
 
         .alert.form-alert {
