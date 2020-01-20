@@ -44,7 +44,7 @@
                     </div>
 
                     <div id="post-comments-holder" class="bc-background">
-                        <div v-if="post.comment_count > 0 && !post.comments || post.comments && !post.comments.loaded" class="loader-wrapper">
+                        <div v-if="post.comment_count > 0 && !post.comments.loaded" class="loader-wrapper">
                             <div class="loader loader-1" />
                         </div>
 
@@ -238,30 +238,28 @@
 
             self.loadingFallback = true;
 
-            if (self.board) {
-                if (self.board.post_count > 0) {
-                    if (self.board.posts.length === 0) {
-                        self.$store.dispatch('boards/getBoardPosts', {
-                            url: window.location.hostname,
-                            filters: { board: self.board, limit: { from: 0, to: 20 } }
-                        });
-                    }
-
-                    if (self.post && self.post.comment_count > 0 && !self.post.comments.loaded) {
-                        self.$store.dispatch('boards/getBoardPostComments', {
-                            url: window.location.hostname,
-                            filters: {
-                                board: self.board,
-                                post: self.post,
-                                limit: { from: 0, to: 20 }
-                            }
-                        });
-                    }
-
-                    setTimeout(() => {
-                        self.loadingFallback = false;
-                    }, 500);
+            if (self.board && self.board.post_count > 0) {
+                if (self.board.posts.length === 0) {
+                    self.$store.dispatch('boards/getBoardPosts', {
+                        url: window.location.hostname,
+                        filters: { board: self.board, limit: { from: 0, to: 20 } }
+                    });
                 }
+
+                if (self.post && self.post.comment_count > 0 && !self.post.comments.loaded) {
+                    self.$store.dispatch('boards/getBoardPostComments', {
+                        url: window.location.hostname,
+                        filters: {
+                            board: self.board,
+                            post: self.post,
+                            limit: { from: 0, to: 20 }
+                        }
+                    });
+                }
+
+                setTimeout(() => {
+                    self.loadingFallback = false;
+                }, 500);
             }
         },
         methods: {
