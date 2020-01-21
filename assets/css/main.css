@@ -133,9 +133,9 @@
         .form-control {
             height: unset;
             line-height: unset;
-            padding: 9px 15px;
+            padding: 10px 15px;
             box-shadow: 0 1px 0 0 hsla(0,0%,100%,.02), inset 0 1px 1px 0 rgba(0,0,0,.1);
-            border: 2px solid;
+            border: 1px solid;
             border-radius: 2px;
             transition: none;
         }
@@ -166,8 +166,8 @@
             margin-bottom: 8px;
         }
 
-        .was-validated .form-control:valid, .form-control.is-valid {
-            background-image: none;
+        .was-validated .form-control:invalid, .form-control.is-invalid {
+            border-color: #dc3545 !important;
         }
 
         .form-group .invalid-feedback {
@@ -206,6 +206,11 @@
 
         .btn .text {
             vertical-align: text-top;
+        }
+
+        .btn:focus, .btn.focus, .btn:active, .btn.active {
+            outline: 0;
+            box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
         }
 
         /* Loaders */
@@ -403,6 +408,10 @@
 
                     .h-bdc-background:hover, .h-bdc-background:focus, .h-bdc-background:active {
                         border-color: var(--background) !important;
+                    }
+
+                    .h-bdc-background-shade:hover, .h-bdc-background-shade:focus, .h-bdc-background-shade:active {
+                        border-color: var(--background-shade) !important;
                     }
 
                     .h-bdc-text-1:hover, .h-bdc-text-1:focus, .h-bdc-text-1:active {

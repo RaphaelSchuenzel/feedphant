@@ -27,14 +27,13 @@
                                         <b-input
                                             id="authUsernameInput"
                                             v-model="inputs.username.content"
-                                            :state="!(inputs.validated && inputs.username.error.active)"
-                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
-                                            type="username"
-                                            aria-describedby="emailHelp"
+                                            :state="inputErrorStates.username"
+                                            class="c-text-1 bc-background-shade bdc-background-shade"
+                                            type="text"
                                             placeholder="Enter Username"
                                         />
 
-                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.username.error.active)" v-if="inputs.username.error.message" class="fs-14">
+                                        <b-form-invalid-feedback :state="inputErrorStates.username" v-if="inputs.username.error.message" class="fs-14">
                                             {{ inputs.username.error.message }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
@@ -44,14 +43,13 @@
                                         <b-input
                                             id="authEmailInput"
                                             v-model="inputs.email.content"
-                                            :state="!(inputs.validated && inputs.email.error.active)"
-                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
+                                            :state="inputErrorStates.email"
+                                            class="c-text-1 bc-background-shade bdc-background-shade"
                                             type="email"
-                                            aria-describedby="emailHelp"
                                             placeholder="Enter Email"
                                         />
 
-                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.email.error.active)" v-if="inputs.email.error.message" class="fs-14">
+                                        <b-form-invalid-feedback :state="inputErrorStates.email" v-if="inputs.email.error.message" class="fs-14">
                                             {{ inputs.email.error.message }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
@@ -61,13 +59,13 @@
                                         <b-input
                                             id="authPasswordInput"
                                             v-model="inputs.password.content"
-                                            :state="!(inputs.validated && inputs.password.error.active)"
-                                            class="form-control c-text-1 bc-background-shade bdc-background-shade"
+                                            :state="inputErrorStates.password"
+                                            class="c-text-1 bc-background-shade bdc-background-shade"
                                             type="password"
                                             placeholder="Enter Password"
                                         />
 
-                                        <b-form-invalid-feedback :state="!(inputs.validated && inputs.password.error.active)" v-if="inputs.password.error.message" class="fs-14">
+                                        <b-form-invalid-feedback :state="inputErrorStates.password" v-if="inputs.password.error.message" class="fs-14">
                                             {{ inputs.password.error.message }}
                                         </b-form-invalid-feedback>
                                     </b-form-group>
@@ -189,6 +187,24 @@
                 } else {
                     return {};
                 }
+            },
+            inputErrorStates () {
+                const response = {};
+
+                const validated = this.inputs.validated;
+                
+                response.username = (validated) ? !this.inputs.username.error.active : null;
+                response.email = (validated) ? !this.inputs.email.error.active : null;
+                response.password = (validated) ? !this.inputs.password.error.active : null;
+
+                return response;
+            }
+        },
+        watch: {
+            mode (newVal, oldVal) {
+                if (newVal !== oldVal) {
+                    this.inputs.validated = false;
+                }
             }
         },
         methods: {
@@ -213,7 +229,7 @@
 
                     inputs.email = this.inputs.email.content;
                 } else {
-                    this.inputs.email.error.message = 'Invalid Email Address Format.';
+                    this.inputs.email.error.message = 'Please enter a valid email address.';
                     this.inputs.email.error.active = true;
 
                     error = true;
@@ -222,7 +238,7 @@
                 if (this.inputs.password.content) {
                     inputs.password = this.inputs.password.content;
                 } else {
-                    this.inputs.password.error.message = 'This field cannot be blank.';
+                    this.inputs.password.error.message = 'Please enter a password.';
                     this.inputs.password.error.active = true;
 
                     error = true;
@@ -232,7 +248,7 @@
                     if (this.inputs.username.content) {
                         inputs.username = this.inputs.username.content;
                     } else {
-                        this.inputs.username.error.message = 'This field cannot be blank.';
+                        this.inputs.username.error.message = 'Please enter a username.';
                         this.inputs.username.error.active = true;
 
                         error = true;

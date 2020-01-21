@@ -9,9 +9,11 @@
 
             <nav id="page-nav" class="h-100">
                 <div id="nav-auth">
-                    <a id="nav-auth-action" v-if="!session.authenticated" v-on:click="$emit('showAuthModal')" class="nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary">
-                        <i class="material-icons">account_circle</i>
-                        Sign In
+                    <a id="nav-auth-log-in" v-if="!session.authenticated" v-on:click="$emit('showAuthModal')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade c-bc-background-shade">
+                        Log In
+                    </a>
+                    <a id="nav-auth-sign-up" v-if="!session.authenticated" v-on:click="$emit('showAuthModal')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-primary h-c-primary-contrast h-bc-primary c-c-primary-contrast c-bc-primary">
+                        Sign Up
                     </a>
 
                     <nuxt-link id="nav-auth-user" v-else-if="session.authenticated" to="/account" class="nav-item fs-16 c-text-1 bc-background-shade h-bc-primary">
@@ -155,9 +157,10 @@
         border-left: none;
     }
 
-    header #page-nav #nav-auth .nav-item#nav-auth-action {
+    header #page-nav #nav-auth .nav-item.nav-auth-action {
         cursor: pointer;
         padding: 10px 20px;
+        margin-left: 5px;
     }
 
     header #page-nav #nav-auth #nav-auth-user {
