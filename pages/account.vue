@@ -10,20 +10,20 @@
                 </div>
 
                 <div id="account-nav" class="col c-text-1 bc-background">
-                    <router-link to="/account/settings" class="account-nav-item h-c-primary" active-class="c-primary bc-background-shade bdc-primary">
+                    <nuxt-link to="/account/settings" class="account-nav-item h-c-primary" active-class="c-primary bc-background-shade bdc-primary">
                         <i class="material-icons">account_circle</i>
                         <span>Settings</span>
-                    </router-link>
+                    </nuxt-link>
 
-                    <router-link to="/help" class="account-nav-item h-bc-background-shade">
+                    <nuxt-link to="/help" class="account-nav-item h-bc-background-shade">
                         <i class="material-icons">contact_support</i>
                         <span>Help</span>
-                    </router-link>
+                    </nuxt-link>
 
-                    <router-link to="/account/logout" class="account-nav-item h-bc-background-shade">
+                    <nuxt-link to="/account/logout" class="account-nav-item h-bc-background-shade">
                         <i class="material-icons">exit_to_app</i>
                         <span>Log Out</span>
-                    </router-link>
+                    </nuxt-link>
                 </div>
             </div>
         </div>
