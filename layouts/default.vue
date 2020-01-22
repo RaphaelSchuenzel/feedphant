@@ -1,10 +1,10 @@
 <template>
     <div class="h-100 w-100">
         <!-- Modals -->
-        <AuthModal v-if="modals.auth" :page="page" @close="modals.auth = false" />
+        <AuthModal v-if="modals.auth.active" :page="page" :authMode="modals.auth.payload.mode" @close="modals.auth.active = false" />
 
         <!-- Content Sections -->
-        <HeaderContent :page="page" :session="session" @showAuthModal="modals.auth = true" />
+        <HeaderContent :page="page" :session="session" @showAuthModal="showAuthModal" />
         
         <MainContent :page="page" :session="session" />
     </div>
@@ -27,8 +27,12 @@
         data () {
             return {
                 modals: {
-                    account: false,
-                    auth: false
+                    auth: {
+                        payload: {
+                            mode: false
+                        },
+                        active: false
+                    }
                 }
             }
         },
@@ -161,6 +165,15 @@
                             reject(error);
                         })
                 });
+            },
+            showAuthModal (mode) {
+                if (mode) {
+                    this.modals.auth.payload.mode = mode;
+
+                    this.modals.auth.active = true;
+                } else {
+                    return false;
+                }
             }
         }
     }

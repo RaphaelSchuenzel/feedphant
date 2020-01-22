@@ -141,6 +141,10 @@
                 default: () => {
                     return {};
                 }
+            },
+            'authMode': {
+                type: String,
+                default: 'log-in'
             }
         },
         data: () => {
@@ -206,6 +210,9 @@
                     this.inputs.validated = false;
                 }
             }
+        },
+        mounted () {
+            this.mode = this.authMode;
         },
         methods: {
             closeModal () {

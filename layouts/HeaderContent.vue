@@ -9,10 +9,10 @@
 
             <nav id="page-nav" class="h-100">
                 <div id="nav-auth">
-                    <a id="nav-auth-log-in" v-if="!session.authenticated" v-on:click="$emit('showAuthModal')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade c-bc-background-shade">
+                    <a id="nav-auth-log-in" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'log-in')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade c-bc-background-shade">
                         Log In
                     </a>
-                    <a id="nav-auth-sign-up" v-if="!session.authenticated" v-on:click="$emit('showAuthModal')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-primary h-c-primary-contrast h-bc-primary c-c-primary-contrast c-bc-primary">
+                    <a id="nav-auth-sign-up" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'sign-up')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-primary h-c-primary-contrast h-bc-primary c-c-primary-contrast c-bc-primary">
                         Sign Up
                     </a>
 
