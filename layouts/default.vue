@@ -4,9 +4,13 @@
         <AuthModal v-if="modals.auth.active" :page="page" :authMode="modals.auth.payload.mode" @close="modals.auth.active = false" />
 
         <!-- Content Sections -->
-        <HeaderContent :page="page" :session="session" @showAuthModal="showAuthModal" />
-        
-        <MainContent :page="page" :session="session" />
+        <Notes :page="page" :session="session" :notes="notes" v-if="noteActive" />
+
+        <div v-bind:class="['h-100 w-100', { 'note-active': noteActive }]">
+            <HeaderContent :page="page" :session="session" @showAuthModal="showAuthModal" />
+            
+            <MainContent :page="page" :session="session" />
+        </div>
     </div>
 </template>
 
@@ -15,12 +19,14 @@
     
     import AuthModal from '../components/modals/auth.vue'
 
+    import Notes from './Notes.vue'
     import HeaderContent from './HeaderContent.vue'
     import MainContent from './MainContent.vue'
 
     export default {
         components: {
             AuthModal,
+            Notes,
             HeaderContent,
             MainContent
         },
@@ -33,6 +39,10 @@
                         },
                         active: false
                     }
+                },
+                notes: {
+                    cookies: true,
+                    example: false
                 }
             }
         },
@@ -87,6 +97,9 @@
             },
             session () {
                 return this.$store.state.session;
+            },
+            noteActive () {
+                return Object.values(this.notes).some(item => item);
             }
         },
         head () {

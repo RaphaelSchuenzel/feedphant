@@ -1,15 +1,15 @@
 
 <template>
     <transition id="cookies" name="note">
-        <div class="note-holder w-100">
-            <div class="note-wrapper c-text-1 bc-background bdc-primary">
-                <div class="note-close bdc-background-shade h-c-background h-bc-primary h-bdc-primary">
-                    <i class="material-icons fs-16">close</i>
-                </div>
-
+        <div class="note-holder h-100 w-100">
+            <div class="note-wrapper h-100 c-text-1">
                 <p class="note-description fs-14">
                     <strong>This page is powered by Patchnote.</strong> Patchnote uses cookies to improve your experience. By using the service, you agree to our usage of cookies. For more information, simply click here.
                 </p>
+
+                <div class="note-close c-text-1 h-c-primary c-c-primary">
+                    <i class="material-icons fs-24">close</i>
+                </div>
             </div>
         </div>
     </transition>
@@ -31,20 +31,19 @@
 
 <style scoped>
     .note-holder {
-        position: absolute;
+        position: relative;
         left: 0;
         bottom: 0;
     }
 
     .note-holder .note-wrapper {
         position: relative;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
         margin: 0 auto;
-        margin-bottom: 20px;
         z-index: 100;
-        padding: 15px 50px 15px 30px;
-        border: 2px solid;
-        border-radius: 2px;
-        max-width: 900px;
+        padding: 15px 30px;
         overflow: hidden;
     }
 
@@ -53,13 +52,6 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        position: absolute;
-        top: 8px;
-        right: 8px;
-        height: 28px;
-        width: 28px;
-        border: 2px solid;
-        border-radius: 5px;
     }
 
     .note-holder .note-wrapper .note-close i {

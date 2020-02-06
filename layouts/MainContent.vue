@@ -14,9 +14,6 @@
 
                 <div id="content-wrapper-inner" class="h-100 w-100">
                     <div id="content-inner" class="h-100 w-100">
-                        <!-- Notes -->
-                        <CookieNote v-if="notes.cookies" :page="page" @close="notes.cookies = false" />
-
                         <nuxt />
                     </div>
                 </div>
@@ -26,8 +23,6 @@
 </template>
 
 <script>
-    import CookieNote 		from '../components/notes/Cookies.vue'
-
     import Sidebar 			from './main/Sidebar.vue'
     import FooterContent 	from './main/FooterContent.vue'
 
@@ -35,7 +30,6 @@
         name: 'MainContent',
         components: {
             Sidebar,
-            CookieNote,
             FooterContent
         },
         props: {
@@ -49,13 +43,6 @@
                 type: Object,
                 default: () => {
                     return {};
-                }
-            }
-        },
-        data () {
-            return {
-                notes: {
-                    cookies: true
                 }
             }
         }

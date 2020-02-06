@@ -43,6 +43,10 @@
         background: var(--primary) !important;
     }
 
+    .note-active {
+        height: calc(100% - 68px) !important;
+    }
+
     /* Global Classes */
 
     .container {
