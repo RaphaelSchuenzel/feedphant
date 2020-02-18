@@ -1,16 +1,16 @@
 <template>
-    <div class="h-100 w-100">
+    <div id="content" class="h-100 w-100">
         <!-- Modals -->
         <AuthModal v-if="modals.auth.active" :page="page" :authMode="modals.auth.payload.mode" @close="modals.auth.active = false" />
-
-        <!-- Content Sections -->
-        <Notes :page="page" :session="session" :notes="notes" v-if="noteActive" />
 
         <div v-bind:class="['h-100 w-100', { 'note-active': noteActive }]">
             <HeaderContent :page="page" :session="session" @showAuthModal="showAuthModal" />
             
             <MainContent :page="page" :session="session" />
         </div>
+
+        <!-- Content Sections -->
+        <Notes :page="page" :session="session" :notes="notes" v-if="noteActive" />
     </div>
 </template>
 

@@ -53,9 +53,6 @@
             return {
                 select: {
                     board: this.getActiveBoard()
-                },
-                collapse: {
-                    board: true
                 }
             }
         },

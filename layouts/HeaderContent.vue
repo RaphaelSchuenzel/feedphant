@@ -1,28 +1,41 @@
 <template>
-    <header id="header-content" class="w-100 bc-background">
-        <div id="nav-container" class="h-100 bdc-background-shade">
-            <nuxt-link id="header-primary" to="/" class="h-100">
-                <img id="header-logo" :src="page.brand.logo_url" v-if="page.brand && page.brand.logo_url">
+    <header id="header-content" class="w-100 bc-background bdc-background-shade">
+        <div id="navbar-upper">
+            <div class="navbar-container h-100 w-100">
+                <nuxt-link id="header-primary" to="/" class="h-100">
+                    <img id="header-logo" :src="page.brand.logo_url" v-if="page.brand && page.brand.logo_url">
 
-                <span v-if="page.title" class="page-title fs-18 c-text-1 bdc-background-shade">{{ page.title }}</span>
-            </nuxt-link>
+                    <span v-if="page.title" class="page-title fs-18 c-text-1 bdc-background-shade">{{ page.title }}</span>
+                </nuxt-link>
 
-            <nav id="page-nav" class="h-100">
-                <div id="nav-auth">
-                    <a id="nav-auth-log-in" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'log-in')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade c-bc-background-shade">
-                        Log In
-                    </a>
-                    <a id="nav-auth-sign-up" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'sign-up')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-primary h-c-primary-contrast h-bc-primary c-c-primary-contrast c-bc-primary">
-                        Sign Up
-                    </a>
+                <nav id="page-nav" class="h-100">
+                    <div id="nav-auth">
+                        <a id="nav-auth-log-in" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'log-in')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-background-shade h-bc-background-shade c-bc-background-shade">
+                            Log In
+                        </a>
+                        <a id="nav-auth-sign-up" v-if="!session.authenticated" v-on:click="$emit('showAuthModal', 'sign-up')" class="nav-auth-action nav-item fs-16 btn c-text-1 bc-background bdc-primary h-c-primary-contrast h-bc-primary c-c-primary-contrast c-bc-primary">
+                            Sign Up
+                        </a>
 
-                    <nuxt-link id="nav-auth-user" v-else-if="session.authenticated" to="/account" class="nav-item fs-16 c-text-1 bc-background-shade h-bc-primary">
-                        <img id="nav-auth-user-avatar" v-bind:src="user.avatar">
+                        <nuxt-link id="nav-auth-user" v-else-if="session.authenticated" to="/account" class="nav-item fs-16 c-text-1 bc-background-shade h-bc-primary">
+                            <img id="nav-auth-user-avatar" v-bind:src="user.avatar">
 
-                        <span id="nav-auth-user-username">{{ user.username }}</span>
+                            <span id="nav-auth-user-username">{{ user.username }}</span>
+                        </nuxt-link>
+                    </div>
+                </nav>
+            </div>
+        </div>
+
+        <div id="navbar-lower">
+            <div class="navbar-container h-100 w-100 bdc-background-shade">
+                <nav id="route-nav" class="h-100">
+                    <nuxt-link to="/" class="nav-item fs-16 h-bc-background-shade" exact-active-class="c-primary bc-background-shade bdc-primary sidebar-nav-item-active">
+                        <i class="material-icons fs-24">home</i>
+                        <span>Home</span>
                     </nuxt-link>
-                </div>
-            </nav>
+                </nav>
+            </div>
         </div>
     </header>
 </template>
@@ -86,23 +99,38 @@
 <style scoped>
     header {
         position: relative;
-        height: 70px;
         background-color: #e7e6ec;
         background-position: top center;
         background-size: cover;
+        padding-top: 2px;
+        border-bottom: 1px solid;
         z-index: 100;
     }
 
-    /* Nav Container */
+    header .navbar-container {
+        padding: 0 15px;
+        max-width: 1330px;
+        margin: 0 auto;
+    }
 
-    header #nav-container {
+    header #navbar-upper {
+        height: 80px;
+        padding: 5px 0;
+    }
+
+    header #navbar-upper .navbar-container {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 30px;
-        height: 70px !important;
-        padding-top: 2px;
-        border-bottom: 1px solid;
+    }
+
+    header #navbar-lower {
+        height: 50px;
+    }
+
+    header #navbar-lower .navbar-container {
+        border-top: 1px solid;
+        padding-top: 10px;
     }
 
     header #header-primary {

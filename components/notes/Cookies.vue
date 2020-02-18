@@ -1,8 +1,8 @@
 
 <template>
     <transition id="cookies" name="note">
-        <div class="note-holder h-100 w-100">
-            <div class="note-wrapper h-100 c-text-1">
+        <div class="bc-background-shade note-holder h-100 w-100">
+            <div class="note-wrapper c-text-1">
                 <p class="note-description fs-14">
                     <strong>This page is powered by Patchnote.</strong> Patchnote uses cookies to improve your experience. By using the service, you agree to our usage of cookies. For more information, simply click here.
                 </p>
@@ -34,6 +34,7 @@
         position: relative;
         left: 0;
         bottom: 0;
+        z-index: 100;
     }
 
     .note-holder .note-wrapper {
@@ -43,7 +44,9 @@
         align-items: center;
         margin: 0 auto;
         z-index: 100;
-        padding: 15px 30px;
+        height: 68px;
+        padding: 0 15px;
+        max-width: 1330px;
         overflow: hidden;
     }
 

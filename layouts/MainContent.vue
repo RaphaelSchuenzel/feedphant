@@ -1,17 +1,7 @@
 <template>
     <main id="main-content">
         <div id="view-container" class="row h-100">
-            <div id="sidebar-wrapper" class="col h-100 w-100 bc-background">
-                <Sidebar :page="page" />
-
-                <footer>
-                    <FooterContent :page="page" />
-                </footer>
-            </div>
-            
             <div id="content-wrapper" class="col h-100 w-100 bc-background">
-                <img id="background" v-if="page && page.brand && page.brand.background_url" :src="page.brand.background_url" class="h-100 w-100">
-
                 <div id="content-wrapper-inner" class="h-100 w-100">
                     <div id="content-inner" class="h-100 w-100">
                         <nuxt />
@@ -23,15 +13,8 @@
 </template>
 
 <script>
-    import Sidebar 			from './main/Sidebar.vue'
-    import FooterContent 	from './main/FooterContent.vue'
-
     export default {
         name: 'MainContent',
-        components: {
-            Sidebar,
-            FooterContent
-        },
         props: {
             'page': {
                 type: Object,
@@ -59,22 +42,9 @@
         border-radius: 5px;
     }
 
-    main #view-container #sidebar-wrapper,
     main #view-container #content-wrapper {
         padding: 0;
         overflow: hidden;
-    }
-
-    main #view-container #sidebar-wrapper {
-        max-width: 300px;
-    }
-
-    main #view-container #content-wrapper #background {
-        position: absolute;
-        object-fit: cover;
-        opacity: .03;
-        pointer-events: none;
-        z-index: 10;
     }
 
     main #view-container #content-wrapper-inner {
