@@ -34,7 +34,7 @@
 
 <style scoped>
     main {
-        height: calc(100% - 70px);
+        height: calc(100% - 133px);
     }
 
     main #view-container {

@@ -1,5 +1,5 @@
 <template>
-    <header id="header-content" class="w-100 bc-background bdc-background-shade">
+    <header id="header-content" class="w-100 bc-background">
         <div id="navbar-upper">
             <div class="navbar-container h-100 w-100">
                 <nuxt-link id="header-primary" to="/" class="h-100">
@@ -27,14 +27,21 @@
             </div>
         </div>
 
-        <div id="navbar-lower">
-            <div class="navbar-container h-100 w-100 bdc-background-shade">
-                <nav id="route-nav" class="h-100">
-                    <nuxt-link to="/" class="nav-item fs-16 h-bc-background-shade" exact-active-class="c-primary bc-background-shade bdc-primary sidebar-nav-item-active">
+        <div id="navbar-lower" class="bc-background-shade">
+            <div id="navbar-lower-container" class="navbar-container h-100 w-100">
+                <nav id="route-nav" class="h-100 c-text-1 bdc-background">
+                    <nuxt-link to="/" class="nav-item fs-16" exact-active-class="c-primary bdc-primary nav-item-active">
                         <i class="material-icons fs-24">home</i>
                         <span>Home</span>
                     </nuxt-link>
+
+                    <nuxt-link to="/feedback" class="nav-item fs-16" active-class="c-primary bdc-primary nav-item-active">
+                        <i class="material-icons fs-24">speaker_notes</i>
+                        <span>Feedback</span>
+                    </nuxt-link>
                 </nav>
+
+                <div id="header-watermark" class="c-text-2 fs-14">Powered by Feedphant 🐘</div>
             </div>
         </div>
     </header>
@@ -103,7 +110,6 @@
         background-position: top center;
         background-size: cover;
         padding-top: 2px;
-        border-bottom: 1px solid;
         z-index: 100;
     }
 
@@ -114,7 +120,7 @@
     }
 
     header #navbar-upper {
-        height: 80px;
+        height: 78px;
         padding: 5px 0;
     }
 
@@ -125,12 +131,7 @@
     }
 
     header #navbar-lower {
-        height: 50px;
-    }
-
-    header #navbar-lower .navbar-container {
-        border-top: 1px solid;
-        padding-top: 10px;
+        height: 52px;
     }
 
     header #header-primary {
@@ -140,8 +141,8 @@
     }
 
     header #header-logo {
-        height: 50%;
-        max-width: 256px;
+        height: 100%;
+        max-width: 192px;
         object-fit: contain;
         backface-visibility: hidden;
     }
@@ -200,6 +201,40 @@
     header #page-nav #nav-auth #nav-auth-user #nav-auth-user-avatar {
         height: 36px;
         border-radius: 50%;
+        margin-right: 10px;
+    }
+
+    /* Navbar Lower */
+
+    header #navbar-lower #navbar-lower-container {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    /* Route Nav */
+
+    header #route-nav {
+        display: flex;
+    }
+    
+    header #route-nav .nav-item {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 5px;
+        margin-right: 20px;
+        text-decoration: none;
+        border-bottom: 2px solid;
+        color: inherit;
+        border-color: inherit;
+    }
+
+    header #route-nav .nav-item.nav-item-active {
+        border-bottom: 2px solid;
+    }
+
+    header #route-nav .nav-item .material-icons {
         margin-right: 10px;
     }
 
