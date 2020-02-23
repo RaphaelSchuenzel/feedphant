@@ -1,5 +1,5 @@
 <template>
-    <div id="auth">
+    <transition id="auth" name="modal">
         <div id="modal-mask" @click="closeModal()" class="h-100 w-100">
             <div id="modal-wrapper">
                 <div id="modal-container" class="bc-background bdc-primary">
@@ -120,7 +120,7 @@
                 </div>
             </div>
         </div>
-    </div>
+    </transition>
 </template>
 
 <script>
@@ -332,6 +332,16 @@
         background-color: rgba(0, 0, 0, .6);
         display: table;
         transition: opacity .1s ease;
+        animation: modalMaskIn 100ms;
+    }
+
+    @keyframes modalMaskIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
+        }
     }
 
     #modal-wrapper {
@@ -477,5 +487,19 @@
     #auth-options .auth-option .auth-option-content span {
         position: relative;
         z-index: 10;
+    }
+
+    .modal-enter {
+        opacity: 0;
+    }
+
+    .modal-leave-active {
+        opacity: 0;
+    }
+
+    .modal-enter #modal-container,
+    .modal-leave-active #modal-container {
+        -webkit-transform: scale(1.1);
+        transform: scale(1.1);
     }
 </style>

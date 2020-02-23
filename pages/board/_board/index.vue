@@ -34,8 +34,8 @@
                 </p>
             </div>
 
-            <div id="posts-view" v-else class="row w-100">
-                <div v-for="post in board.posts" :key="post.id" class="post col-6 row bc-background">
+            <div id="posts-view" v-else class="row w-100 bdc-background-shade">
+                <div v-for="post in board.posts" :key="post.id" class="post col-6 row bc-background bdc-background-shade">
                     <div class="post-vote h-100 bdc-background-shade h-bc-background-shade h-bdc-primary col">
                         <div class="post-vote-inner">
                             <i class="post-vote-icon material-icons fs-48 c-text-1">arrow_drop_up</i>
@@ -212,17 +212,23 @@
 
     #posts #posts-view {
         margin: 0 auto;
+        border: 1px solid;
+        border-top: none;
     }
 
     #posts .post {
-        height: 145px;
+        height: 155px;
         padding: 0;
-        max-width: 48%;
-        margin: 10px 1%;
+        max-width: 50%;
+        margin: 0;
         padding: 15px 20px;
+        border-top: 1px solid;
         text-decoration: none;
-        border-radius: 2px;
         overflow: hidden;
+    }
+
+    #posts .post:nth-child(odd) {
+        border-right: 1px solid;
     }
 
         /* Post Vote Action */
