@@ -41,7 +41,7 @@
                     </nuxt-link>
                 </nav>
 
-                <div id="header-watermark" class="c-text-2 fs-14">Powered by Feedphant 🐘</div>
+                <div id="header-watermark" class="c-text-2 fs-14">Powered by Feedphant</div>
             </div>
         </div>
     </header>
