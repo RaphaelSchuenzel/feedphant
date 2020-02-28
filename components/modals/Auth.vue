@@ -321,185 +321,128 @@
     }
 </script>
 
-<style scoped>
-    /* Modal Base */
+<style lang="sass" scoped>
+    #modal-mask
+        position: fixed
+        z-index: 9998
+        top: 0
+        left: 0
+        background-color: rgba(0, 0, 0, .6)
+        display: table
+        $animation-name: unique-id()
+        animation-name: $animation-name
+        animation-duration: 100ms
 
-    #modal-mask {
-        position: fixed;
-        z-index: 9998;
-        top: 0;
-        left: 0;
-        background-color: rgba(0, 0, 0, .6);
-        display: table;
-        transition: opacity .1s ease;
-        animation: modalMaskIn 100ms;
-    }
+        @keyframes #{$animation-name}
+            from
+                opacity: 0
+            to
+                opacity: 1
 
-    @keyframes modalMaskIn {
-        0% {
-            opacity: 0;
-        }
-        100% {
-            opacity: 1;
-        }
-    }
+        #modal-wrapper
+            display: table-cell
+            vertical-align: middle
 
-    #modal-wrapper {
-        display: table-cell;
-        vertical-align: middle;
-    }
+            #modal-container
+                width: 95%
+                max-width: 500px
+                margin: 0px auto
+                border: 2px solid
+                border-radius: 5px
+                transition: all .3s ease
+                overflow: hidden
 
-    #modal-container {
-        width: 95%;
-        max-width: 500px;
-        margin: 0px auto;
-        border: 2px solid;
-        border-radius: 5px;
-        transition: all .3s ease;
-        overflow: hidden;
-    }
+                #modal-header
+                    display: block
+                    text-align: center
+                    border-bottom: none
+                    padding: 30px 0 20px 0
+                    border-bottom: 2px solid
+                    width: 100%
+                    max-width: 400px
+                    margin: 0 auto
 
-    #modal-header {
-        display: block;
-        text-align: center;
-        border-bottom: none;
-        padding: 30px 0 20px 0;
-        border-bottom: 2px solid;
-        width: 100%;
-        max-width: 400px;
-        margin: 0 auto;
-    }
+                    .header-sub
+                        margin-top: 10px
 
-    #modal-header .header-sub {
-        margin-top: 10px;
-    }
+                #modal-body
+                    max-width: 400px
+                    margin: 0 auto
+                    padding: 30px 0
+                    text-align: center
 
-    #modal-body {
-        max-width: 400px;
-        margin: 0 auto;
-        padding: 30px 0;
-        text-align: center;
-    }
+                    #email-auth
+                        max-width: 400px
+                        text-align: left
+                        margin: 0 auto
 
-    /* Content */
+                        .form-submit
+                            display: flex
+                            align-items: center
+                            justify-content: space-between
+                            margin-top: 25px
 
-    #email-auth {
-        max-width: 400px;
-        text-align: left;
-        margin: 0 auto;
-    }
+                            .auth-mode a
+                                cursor: pointer
+                                font-weight: 700
 
-    #email-auth .form-submit {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 25px;
-    }
+                                &:hover, &:focus, &:active
+                                    text-decoration: underline
 
-    #email-auth .auth-mode a {
-        cursor: pointer;
-        font-weight: 700;
-    }
+                    #auth-options
+                        margin: 0
+                        margin-top: 30px
+                        padding-top: 20px
+                        border-top: 2px solid
 
-    #email-auth .auth-mode a:hover, #email-auth .auth-mode a:focus, #email-auth .auth-mode a:active {
-        text-decoration: underline;
-    }
+                        .auth-option
+                            display: flex
+                            align-items: center
+                            justify-content: center
+                            cursor: pointer
+                            border: 2px solid
+                            border-radius: 2px
+                            max-width: 31%
+                            margin: 0 1.166666665%
+                            height: 50px
+                            margin: 10px auto
 
-    /* Auth Options */
+                            .auth-option-icon
+                                height: 20px
+                                width: 20px
+                                fill: var(--text-1)
 
-    #auth-options {
-        margin: 0;
-        margin-top: 30px;
-        padding-top: 20px;
-        border-top: 2px solid;
-    }
+                            span
+                                margin-left: 10px
 
-    #auth-options .auth-option {
-        max-width: 31%;
-        margin: 0 1.166666665%;
-        height: 50px;
-        margin: 10px auto;
-    }
+                            &#auth-google
+                                border-color: #4285F4
 
-    #auth-options .auth-option {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-        border: 2px solid;
-        border-radius: 2px;
-    }
+                                &:hover, &:focus, &:active
+                                    background: #4285F4
 
-    #auth-options .auth-option .auth-option-icon {
-        height: 20px;
-        width: 20px;
-        fill: var(--text-1);
-    }
+                            &#auth-steam
+                                border-color: #171a21
 
-    #auth-options .auth-option span {
-        margin-left: 10px;
-    }
+                                &:hover, &:focus, &:active
+                                    background: #171a21
 
-    /* Google Auth */
+                            &#auth-discord
+                                border-color: #7289DA
 
-    #auth-options .auth-option#auth-google {
-        border-color: #4285F4;
-    }
+                                &:hover, &:focus, &:active
+                                    background: #7289DA
 
-    #auth-options .auth-option#auth-google:hover,
-    #auth-options .auth-option#auth-google:focus,
-    #auth-options .auth-option#auth-google:active {
-        background: #4285F4;
-    }
+    /* Transition */
 
-    /* Steam Auth */
+    .modal-enter
+        opacity: 0
 
-    #auth-options .auth-option#auth-steam {
-        border-color: #171a21;
-    }
-
-    #auth-options .auth-option#auth-steam:hover,
-    #auth-options .auth-option#auth-steam:focus,
-    #auth-options .auth-option#auth-steam:active {
-        background: #171a21;
-    }
-
-    /* Discord Auth */
-
-    #auth-options .auth-option#auth-discord {
-        border-color: #7289DA;
-    }
-
-    #auth-options .auth-option#auth-discord:hover,
-    #auth-options .auth-option#auth-discord:focus,
-    #auth-options .auth-option#auth-discord:active {
-        background: #7289DA;
-    }
-
-    #auth-options .auth-option .auth-option-content {
-        position: relative;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: calc(100% - 50px);
-    }
-
-    #auth-options .auth-option .auth-option-content span {
-        position: relative;
-        z-index: 10;
-    }
-
-    .modal-enter {
-        opacity: 0;
-    }
-
-    .modal-leave-active {
-        opacity: 0;
-    }
+    .modal-leave-active
+        opacity: 0
 
     .modal-enter #modal-container,
-    .modal-leave-active #modal-container {
-        -webkit-transform: scale(1.1);
-        transform: scale(1.1);
-    }
+    .modal-leave-active #modal-container
+        -webkit-transform: scale(1.1)
+        transform: scale(1.1)
 </style>
