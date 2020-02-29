@@ -1,126 +1,106 @@
-<template>
-    <transition id="auth" name="modal">
-        <div id="modal-mask" @click="closeModal()" class="h-100 w-100">
-            <div id="modal-wrapper">
-                <div id="modal-container" class="bc-background bdc-primary">
+<template lang="pug">
+    transition#auth(name="modal")
+        div#modal-mask(@click="closeModal()" class="h-100 w-100")
+            div#modal-wrapper
+                div#modal-container(class="bc-background bdc-primary")
 
-                    <div id="modal-header" class="bdc-background-shade">
-                        <div v-if="mode === 'log-in'">
-                            <h1 class="header-text c-text-1 fs-24">Log In</h1>
-                            <p class="header-sub c-text-2 fs-16">Log in to your Patchnote account.</p>
-                        </div>
+                    div#modal-header(class="bdc-background-shade")
+                        div(v-if="mode === 'log-in'")
+                            h1(class="header-text c-text-1 fs-24") Log In
+                            p(class="header-sub c-text-2 fs-16") Log in to your Patchnote account.
 
-                        <div v-else-if="mode === 'sign-up'">
-                            <h1 class="header-text c-text-1 fs-24">Sign Up</h1>
-                            <p class="header-sub c-text-2 fs-16">Sign up for a Patchnote account.</p>
-                        </div>
-                    </div>
+                        div(v-else-if="mode === 'sign-up'")
+                            h1(class="header-text c-text-1 fs-24") Sign Up
+                            p(class="header-sub c-text-2 fs-16") Sign up for a Patchnote account.
                     
-                    <div id="modal-body" class="c-text-1">
-                        <div v-if="!sso.enable">
-                            <div v-if="!submitting.active && !submitting.fallback">
+                    div#modal-body.c-text-1
+                        div(v-if="!sso.enable")
+                            div(v-if="!submitting.active && !submitting.fallback")
 
-                                <!-- Email Auth -->
-                                <b-form id="email-auth" @submit.prevent="authSubmit">
-                                    <b-form-group v-if="mode === 'sign-up'">
-                                        <label class="fs-14" for="authUsernameInput">Username</label>
-                                        <b-input
-                                            id="authUsernameInput"
+                                //- Email Auth
+                                b-form#email-auth(@submit.prevent="authSubmit")
+                                    b-form-group(v-if="mode === 'sign-up'")
+                                        label.fs-14(for="authUsernameInput") Username
+                                        b-input#authUsernameInput(
                                             v-model="inputs.username.content"
-                                            :state="inputErrorStates.username"
+                                            v-bind:state="inputErrorStates.username"
                                             class="c-text-1 bc-background-shade bdc-background-shade"
                                             type="text"
                                             placeholder="Enter Username"
-                                        />
+                                        )
 
-                                        <b-form-invalid-feedback :state="inputErrorStates.username" v-if="inputs.username.error.message" class="fs-14">
-                                            {{ inputs.username.error.message }}
-                                        </b-form-invalid-feedback>
-                                    </b-form-group>
+                                        b-form-invalid-feedback(:state="inputErrorStates.username" v-if="inputs.username.error.message" class="fs-14") {{ inputs.username.error.message }}
 
-                                    <b-form-group>
-                                        <label class="fs-14" for="authEmailInput">Email Address</label>
-                                        <b-input
-                                            id="authEmailInput"
+                                    b-form-group
+                                        label.fs-14(for="authEmailInput") Email Address
+                                        b-input#authEmailInput(
                                             v-model="inputs.email.content"
-                                            :state="inputErrorStates.email"
+                                            v-bind:state="inputErrorStates.email"
                                             class="c-text-1 bc-background-shade bdc-background-shade"
                                             type="email"
                                             placeholder="Enter Email"
-                                        />
+                                        )
 
-                                        <b-form-invalid-feedback :state="inputErrorStates.email" v-if="inputs.email.error.message" class="fs-14">
-                                            {{ inputs.email.error.message }}
-                                        </b-form-invalid-feedback>
-                                    </b-form-group>
+                                        b-form-invalid-feedback(:state="inputErrorStates.email" v-if="inputs.email.error.message" class="fs-14") {{ inputs.email.error.message }}
 
-                                    <b-form-group>
-                                        <label class="fs-14" for="authPasswordInput">Password</label>
-                                        <b-input
+                                    b-form-group
+                                        label.fs-14(for="authPasswordInput") Password
+                                        b-input(
                                             id="authPasswordInput"
                                             v-model="inputs.password.content"
-                                            :state="inputErrorStates.password"
+                                            v-bind:state="inputErrorStates.password"
                                             class="c-text-1 bc-background-shade bdc-background-shade"
                                             type="password"
                                             placeholder="Enter Password"
-                                        />
+                                        )
 
-                                        <b-form-invalid-feedback :state="inputErrorStates.password" v-if="inputs.password.error.message" class="fs-14">
-                                            {{ inputs.password.error.message }}
-                                        </b-form-invalid-feedback>
-                                    </b-form-group>
+                                        b-form-invalid-feedback.fs-14(:state="inputErrorStates.password" v-if="inputs.password.error.message") {{ inputs.password.error.message }}
 
-                                    <div class="form-submit">
-                                        <button v-if="mode === 'log-in'" class="btn btn-bold btn-large c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary" type="submit">Log In</button>
-                                        <button v-else-if="mode === 'sign-up'" class="btn btn-bold btn-large c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary" type="submit">Sign Up</button>
+                                    div.form-submit
+                                        button(
+                                            v-if="mode === 'log-in'"
+                                            class="btn btn-bold btn-large c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary"
+                                            type="submit"
+                                        ) Log In
+                                        button(
+                                            v-else-if="mode === 'sign-up'"
+                                            class="btn btn-bold btn-large c-text-1 bc-background bdc-background-shade h-bc-background-shade h-bdc-primary c-c-primary-contrast c-bc-primary"
+                                            type="submit"
+                                        ) Sign Up
 
-                                        <p class="auth-mode fs-14">
-                                            <span v-if="mode === 'log-in'">Don't have an account? <a v-on:click="mode = 'sign-up'">Sign Up</a></span>
-                                            <span v-else-if="mode === 'sign-up'">Already have an account? <a v-on:click="mode = 'log-in'">Log In</a></span>
-                                        </p>
-                                    </div>
-                                </b-form>
+                                        p(class="auth-mode fs-14")
+                                            span(v-if="mode === 'log-in'") Not a member yet?
+                                                a(v-on:click="mode = 'sign-up'") Sign Up
+                                            span(v-else-if="mode === 'sign-up'") Already have an account?
+                                                a(v-on:click="mode = 'log-in'") Log In
 
-                                <div v-if="inputs.error.active" class="form-alert alert alert-danger" role="alert">{{ inputs.error.message }}</div>
+                                div(v-if="inputs.error.active" class="form-alert alert alert-danger" role="alert") {{ inputs.error.message }}
 
-                                <div id="auth-options" class="w-100 row bdc-background-shade">
+                                div#auth-options(class="w-100 row bdc-background-shade")
 
-                                    <!-- Google Auth -->
-                                    <div id="auth-google" class="col auth-option h-bs-s">
-                                        <GoogleLogo class="auth-option-icon" />
+                                    //- Google Auth
+                                    div#auth-google(class="col auth-option h-bs-s")
+                                        GoogleLogo.auth-option-icon
 
-                                        <span>Google</span>
-                                    </div>
+                                        span Google
 
-                                    <!-- Steam Auth -->
-                                    <div id="auth-steam" class="col auth-option h-bs-s">
-                                        <SteamLogo class="auth-option-icon" />
+                                    //- Steam Auth
+                                    div#auth-steam(class="col auth-option h-bs-s")
+                                        SteamLogo.auth-option-icon
 
-                                        <span>Steam</span>
-                                    </div>
+                                        span Steam
 
-                                    <!-- Discord Auth -->
-                                    <div id="auth-discord" class="col auth-option h-bs-s">
-                                        <DiscordLogo class="auth-option-icon" />
+                                    //- Discord Auth
+                                    div#auth-discord(class="col auth-option h-bs-s")
+                                        DiscordLogo.auth-option-icon
 
-                                        <span>Discord</span>
-                                    </div>
-                                </div>
-                            </div>
+                                        span Discord
 
-                            <div v-else class="loader-wrapper">
-                                <div class="loader-inner">
-                                    <div class="loader loader-1" />
+                            div.loader-wrapper(v-else)
+                                div class="loader-inner"
+                                    div(class="loader loader-1")
 
-                                    <p class="loader-status fs-16">Logging you in...</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </transition>
+                                    p(class="loader-status fs-16") Logging you in...
 </template>
 
 <script>
