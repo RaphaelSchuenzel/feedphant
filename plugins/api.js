@@ -1,7 +1,5 @@
 'use strict';
 
-import enviroment from '../helpers/enviroment.js';
-
 export default function ({ $axios, store }, inject) {
     const api = $axios.create({
         headers: {
@@ -11,7 +9,7 @@ export default function ({ $axios, store }, inject) {
         }
     });
 
-    api.setBaseURL(store.state.system.api_url[enviroment]);
+    api.setBaseURL(`http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}` + '/api');
 
     // Inject to context as $api
     inject('api', api)

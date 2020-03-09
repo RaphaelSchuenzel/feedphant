@@ -1,18 +1,25 @@
 module.exports = {
-    root: true,
-    env: {
-        browser: true,
-        node: true
+    "root": true,
+    "env": {
+        "browser": true,
+        "es6": true,
+        "node": true
     },
-    parserOptions: {
-        parser: "babel-eslint"
+    "parserOptions": {
+        "parser": "babel-eslint",
+        "ecmaVersion": 2018,
+        "sourceType": "module"
     },
-    extends: [
+    "globals": {
+        "Atomics": "readonly",
+        "SharedArrayBuffer": "readonly"
+    },
+    "extends": [
         "@nuxtjs",
         "plugin:nuxt/recommended"
     ],
     // add your custom rules here
-    rules: {
+    "rules": {
         "nuxt/no-cjs-in-config": "off",
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
