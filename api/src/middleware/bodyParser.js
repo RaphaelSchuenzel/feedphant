@@ -1,8 +1,8 @@
 'use strict';
 
-import bodyParser from 'body-parser';
+const bodyParser = require('body-parser');
 
-export default ({ app, config }) => {
+module.exports = ({ app, config }) => {
     app.use(bodyParser.urlencoded({
         extended: true
     }));

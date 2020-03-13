@@ -1,17 +1,17 @@
 'use strict';
 
-import passport     from 'passport';
-import bcrypt       from 'bcrypt';
-import jwt          from 'jsonwebtoken';
+const passport = require('passport');
+const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 // strategies
-import LocalStrategy    from 'passport-local';
-import BearerStrategy   from 'passport-http-bearer';
+const LocalStrategy = require('passport-local');
+const BearerStrategy = require('passport-http-bearer');
 
-// models
-import secrets from '../models/secrets'
+// controllers
+const secrets = require('../controllers/secrets');
 
-export default ({ app, config }) => {
+module.exports = ({ app }) => {
     app.use(passport.initialize());
     app.use(passport.session());
 
@@ -104,5 +104,5 @@ export default ({ app, config }) => {
             });
     }));
 
-    return global.passport = passport;
+    return passport;
 }

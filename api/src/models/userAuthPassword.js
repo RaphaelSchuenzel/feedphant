@@ -1,15 +1,15 @@
 module.exports = ({ db, Sequelize }) => {
-    db.define('boards', {
+    db.define('users_auth_password', {
         id: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        name: {
-            type: Sequelize.STRING,
+        userId: {
+            type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        title: {
-            type: Sequelize.STRING,
+        hash: {
+            type: Sequelize.STRING(4096),
             allowNull: false
         },
         createdAt: {

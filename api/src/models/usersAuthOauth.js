@@ -1,15 +1,23 @@
 module.exports = ({ db, Sequelize }) => {
-    db.define('boards', {
+    db.define('users_auth_oauth', {
         id: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        name: {
+        userId: {
+            type: Sequelize.RANGE(Sequelize.INTEGER),
+            allowNull: false
+        },
+        provider: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        title: {
-            type: Sequelize.STRING,
+        accessToken: {
+            type: Sequelize.STRING(4096),
+            allowNull: false
+        },
+        refreshToken: {
+            type: Sequelize.STRING(4096),
             allowNull: false
         },
         createdAt: {

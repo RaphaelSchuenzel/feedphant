@@ -1,8 +1,8 @@
 'use strict';
 
-import cors from 'cors';
+const cors = require('cors');
 
-export default ({ app, config }) => {
+module.exports = ({ app, config }) => {
     app.use(cors({
         exposedHeaders: config.corsHeaders
     }));

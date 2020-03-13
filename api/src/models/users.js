@@ -1,16 +1,20 @@
 module.exports = ({ db, Sequelize }) => {
-    db.define('boards', {
+    db.define('users', {
         id: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        name: {
+        email: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        title: {
-            type: Sequelize.STRING,
+        username: {
+            type: Sequelize.STRING(50),
             allowNull: false
+        },
+        avatarUrl: {
+            type: Sequelize.STRING(4096),
+            allowNull: true
         },
         createdAt: {
             type: Sequelize.DATE,

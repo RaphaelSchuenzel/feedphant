@@ -1,12 +1,15 @@
 'use strict';
 
-// controllers
-import UserController from '../../controllers/users'
-
-const requests = () => {
-    get: {
-        api.get('/users/me', passport.authenticate('bearer'), UserController.getUsersMe);
+module.exports = ({ api, db, passport }) => {
+    const controllers = {
+        users: require('../../controllers/users')({ api, db, passport })
     }
-}
 
-export default requests;
+    const requests = () => {
+        get: {
+            api.get('/users/me', passport.authenticate('bearer'), controllers.users.getUsersMe);
+        }
+    }
+
+    return requests();
+}

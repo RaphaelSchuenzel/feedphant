@@ -1,11 +1,10 @@
-import { Router }   from 'express';
+const { Router } = require('express');
 
-import cors 		from './cors'
-import bodyParser 	from './bodyParser'
-
-export default ({ app, config }) => {
-    cors({ app, config })
-    bodyParser({ app, config })
+module.exports = ({ app, config }) => {
+    const middleware = {
+        cors        : require('./cors')({ app, config }),
+        bodyParser  : require('./bodyParser')({ app, config }),
+    }
 
     return Router();
 }

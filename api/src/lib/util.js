@@ -3,7 +3,7 @@
 
 const util = {
     db: {
-        /**	
+        /**
 		 *  Queries a specified table for count of rows with a specified condition.
 		 *	@param {string} table			Table within DB to access
 		 *	@param {string} condition		Condition to query table for
@@ -51,6 +51,4 @@ const util = {
     }
 }
 
-global.util = util;
-
-export default util;
+module.exports = util;

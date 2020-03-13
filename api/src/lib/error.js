@@ -45,4 +45,4 @@ class ApplicationError extends Error {
 global.ErrorCodes = ErrorCodes;
 global.ApplicationError = ApplicationError;
 
-export default { ErrorCodes, ApplicationError }
+module.exports = { ErrorCodes, ApplicationError }

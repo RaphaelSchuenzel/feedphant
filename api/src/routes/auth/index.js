@@ -1,15 +1,18 @@
 'use strict';
 
-// controllers
-import AuthController from '../../controllers/auth'
+module.exports = ({ api, db, passport }) => {
+    const controllers = {
+        auth: require('../../controllers/auth')({ api, db, passport })
+    }
 
-const requests = () => {
-    post: {
-        api.post('/auth/email', AuthController.registerAccountEmail);
+    const requests = async () => {
+        post: {
+            api.post('/auth/email', controllers.auth.registerAccountEmail);
+        }
+        put: {
+            api.put('/auth/email', passport.authenticate('local'), controllers.auth.loginAccountEmail);
+        }
     }
-    put: {
-        api.put('/auth/email', passport.authenticate('local'), AuthController.loginAccountEmail);
-    }
+
+    return requests();
 }
-
-export default requests;

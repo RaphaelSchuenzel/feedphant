@@ -1,27 +1,20 @@
 'use strict';
 
-import { version }  from '../../package.json';
-import { Router }   from 'express';
+const { version } = require('../../package.json');
+const { Router } = require('express');
 
-// routes
-import auth             from './auth'
-import hubs             from './hubs'
-import organizations    from './organizations'
-import users            from './users'
-
-export default ({ app, config }) => {
-    global.api = Router();
-
-    let maintenance = false;
+module.exports = ({ app, config, db, passport }) => {
+    const api = Router();
 
     api.get('/', (req, res) => {
-        res.json({ version, "maintenance": maintenance });
+        res.json({ version });
     });
 
-    auth();
-    hubs();
-    organizations();
-    users();
+    const routes = {
+        auth    : require('./auth')({ api, db, passport }),
+        boards  : require('./boards')({ api, db, passport }),
+        users   : require('./users')({ api, db, passport })
+    }
 
     return api;
 }

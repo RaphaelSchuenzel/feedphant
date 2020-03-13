@@ -1,15 +1,23 @@
 module.exports = ({ db, Sequelize }) => {
-    db.define('boards', {
+    db.define('boards_posts', {
         id: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        name: {
-            type: Sequelize.STRING,
+        boardId: {
+            type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
         title: {
             type: Sequelize.STRING,
+            allowNull: false
+        },
+        content: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        state: {
+            type: Sequelize.BOOLEAN,
             allowNull: false
         },
         createdAt: {

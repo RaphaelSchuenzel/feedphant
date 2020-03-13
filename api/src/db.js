@@ -1,10 +1,8 @@
-import Sequelize from 'sequelize';
-import consola from 'consola';
-import config from './config.json';
+const Sequelize = require('sequelize');
+const consola = require('consola');
+const config = require('./config.json');
 
-export default callback => {
-    if (config.debug) consola.warn("The applicaton is running in development mode. For use in production, make sure to disable the debug option.");
-
+module.exports = callback => {
     let connection = new Sequelize(config.db.database, config.db.user, config.db.password, {
         host    : config.db.host,
         dialect : config.db.dialect,
@@ -20,8 +18,6 @@ export default callback => {
             throw new ApplicationError(ErrorCodes.INTERNAL_ERROR, err);
         });
 
-    global.db = connection;
-
-    // connect to a database if needed, then pass it to `callback`:
+    // pass connection object in callback
     callback(connection);
 }

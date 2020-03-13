@@ -1,9 +1,9 @@
 'use strict';
 
-import fs       from 'fs'
-import crypto   from 'crypto'
+const fs = require('fs');
+const crypto = require('crypto');
 
-const model = {
+module.exports = ({ api, db, passport }) => ({
     getSecret: async function (type) {
         // cache
 
@@ -60,6 +60,4 @@ const model = {
             });
         });
     }
-};
-
-export default model;
+});
