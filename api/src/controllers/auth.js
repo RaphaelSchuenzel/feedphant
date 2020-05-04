@@ -33,7 +33,7 @@ module.exports = ({ api, db, passport }) => ({
                     password: req.body.password
                 };
 
-                let users = await models.users.findAll({
+                const users = await models.users.findAll({
                     where: {
                         email: credentials.email
                     }
@@ -72,12 +72,12 @@ module.exports = ({ api, db, passport }) => ({
                                     return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
                                 } else if (results) {
                                     controllers.users.getUser('email', credentials.email)
-                                        .then(user => {
+                                        .then((user) => {
                                             db.query(`INSERT INTO users_auth_password (user_id, hash) VALUES ('${user.id}', '${credentials.password}')`, function (error, results, fields) {
                                                 if (error) {
                                                     return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
                                                 } else if (results) {
-                                                    model.generateAccessToken(user)
+                                                    module.exports.generateAccessToken(user)
                                                         .then((response) => {
                                                             return resolve(response);
                                                         })
@@ -89,7 +89,7 @@ module.exports = ({ api, db, passport }) => ({
                                                 }
                                             });
                                         })
-                                        .catch(err => {
+                                        .catch((err) => {
                                             return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
                                         });
                                 } else {
@@ -104,19 +104,13 @@ module.exports = ({ api, db, passport }) => ({
     },
     loginAccountEmail: (req, res, next) => {
         try {
-            let user = req.user;
-
-            if (user) {
-                module.exports.generateAccessToken(user)
-                    .then(function (response) {
-                        return res.json(response);
-                    })
-                    .catch(function (err) {
-                        return res.status(err.status).json(err);
-                    });
-            } else {
-                throw new ApplicationError(ErrorCodes.INTERNAL_ERROR, error);
-            }
+            module.exports.generateAccessToken(req.user)
+                .then(function (response) {
+                    return res.json(response);
+                })
+                .catch(function (err) {
+                    return res.status(err.status).json(err);
+                });
         } catch (err) {
             return res.status(err.status).json(err);
         }
