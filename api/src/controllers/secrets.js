@@ -4,30 +4,26 @@ const fs = require('fs');
 const crypto = require('crypto');
 
 module.exports = ({ api, db, passport }) => ({
-    getSecret: async function (type) {
+    getSecret: (type) => {
         // cache
 
-        return await new Promise((resolve, reject) => {
+        return new Promise((resolve, reject) => {
             let prefix = './secrets/';
             
             fs.readFile(prefix + type + '.json', (err, data) => {
                 if (err) {
                     return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
                 } else if (data) {
-                    let response = JSON.parse(data)
+                    const response = JSON.parse(data)
                     
                     if (response && response.secret) {
                         resolve(response.secret);
                     } else {
-                        model.generateSecret('auth')
+                        module.exports.generateSecret('auth')
                             .then(function (data) {
-                                let response = JSON.parse(data);
+                                const response = JSON.parse(data);
 
-                                if (response && response.secret) {
-                                    resolve(response.secret);
-                                } else {
-                                    return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, IsStringNull(string)));
-                                }
+                                resolve(response.secret);
                             })
                             .catch(function (err) {
                                 return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
@@ -37,17 +33,17 @@ module.exports = ({ api, db, passport }) => ({
             });
         });
     },
-    generateSecret: async function (type) {
-        return await new Promise((resolve, reject) => {
-            let prefix  = './secrets/';
-            let secret  = crypto.randomBytes(256).toString('hex');
+    generateSecret: (type) => {
+        return new Promise((resolve, reject) => {
+            const prefix = './secrets/';
+            const secret = crypto.randomBytes(256).toString('hex');
             
-            let expires = new Date();
+            const expires = new Date();
             expires.setDate(expires.getDate() + 14);
 
-            var data = JSON.stringify({
-                secret: secret,
-                expires: expires
+            const data = JSON.stringify({
+                secret,
+                expires
             });
             
             // todo: create file if it doesnt exist

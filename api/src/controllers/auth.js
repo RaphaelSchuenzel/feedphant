@@ -20,14 +20,14 @@ module.exports = ({ api, db, passport }) => ({
         try {
             if (req.body.email != null && req.body.username != null && req.body.password != null) {
                 if (req.body.username.length < 2 || req.body.username.length > 40) {
-                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Invalid Username. (Minimum 2, Maximum 40 Characters)");
+                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Username. (Minimum 2, Maximum 40 Characters)');
                 } else if (EmailValidator.validate(req.body.email) !== true) {
-                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Invalid Email Address.");
+                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Email Address.');
                 } else if (req.body.password.length < 8) {
-                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Invalid Password. (Minimum 8 Characters)");
+                    throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Password. (Minimum 8 Characters)');
                 }
 
-                let credentials = {
+                const credentials = {
                     username: req.body.username,
                     email: req.body.email,
                     password: req.body.password
@@ -41,24 +41,22 @@ module.exports = ({ api, db, passport }) => ({
 
                 return res.json(users);
             } else {
-                throw new ApplicationError(ErrorCodes.BAD_REQUEST, "Invalid Payload.");
+                throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Payload.');
             }
         } catch (err) {
             return res.status(err.status).json(err);
         }
     },
-    createAccountEmail: async (credentials) => {
-        return await new Promise((resolve, reject) => {
+    createAccountEmail: (credentials) => {
+        return new Promise((resolve, reject) => {
             // SELECT * FROM users WHERE email = '${credentials.email}'
-            return users;
             
-            /*
             db.query(`SELECT * FROM users WHERE email = '${credentials.email}'`, function (error, results, fields) {
                 if (error || (results && results != null && results.length > 0)) {
                     if (error) {
                         return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
                     } else if (results[0].email === credentials.email) {
-                        return reject(new ApplicationError(ErrorCodes.BAD_REQUEST, "Email address is already in use."));
+                        return reject(new ApplicationError(ErrorCodes.BAD_REQUEST, 'Email address is already in use.'));
                     } else {
                         return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, null));
                     }
@@ -80,10 +78,10 @@ module.exports = ({ api, db, passport }) => ({
                                                     return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
                                                 } else if (results) {
                                                     model.generateAccessToken(user)
-                                                        .then(response => {
+                                                        .then((response) => {
                                                             return resolve(response);
                                                         })
-                                                        .catch(err => {
+                                                        .catch((err) => {
                                                             return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
                                                         });
                                                 } else {
@@ -102,15 +100,14 @@ module.exports = ({ api, db, passport }) => ({
                     });
                 }
             });
-            */
         });
     },
-    loginAccountEmail: async (req, res, next) => {
+    loginAccountEmail: (req, res, next) => {
         try {
             let user = req.user;
 
             if (user) {
-                generateAccessToken(user)
+                module.exports.generateAccessToken(user)
                     .then(function (response) {
                         return res.json(response);
                     })
@@ -124,15 +121,17 @@ module.exports = ({ api, db, passport }) => ({
             return res.status(err.status).json(err);
         }
     },
-    generateAccessToken: async (user) => {
-        return await new Promise((resolve, reject) => {
+    generateAccessToken: (user) => {
+        return new Promise((resolve, reject) => {
             controllers.secrets.getSecret('auth')
                 .then(function (secret) {
                     jwt.sign({
                         id: user.id,
                         expiresIn: '14 days'
-                    }, secret, function(err, token) {
-                        if (err) reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
+                    }, secret, (err, token) => {
+                        if (err) {
+                            reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
+                        }
         
                         resolve(token);
                     });

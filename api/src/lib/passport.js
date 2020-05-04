@@ -33,19 +33,19 @@ module.exports = ({ app }) => {
             if (error) {
                 return done(error);
             } else if (!results || results == null) {
-                return done(null, false, "User could not be found.");
+                return done(null, false, 'User could not be found.');
             } else if (results) {
-                let user = results[0];
+                const user = results[0];
 
                 if (user) {
                     db.query(`SELECT * FROM users_auth_password WHERE user_id = '${user.id}'`, function (error, results, fields) {
                         if (error) {
                             return done(error);
                         } else if (results) {
-                            let password_hash = results[0].hash;
+                            const passwordHash = results[0].hash;
 
-                            if (password_hash) {
-                                bcrypt.compare(password, password_hash, function(err, result) {
+                            if (passwordHash) {
+                                bcrypt.compare(password, passwordHash, function (err, result) {
                                     if (err || result !== true) {
                                         return done(null, false);
                                     } else if (result === true) {
@@ -71,7 +71,7 @@ module.exports = ({ app }) => {
     passport.use(new BearerStrategy((token, done) => {
         secrets.getSecret('auth')
             .then(function (secret) {
-                jwt.verify(token, secret, function(err, decoded) {
+                jwt.verify(token, secret, function (err, decoded) {
                     if (err) {
                         return done(null, false, 'Invalid Access Token.');
                     } else if (decoded) {
@@ -81,7 +81,7 @@ module.exports = ({ app }) => {
                             if (error) {
                                 return done(error);
                             } else if (!results || results == null) {
-                                return done(null, false, "User could not be found.");
+                                return done(null, false, 'User could not be found.');
                             } else if (results) {
                                 let user = results[0];
                 

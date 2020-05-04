@@ -1,4 +1,3 @@
-const http = require('http');
 const express = require('express');
 const helmet = require('helmet');
 const morgan = require('morgan');
@@ -8,7 +7,7 @@ const middleware = require('./middleware');
 const routes = require('./routes');
 const config = require('./config.json');
 
-let app = express();
+const app = express();
 
 // lib
 const util = require('./lib/util');
@@ -29,10 +28,12 @@ process.on('uncaughtException', (err) => {
     process.exit(1)
 });
 
-if (config.debug) consola.warn("The applicaton is running with debugging tools active. For use in production, make sure to disable the debug option within the config.");
+if (config.debug) {
+    consola.warn('The applicaton is running with debugging tools active. For use in production, make sure to disable the debug option within the config.');
+}
 
 // connect to db
-initializeDb(db => {
+initializeDb((db) => {
     // internal middleware
     app.use(middleware({ app, config }));
 

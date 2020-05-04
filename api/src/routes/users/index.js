@@ -5,11 +5,10 @@ module.exports = ({ api, db, passport }) => {
         users: require('../../controllers/users')({ api, db, passport })
     }
 
-    const requests = () => {
-        get: {
-            api.get('/users/me', passport.authenticate('bearer'), controllers.users.getUsersMe);
-        }
-    }
+    // requests
+    
+    // GET
+    api.get('/users/me', passport.authenticate('bearer'), controllers.users.getUsersMe);
 
-    return requests();
+    return api;
 }

@@ -14,34 +14,13 @@ const util = {
 		 *				console.log(response);
 		 *			})
 		 */
-        getRowCountByCondition: async function (table, condition) {
-            return await new Promise((resolve, reject) => {
+        getRowCountByCondition: (table, condition) => {
+            return new Promise((resolve, reject) => {
                 db.query(`SELECT COUNT(*) FROM ${table} WHERE ${condition}`, function (error, results, fields) {
                     if (error) {
                         return reject(error);
                     } else if (results) {
                         return resolve(results[0]['COUNT(*)']);
-                    } else {
-                        return resolve([]);
-                    }
-                });
-            });
-        },
-
-        /**	
-         *  Retrieve a specific amount of posts within a specified hub board.
-         *	@param {string} hub			Hub ID within which to look up the board
-            *	@param {string} board		Board ID to look up
-            *	@param {string} start		First post item to select
-            *	@param {string} end			Last post item to select
-            */
-        getRowsByCondition: async function (table, condition) {
-            return await new Promise((resolve, reject) => {
-                db.query(`SELECT * FROM ${table} WHERE ${condition}`, function (error, results, fields) {
-                    if (error) {
-                        return reject(error);
-                    } else if (results) {
-                        return resolve(results);
                     } else {
                         return resolve([]);
                     }
