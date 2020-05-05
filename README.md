@@ -28,7 +28,7 @@ The installation process consists of 4 steps.
 
 First, clone the repository.
 
-#### Setting up the Database
+### Setting up the Database
 
 This project requires a PostgreSQL database. We will use this database to store tenant account data.
 
@@ -36,13 +36,13 @@ To get started, create a new PostgreSQL database. A walkthrough can be found [he
 
 Once set up, run the `base.sql` script found within [api/db](api/db).
 
-#### Configuring the Application
+### Configuring the Application
 
 Now that we've set up the database, it's time to configure our application.
 
 Fill out the example config found [here](config/example.config.json), then save it as `config.json` (within the same folder).
 
-#### Running the Application
+### Running the Application
 
 In order to get our application running, we will have to install it's dependencies.
 
