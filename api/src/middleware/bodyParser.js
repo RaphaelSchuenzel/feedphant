@@ -8,7 +8,7 @@ module.exports = ({ app, config }) => {
     }));
 
     app.use(bodyParser.json({
-        limit: config.bodyLimit
+        limit: config.api.bodyLimit
     }));
 
     // handle body parser syntax errors

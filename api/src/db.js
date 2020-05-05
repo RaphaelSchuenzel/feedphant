@@ -1,13 +1,13 @@
 const Sequelize = require('sequelize');
 const consola = require('consola');
-const config = require('./config.json');
+const config = require('../config/config.json');
 
 module.exports = (callback) => {
-    const connection = new Sequelize(config.db.database, config.db.user, config.db.password, {
-        host: config.db.host,
-        dialect: config.db.dialect,
-        port: config.db.port,
-        logging: config.debug ? consola.log : false
+    const connection = new Sequelize(config.api.db.database, config.api.db.user, config.api.db.password, {
+        host: config.api.db.host,
+        dialect: config.api.db.dialect,
+        port: config.api.db.port,
+        logging: config.api.debug ? consola.log : false
     });
 
     connection.authenticate()

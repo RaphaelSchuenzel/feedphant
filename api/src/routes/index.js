@@ -3,7 +3,7 @@
 const { Router } = require('express');
 const { version } = require('../../package.json');
 
-module.exports = ({ app, config, db, passport }) => {
+module.exports = ({ db, passport }) => {
     const api = Router();
 
     api.get('/', (req, res) => {
