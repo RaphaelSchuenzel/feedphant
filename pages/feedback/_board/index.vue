@@ -142,7 +142,6 @@
 
                 if (self.board && (self.board.post_count > 0) && self.posts.length === 0) {
                     self.$store.dispatch('boards/getBoardPosts', {
-                        url: window.location.hostname,
                         filters: { board: self.board, limit: { from: 0, to: 20 } }
                     });
 
@@ -159,7 +158,6 @@
 
             if (self.board && (self.board.post_count > 0) && self.posts.length === 0) {
                 self.$store.dispatch('boards/getBoardPosts', {
-                    url: window.location.hostname,
                     filters: { board: self.board, limit: { from: 0, to: 20 } }
                 });
 

@@ -223,7 +223,6 @@
                 
                 if (self.board && self.post && self.post.comment_count > 0 && !self.post.comments.loaded && newVal && newVal.id && newVal !== oldVal) {
                     self.$store.dispatch('boards/getBoardPostComments', {
-                        url: window.location.hostname,
                         filters: {
                             board: self.board,
                             post: self.post,
@@ -241,14 +240,12 @@
             if (self.board && self.board.post_count > 0) {
                 if (self.board.posts.length === 0) {
                     self.$store.dispatch('boards/getBoardPosts', {
-                        url: window.location.hostname,
                         filters: { board: self.board, limit: { from: 0, to: 20 } }
                     });
                 }
 
                 if (self.post && self.post.comment_count > 0 && !self.post.comments.loaded) {
                     self.$store.dispatch('boards/getBoardPostComments', {
-                        url: window.location.hostname,
                         filters: {
                             board: self.board,
                             post: self.post,

@@ -163,22 +163,6 @@
                     resolve();
                 });
             },
-            getHub () {
-                const self = this;
-
-                return new Promise((resolve, reject) => {
-                    self.$store.dispatch('hub/getHub')
-                        .then((response) => {
-                            self.$store.dispatch('boards/getBoards')
-
-                            resolve(response);
-                        }, (error) => {
-                            // handle error
-
-                            reject(error);
-                        })
-                });
-            },
             showAuthModal (mode) {
                 if (mode) {
                     this.modals.auth.payload.mode = mode;

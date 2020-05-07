@@ -4,23 +4,17 @@ const state = () => ({
 })
 
 const actions = {
-    getHub ({ commit, dispatch, rootState }, { url }) {
+    getHub ({ commit, dispatch, rootState }) {
         return new Promise((resolve, reject) => {
-            if (url) {
-                this.$api.get(`hub/${url}`)
-                    .then((payload) => {
-                        commit('setHub', payload)
+            this.$api.get(`/`)
+                .then((payload) => {
+                    commit('setHub', payload)
 
-                        resolve(payload);
-                    }, (error) => {
-                        // handle error
-                        reject(error);
-                    })
-            } else if (!url) {
-                const errorMessage = 'No Hub URL specified.'
-
-                reject(errorMessage);
-            }
+                    resolve(payload);
+                }, (error) => {
+                    // handle error
+                    reject(error);
+                })
         });
     }
 }

@@ -4,9 +4,9 @@ const state = () => ({
 })
 
 const actions = {
-    getBoards ({ commit, rootState }, { url }) {
+    getBoards ({ commit, rootState }) {
         return new Promise((resolve, reject) => {
-            this.$api.get(`hub/${url}/boards`)
+            this.$api.get(`boards`)
                 .then((payload) => {
                     commit('setBoards', payload)
 
@@ -17,9 +17,9 @@ const actions = {
                 })
         });
     },
-    getBoardPosts ({ commit, rootState }, { url, filters }) {
+    getBoardPosts ({ commit, rootState }, { filters }) {
         if (filters && (filters.board && filters.board.id) && (filters.limit && (filters.limit.from != null) && (filters.limit.to != null))) {
-            this.$api.get(`hub/${url}/boards/${filters.board.id}/posts/${filters.limit.from}/${filters.limit.to}`)
+            this.$api.get(`boards/${filters.board.id}/posts/${filters.limit.from}/${filters.limit.to}`)
                 .then((payload) => {
                     commit('setBoardPosts', { payload, board: filters.board })
                 }, (error) => {
@@ -31,9 +31,9 @@ const actions = {
             return false;
         }
     },
-    getBoardPostComments ({ commit, rootState }, { url, filters }) {
+    getBoardPostComments ({ commit, rootState }, { filters }) {
         if (rootState.boards.loaded && filters && (filters.board && filters.board.id) && (filters.post && filters.post.id) && (filters.limit && (filters.limit.from != null) && (filters.limit.to != null))) {
-            this.$api.get(`hub/${url}/boards/${filters.board.id}/posts/${filters.post.id}/comments/${filters.limit.from}/${filters.limit.to}`)
+            this.$api.get(`boards/${filters.board.id}/posts/${filters.post.id}/comments/${filters.limit.from}/${filters.limit.to}`)
                 .then((payload) => {
                     commit('setBoardPostComments', {
                         data: payload.data,
