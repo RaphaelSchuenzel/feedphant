@@ -36,12 +36,14 @@ module.exports = ({ api, db, passport }) => ({
         return Promise.all(boards.map(async (board) => {
 
             // get the total count of posts within each board
-            await util.db.getRowCountByCondition('organizations_hubs_boards_posts', `hub_id = ` + board.hub_id + ` AND board_id = ` + board.id)
+            
+            // todo: replace with sequelize lookup
+            /* await util.db.getRowCountByCondition('organizations_hubs_boards_posts', `hub_id = ` + board.hub_id + ` AND board_id = ` + board.id)
                 .then(function (response) {
                     board.post_count = response;
 
                     return board;
-                })
+                }) */
 
             const response = {};
 

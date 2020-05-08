@@ -10,7 +10,6 @@ const routes = require('./routes');
 const app = express();
 
 // lib
-const util = require('./lib/util');
 const error = require('./lib/error');
 const passport = require('./lib/passport')({ app });
 
