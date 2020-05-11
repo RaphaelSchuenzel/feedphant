@@ -16,9 +16,13 @@ const models = {
 }
 
 module.exports = ({ api, db, passport }) => ({
-    registerAccountEmail: async (req, res, next) => {
+    createAccount: (req, res, next) => {
         try {
-            if (req.body.email != null && req.body.username != null && req.body.password != null) {
+            // todo: check for auth adapter
+
+            // todo: check credentials
+            
+            /* if (req.body.email != null && req.body.username != null && req.body.password != null) {
                 if (req.body.username.length < 2 || req.body.username.length > 40) {
                     throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Username. (Minimum 2, Maximum 40 Characters)');
                 } else if (EmailValidator.validate(req.body.email) !== true) {
@@ -26,32 +30,23 @@ module.exports = ({ api, db, passport }) => ({
                 } else if (req.body.password.length < 8) {
                     throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Password. (Minimum 8 Characters)');
                 }
+            } */
 
-                const credentials = {
-                    username: req.body.username,
-                    email: req.body.email,
-                    password: req.body.password
-                };
+            const credentials = {
+                username: req.body.username,
+                email: req.body.email,
+                password: req.body.password
+            };
 
-                const users = await models.users.findAll({
-                    where: {
-                        email: credentials.email
-                    }
-                });
+            // todo:
 
-                return res.json(users);
-            } else {
-                throw new ApplicationError(ErrorCodes.BAD_REQUEST, 'Invalid Payload.');
-            }
-        } catch (err) {
-            return res.status(err.status).json(err);
-        }
-    },
-    createAccountEmail: (credentials) => {
-        return new Promise((resolve, reject) => {
-            // SELECT * FROM users WHERE email = '${credentials.email}'
+            // 1. check if the given email address already exists, if it does, exit
+            // 2. hash password
+            // 3. create db record
+            // 4. get access token
+            // 5. return access token
             
-            db.query(`SELECT * FROM users WHERE email = '${credentials.email}'`, function (error, results, fields) {
+            /* db.query(`SELECT * FROM users WHERE email = '${credentials.email}'`, function (error, results, fields) {
                 if (error || (results && results != null && results.length > 0)) {
                     if (error) {
                         return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
@@ -99,18 +94,16 @@ module.exports = ({ api, db, passport }) => ({
                         }
                     });
                 }
-            });
-        });
+            }); */
+        } catch (err) {
+            return res.status(err.status).json(err);
+        }
     },
-    loginAccountEmail: (req, res, next) => {
+    loginAccount: async (req, res, next) => {
         try {
-            module.exports.generateAccessToken(req.user)
-                .then(function (response) {
-                    return res.json(response);
-                })
-                .catch(function (err) {
-                    return res.status(err.status).json(err);
-                });
+            const response = await module.exports.generateAccessToken(req.user)
+
+            return res.json(response);
         } catch (err) {
             return res.status(err.status).json(err);
         }
