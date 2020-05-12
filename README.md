@@ -1,6 +1,6 @@
-# tenant
+# hub
 
-Tenant web application.
+Tenant hub web application.
 
 ## Table of Contents
 
@@ -23,8 +23,6 @@ Application highlights include:
 - [Pug](https://pugjs.org/) & [Sass](https://sass-lang.com/) Template Syntax.
 
 ## Installation
-
-The installation process consists of 4 steps.
 
 First, clone the repository.
 
