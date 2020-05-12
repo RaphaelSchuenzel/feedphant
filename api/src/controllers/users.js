@@ -5,9 +5,9 @@ module.exports = ({ api, db, passport }) => ({
         return new Promise((resolve, reject) => {
             if (condition && value) {
                 // allow lookup for unique conditions only
-                
+
                 if (condition === 'id' || condition === 'email') {
-                    db.query(`SELECT * FROM users WHERE ${condition} = '${value}'`, function (error, results, fields) {
+                    /* db.query(`SELECT * FROM users WHERE ${condition} = '${value}'`, function (error, results, fields) {
                         if (error) {
                             reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
                         } else if (results) {
@@ -21,7 +21,7 @@ module.exports = ({ api, db, passport }) => ({
                         } else {
                             return resolve({});
                         }
-                    });
+                    }); */
                 } else {
                     reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, 'Invalid condition.'));
                 }

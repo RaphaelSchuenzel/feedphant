@@ -6,10 +6,7 @@ const users = require('./users');
 module.exports = ({ api, db, passport }) => ({
     getBoards: (req, res, next) => {
         try {
-
-            // needs hub id
-
-            db.query(`SELECT * FROM organizations_hubs_boards WHERE hub_id = ` + id, async (error, results, fields) => {
+            /* db.query(`SELECT * FROM organizations_hubs_boards WHERE hub_id = ` + id, async (error, results, fields) => {
                 try {
                     if (error) {
                         throw new ApplicationError(ErrorCodes.INTERNAL_ERROR, error);
@@ -26,7 +23,7 @@ module.exports = ({ api, db, passport }) => ({
                 } catch (err) {
                     return res.status(err.status).json(err);
                 }
-            });
+            }); */
         } catch (err) {
             return res.status(err.status).json(err);
         }
@@ -74,7 +71,7 @@ module.exports = ({ api, db, passport }) => ({
             const postId		= req.params.post_id;
             const limit 		= { from: req.params.limit_from, to: req.params.limit_to } || { from: 0, to: 20 };
 
-            db.query(`SELECT * FROM organizations_hubs_boards_posts_comments WHERE board_id = ${boardId} AND post_id = ${postId} LIMIT ${limit.from}, ${limit.to}`, async function (error, results, fields) {
+            /* db.query(`SELECT * FROM organizations_hubs_boards_posts_comments WHERE board_id = ${boardId} AND post_id = ${postId} LIMIT ${limit.from}, ${limit.to}`, async function (error, results, fields) {
                 if (error) {
                     throw new ApplicationError(ErrorCodes.INTERNAL_ERROR, error);
                 } else {
@@ -102,7 +99,7 @@ module.exports = ({ api, db, passport }) => ({
 
                     return res.json(response);
                 }
-            });
+            }); */
         } catch (err) {
             return res.status(err.status).json(err);
         }
