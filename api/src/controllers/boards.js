@@ -33,8 +33,7 @@ module.exports = ({ api, db, passport }) => ({
     },
     getBoard: (boards) => {
         // fetch data
-        return Promise.all(boards.map(async (board) => {
-
+        return Promise.all(boards.map((board) => {
             // get the total count of posts within each board
             
             // todo: replace with sequelize lookup

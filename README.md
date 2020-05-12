@@ -6,7 +6,7 @@ Tenant web application.
 
 - [What's What](#whats-what)
 - [Installation](#installation)
-- [Running in Production](#running-in-production)
+- [Build Setup](#build-setup)
 
 ## What's What
 
@@ -28,7 +28,7 @@ The installation process consists of 4 steps.
 
 First, clone the repository.
 
-### Setting up the Database
+#### Setting up the Database
 
 This project requires a PostgreSQL database. We will use this database to store tenant account data.
 
@@ -36,13 +36,15 @@ To get started, create a new PostgreSQL database. A walkthrough can be found [he
 
 Once set up, run the `base.sql` script found within [api/db](api/db).
 
-### Configuring the Application
+#### Configuring
 
 Now that we've set up the database, it's time to configure our application.
 
 Fill out the example config found [here](config/example.config.json), then save it as `config.json` (within the same folder).
 
-### Running the Application
+## Build Setup
+
+#### Development Enviroment
 
 In order to get our application running, we will have to install it's dependencies.
 
@@ -60,7 +62,7 @@ $ npm run dev
 
 The application is now be running in development mode. 🎉
 
-## Running in Production
+#### Production Enviroment
 
 Running the application in production mode is largely similar to the process pointed out within the [Installation](#installation) section.
 

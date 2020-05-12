@@ -101,7 +101,7 @@ module.exports = ({ api, db, passport }) => ({
     },
     loginAccount: async (req, res, next) => {
         try {
-            const response = await module.exports.generateAccessToken(req.user)
+            const response = await module.exports.generateAccessToken(req.user);
 
             return res.json(response);
         } catch (err) {

@@ -4,8 +4,8 @@ module.exports = ({ api, db, passport }) => ({
     getUser: (condition, value) => {
         return new Promise((resolve, reject) => {
             if (condition && value) {
-
                 // allow lookup for unique conditions only
+                
                 if (condition === 'id' || condition === 'email') {
                     db.query(`SELECT * FROM users WHERE ${condition} = '${value}'`, function (error, results, fields) {
                         if (error) {
