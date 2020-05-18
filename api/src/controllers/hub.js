@@ -1,9 +1,19 @@
 'use strict';
 
+// import models from '../db/models'
+
 module.exports = ({ api, db, passport }) => ({
 
     // retrieve hub on requested subdomain (${url}.feedphant.com)
-    getHub: (req, res, next) => {
+    getHub: async (req, res, next) => {
+        /* const hub = await models.hub.findAll({
+            where: {
+                id: '1b20abec-4001-4479-92b9-03365cc06c3a'
+            }
+        });
+
+        return res.json(hub); */
+
         return res.status(501).send('NOT IMPLEMENTED: GET Hub');
     },
 

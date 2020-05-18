@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const consola = require('consola');
-const config = require('../../config/config.json');
+const config = require('../../../config/config.json');
 
 module.exports = async (callback) => {
     const connection = new Sequelize(config.api.db.database, config.api.db.user, config.api.db.password, {
