@@ -4,7 +4,7 @@
 -- https://tableplus.com/
 --
 -- Database: local
--- Generation Time: 2020-05-18 19:50:58.5130
+-- Generation Time: 2020-05-18 17:28:47.1040
 -- -------------------------------------------------------------
 
 
@@ -14,9 +14,9 @@
 CREATE TABLE "hubs"."board" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "name" varchar(255) NOT NULL,
-    "url" varchar(255) NOT NULL,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "title" varchar(255) NOT NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
@@ -26,12 +26,12 @@ CREATE TABLE "hubs"."board" (
 CREATE TABLE "hubs"."board_post" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "board_id" uuid NOT NULL,
-    "title" varchar(255) NOT NULL,
-    "content" varchar(255) NOT NULL,
-    "hidden" bool NOT NULL DEFAULT true,
-    "state" varchar(255) NOT NULL,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "title" varchar NOT NULL,
+    "content" varchar NOT NULL,
+    "hidden" varchar NOT NULL,
+    "state" varchar NOT NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
@@ -41,11 +41,11 @@ CREATE TABLE "hubs"."board_post" (
 CREATE TABLE "hubs"."board_post_comment" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "post_id" uuid NOT NULL,
-    "owner" uuid NOT NULL,
-    "content" varchar(4096) NOT NULL,
-    "hidden" bool NOT NULL DEFAULT true,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "owner" int4 NOT NULL,
+    "content" varchar(2048) NOT NULL,
+    "state" bool NOT NULL DEFAULT false,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
@@ -55,10 +55,10 @@ CREATE TABLE "hubs"."board_post_comment" (
 CREATE TABLE "hubs"."board_post_comment_vote" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "comment_id" uuid NOT NULL,
-    "owner" uuid NOT NULL,
+    "owner" int4 NOT NULL,
     "state" bool NOT NULL DEFAULT false,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
@@ -66,11 +66,10 @@ CREATE TABLE "hubs"."board_post_comment_vote" (
 
 -- Table Definition
 CREATE TABLE "hubs"."board_post_state" (
-    "id" varchar(255) NOT NULL,
-    "name" varchar(255) NOT NULL,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY ("id")
+    "id" varchar NOT NULL,
+    "name" varchar NOT NULL,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP
 );
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
@@ -79,56 +78,55 @@ CREATE TABLE "hubs"."board_post_state" (
 CREATE TABLE "hubs"."board_post_vote" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "post_id" uuid NOT NULL,
-    "owner" uuid NOT NULL,
+    "owner" int4 NOT NULL,
     "state" bool NOT NULL DEFAULT false,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hubs"."setting" (
-    "hub_id" uuid NOT NULL,
+CREATE TABLE "hubs"."settings" (
+    "hub_id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "public" bool NOT NULL DEFAULT false,
-    "title" varchar(255) NOT NULL,
-    "description" varchar(2048),
-    "whitelabel" bool NOT NULL DEFAULT false,
-    "subdomain" varchar(255) NOT NULL,
-    "domain_custom" varchar(255),
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "title" varchar,
+    "description" varchar,
+    "whitelabel" bool NOT NULL DEFAULT true,
+    "subdomain" varchar NOT NULL,
+    "domain_custom" varchar,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("hub_id")
 );
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hubs"."setting_brand" (
-    "hub_id" uuid NOT NULL,
-    "name" varchar(255) NOT NULL,
-    "logo_url" varchar(4096),
-    "icon_url" varchar(4096),
-    "background_url" varchar(4096),
-    "colors_primary" varchar(255),
-    "colors_background" varchar(255),
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY ("hub_id")
+CREATE TABLE "hubs"."settings_brand" (
+    "hub_id" uuid,
+    "name" varchar,
+    "logo_url" varchar,
+    "icon_url" varchar,
+    "background_url" varchar,
+    "colors_primary" varchar,
+    "colors_background" varchar,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
 CREATE TABLE "hubs"."subscription" (
-    "hub_id" uuid NOT NULL,
-    "stripe_customer_id" varchar(2048),
-    "stripe_subscription_id" varchar(2048),
-    "current_period_ends" timestamptz,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY ("hub_id")
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
+    "stripe_customer_id" varchar,
+    "stripe_subscription_id" varchar,
+    "current_period_ends" timestamp,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ("id")
 );
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
@@ -136,11 +134,11 @@ CREATE TABLE "hubs"."subscription" (
 -- Table Definition
 CREATE TABLE "hubs"."user" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
-    "email" varchar(255) NOT NULL DEFAULT NULL::character varying,
+    "email" varchar(256) NOT NULL DEFAULT NULL::character varying,
     "username" varchar(50) NOT NULL DEFAULT NULL::character varying,
     "avatar_url" varchar(4096) DEFAULT NULL::character varying,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
@@ -150,12 +148,11 @@ CREATE TABLE "hubs"."user" (
 CREATE TABLE "hubs"."user_auth" (
     "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "user_id" uuid NOT NULL,
-    "adapter" varchar(255) NOT NULL DEFAULT NULL::character varying,
-    "hash" varchar(4096) DEFAULT NULL::character varying,
-    "access_token" varchar(4096) NOT NULL DEFAULT 'NULL::character varying'::character varying,
-    "refresh_token" varchar(4096) NOT NULL DEFAULT 'NULL::character varying'::character varying,
-    "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "adapter" varchar NOT NULL DEFAULT NULL::character varying,
+    "access_token" varchar NOT NULL DEFAULT NULL::character varying,
+    "refresh_token" varchar NOT NULL DEFAULT NULL::character varying,
+    "created_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updated_at" timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY ("id")
 );
 
