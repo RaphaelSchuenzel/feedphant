@@ -1,24 +1,31 @@
 module.exports = ({ db, DataTypes }) => {
-    db.define('board_post_comment', {
-        id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
-            allowNull: false
-        },
-        postId: {
+    db.define('setting', {
+        hubId: {
             type: DataTypes.UUID,
             allowNull: false
         },
-        owner: {
-            type: DataTypes.UUID,
-            allowNull: false
-        },
-        content: {
-            type: DataTypes.STRING(4096),
-            allowNull: false
-        },
-        hidden: {
+        public: {
             type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        title: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        description: {
+            type: DataTypes.STRING(2048),
+            allowNull: true
+        },
+        whitelabel: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        subdomain: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
+        domain_custom: {
+            type: DataTypes.STRING,
             allowNull: false
         },
         createdAt: {
