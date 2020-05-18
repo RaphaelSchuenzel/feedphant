@@ -1,5 +1,5 @@
 module.exports = ({ db, Sequelize }) => {
-    db.define('users_auth_oauth', {
+    db.define('user_auth', {
         id: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
@@ -8,9 +8,13 @@ module.exports = ({ db, Sequelize }) => {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
         },
-        provider: {
+        adapter: {
             type: Sequelize.STRING,
             allowNull: false
+        },
+        hash: {
+            type: Sequelize.STRING(4096),
+            allowNull: true
         },
         accessToken: {
             type: Sequelize.STRING(4096),

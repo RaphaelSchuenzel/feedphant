@@ -1,0 +1,29 @@
+module.exports = ({ db, DataTypes }) => {
+    db.define('board_post_comment_vote', {
+        id: {
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
+            allowNull: false
+        },
+        commentId: {
+            type: DataTypes.UUID,
+            allowNull: false
+        },
+        owner: {
+            type: DataTypes.UUID,
+            allowNull: false
+        },
+        state: {
+            type: DataTypes.BOOLEAN,
+            allowNull: false
+        },
+        createdAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        },
+        updatedAt: {
+            type: DataTypes.DATE,
+            allowNull: false
+        }
+    });
+}

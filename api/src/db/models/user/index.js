@@ -1,27 +1,28 @@
-module.exports = ({ db, Sequelize }) => {
-    db.define('users', {
+module.exports = ({ db, DataTypes }) => {
+    db.define('user', {
         id: {
-            type: Sequelize.RANGE(Sequelize.INTEGER),
+            type: DataTypes.UUID,
+            defaultValue: DataTypes.UUIDV4,
             allowNull: false
         },
         email: {
-            type: Sequelize.STRING,
+            type: DataTypes.STRING,
             allowNull: false
         },
         username: {
-            type: Sequelize.STRING(50),
+            type: DataTypes.STRING(50),
             allowNull: false
         },
         avatarUrl: {
-            type: Sequelize.STRING(4096),
+            type: DataTypes.STRING(4096),
             allowNull: true
         },
         createdAt: {
-            type: Sequelize.DATE,
+            type: DataTypes.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: Sequelize.DATE,
+            type: DataTypes.DATE,
             allowNull: false
         }
     });
