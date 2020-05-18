@@ -1,9 +1,5 @@
 module.exports = ({ db, Sequelize }) => {
     db.define('user_auth', {
-        id: {
-            type: Sequelize.RANGE(Sequelize.INTEGER),
-            allowNull: false
-        },
         userId: {
             type: Sequelize.RANGE(Sequelize.INTEGER),
             allowNull: false
