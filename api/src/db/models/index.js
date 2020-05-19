@@ -2,30 +2,26 @@
 
 import { DataTypes } from 'sequelize';
 
-module.exports = ({ db }) => {
-    const models = {
+module.exports = ({ sequelize }) => {
+    return {
 
         // boards
-        boards: require('./board')({ db, DataTypes }),
-        boardPosts: require('./board/post')({ db, DataTypes }),
-        boardPostStates: require('./board/post/state')({ db, DataTypes }),
-        boardPostVotes: require('./board/post/vote')({ db, DataTypes }),
-        boardPostComments: require('./board/post/comment')({ db, DataTypes }),
-        boardPostCommentVotes: require('./board/post/comment/vote')({ db, DataTypes }),
+        boards: require('./board')({ sequelize, DataTypes }),
+        boardPosts: require('./board/post')({ sequelize, DataTypes }),
+        boardPostStates: require('./board/post/state')({ sequelize, DataTypes }),
+        boardPostVotes: require('./board/post/vote')({ sequelize, DataTypes }),
+        boardPostComments: require('./board/post/comment')({ sequelize, DataTypes }),
+        boardPostCommentVotes: require('./board/post/comment/vote')({ sequelize, DataTypes }),
 
         // hub
-        hub: require('./setting')({ db, DataTypes }),
-        hubBrand: require('./setting/brand')({ db, DataTypes }),
+        hub: require('./setting')({ sequelize, DataTypes }),
+        hubBrand: require('./setting/brand')({ sequelize, DataTypes }),
 
         // subscriptions
-        subscriptions: require('./subscription')({ db, DataTypes }),
+        subscriptions: require('./subscription')({ sequelize, DataTypes }),
 
         // users
-        users: require('./user')({ db, DataTypes }),
-        userAuth: require('./user/auth')({ db, DataTypes })
+        users: require('./user')({ sequelize, DataTypes }),
+        userAuth: require('./user/auth')({ sequelize, DataTypes })
     }
-
-    db.sync();
-
-    return models;
 }

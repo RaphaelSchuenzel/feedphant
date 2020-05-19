@@ -1,5 +1,5 @@
-module.exports = ({ db, DataTypes }) => {
-    db.define('setting', {
+module.exports = ({ sequelize, DataTypes }) => {
+    return sequelize.define('setting', {
         hubId: {
             type: DataTypes.UUID,
             allowNull: false

@@ -1,5 +1,5 @@
-module.exports = ({ db, DataTypes }) => {
-    db.define('board_post_state', {
+module.exports = ({ sequelize, DataTypes }) => {
+    return sequelize.define('board_post_state', {
         id: {
             type: DataTypes.STRING,
             allowNull: false

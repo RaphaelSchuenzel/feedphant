@@ -1,5 +1,5 @@
-module.exports = ({ db, DataTypes }) => {
-    db.define('board', {
+module.exports = ({ sequelize, DataTypes }) => {
+    return sequelize.define('board', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
