@@ -4,15 +4,15 @@
 -- https://tableplus.com/
 --
 -- Database: local
--- Generation Time: 2020-05-20 00:11:15.6500
+-- Generation Time: 2020-05-18 19:50:58.5130
 -- -------------------------------------------------------------
 
 
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."board" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "name" varchar(255) NOT NULL,
     "url" varchar(255) NOT NULL,
     "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -23,8 +23,8 @@ CREATE TABLE "hub"."board" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board_post" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."board_post" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "board_id" uuid NOT NULL,
     "title" varchar(255) NOT NULL,
     "content" varchar(255) NOT NULL,
@@ -38,8 +38,8 @@ CREATE TABLE "hub"."board_post" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board_post_comment" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."board_post_comment" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "post_id" uuid NOT NULL,
     "owner" uuid NOT NULL,
     "content" varchar(4096) NOT NULL,
@@ -52,8 +52,8 @@ CREATE TABLE "hub"."board_post_comment" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board_post_comment_vote" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."board_post_comment_vote" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "comment_id" uuid NOT NULL,
     "owner" uuid NOT NULL,
     "state" bool NOT NULL DEFAULT false,
@@ -65,7 +65,7 @@ CREATE TABLE "hub"."board_post_comment_vote" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board_post_state" (
+CREATE TABLE "hubs"."board_post_state" (
     "id" varchar(255) NOT NULL,
     "name" varchar(255) NOT NULL,
     "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
@@ -76,8 +76,8 @@ CREATE TABLE "hub"."board_post_state" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."board_post_vote" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."board_post_vote" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "post_id" uuid NOT NULL,
     "owner" uuid NOT NULL,
     "state" bool NOT NULL DEFAULT false,
@@ -89,8 +89,8 @@ CREATE TABLE "hub"."board_post_vote" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."setting" (
-    "hub_id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."setting" (
+    "hub_id" uuid NOT NULL,
     "public" bool NOT NULL DEFAULT false,
     "title" varchar(255) NOT NULL,
     "description" varchar(2048),
@@ -105,7 +105,7 @@ CREATE TABLE "hub"."setting" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."setting_brand" (
+CREATE TABLE "hubs"."setting_brand" (
     "hub_id" uuid NOT NULL,
     "name" varchar(255) NOT NULL,
     "logo_url" varchar(4096),
@@ -121,7 +121,7 @@ CREATE TABLE "hub"."setting_brand" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."subscription" (
+CREATE TABLE "hubs"."subscription" (
     "hub_id" uuid NOT NULL,
     "stripe_customer_id" varchar(2048),
     "stripe_subscription_id" varchar(2048),
@@ -134,8 +134,8 @@ CREATE TABLE "hub"."subscription" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."user" (
-    "id" uuid NOT NULL DEFAULT hub.uuid_generate_v4(),
+CREATE TABLE "hubs"."user" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "email" varchar(255) NOT NULL DEFAULT NULL::character varying,
     "username" varchar(50) NOT NULL DEFAULT NULL::character varying,
     "avatar_url" varchar(4096) DEFAULT NULL::character varying,
@@ -147,13 +147,15 @@ CREATE TABLE "hub"."user" (
 -- This script only contains the table creation statements and does not fully represent the table in the database. It's still missing: indices, triggers. Do not use it as a backup.
 
 -- Table Definition
-CREATE TABLE "hub"."user_auth" (
+CREATE TABLE "hubs"."user_auth" (
+    "id" uuid NOT NULL DEFAULT hubs.uuid_generate_v4(),
     "user_id" uuid NOT NULL,
     "adapter" varchar(255) NOT NULL DEFAULT NULL::character varying,
     "hash" varchar(4096) DEFAULT NULL::character varying,
     "access_token" varchar(4096) NOT NULL DEFAULT 'NULL::character varying'::character varying,
     "refresh_token" varchar(4096) NOT NULL DEFAULT 'NULL::character varying'::character varying,
     "created_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP
+    "updated_at" timestamptz NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY ("id")
 );
 

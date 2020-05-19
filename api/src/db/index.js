@@ -12,14 +12,14 @@ module.exports = async (callback) => {
         logging: config.api.debug ? consola.log : false
     });
 
-    db.models = require('./models');
-
-    db.sequelize.sync();
-
     // test connection
     await db.sequelize.authenticate();
 
     consola.success('Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
+
+    db.models = require('./models');
+
+    db.sequelize.sync();
 
     // pass connection object in callback
     callback(db);
