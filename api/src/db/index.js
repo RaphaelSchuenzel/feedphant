@@ -19,7 +19,7 @@ module.exports = async (callback) => {
     // test connection
     await db.sequelize.authenticate();
 
-    consola.success('Connected to database ' + '\x1b[42m\x1b[30m%s\x1b[0m', config.api.db.database);
+    consola.success('Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
 
     // pass connection object in callback
     callback(db);
