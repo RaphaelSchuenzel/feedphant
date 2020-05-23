@@ -61,6 +61,6 @@ module.exports = {
     },
     serverMiddleware: [
         // API middleware
-        '@/api/src/index.js'
+        '@/api/index.js'
     ]
 }
