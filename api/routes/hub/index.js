@@ -1,20 +1,13 @@
 'use strict';
 
-module.exports = ({ api, db, passport }) => {
-    const controllers = {
-        hub: require('../../controllers/hub')({ api, db, passport })
-    }
+const hub = require('express').Router();
 
-    // requests
+// controllers
+const HubController = require('../../controllers/hub');
 
-    // GET
-    api.get('/', controllers.hub.getHub);
+hub.route('/')
+    .get(HubController.getHub)
+    .post(HubController.createHub)
+    .put(HubController.updateHub);
 
-    // POST
-    api.post('/', controllers.hub.createHub);
-
-    // PUT
-    api.put('/', controllers.hub.updateHub);
-
-    return api;
-}
+module.exports = hub;

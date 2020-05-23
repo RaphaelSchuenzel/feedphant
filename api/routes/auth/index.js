@@ -1,21 +1,17 @@
 'use strict';
 
-module.exports = ({ api, db, passport }) => {
-    const controllers = {
-        auth: require('../../controllers/auth')({ api, db, passport })
-    }
+const auth = require('express').Router();
+// const passport = require('../../lib/passport')
 
-    // requests
+// controllers
+const AuthController = require('../../controllers/auth');
 
-    // POST
+// register a new account; email & password as authentication method
+auth.route('/:adapter')
+    .post(AuthController.createAccount);
 
-    // register a new account; email & password as authentication method
-    api.post('/auth/:adapter', controllers.auth.createAccount);
+// log in to an existing account; email & password as authentication method
+auth.route('/email')
+    .put(passport.authenticate('local'), AuthController.loginAccount);
 
-    // PUT
-
-    // log in to an existing account; email & password as authentication method
-    api.put('/auth/email', passport.authenticate('local'), controllers.auth.loginAccount);
-
-    return api;
-}
+module.exports = auth;

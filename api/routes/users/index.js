@@ -1,16 +1,13 @@
 'use strict';
 
-module.exports = ({ api, db, passport }) => {
-    const controllers = {
-        users: require('../../controllers/users')({ api, db, passport })
-    }
+const users = require('express').Router();
+// const passport = require('../../lib/passport')
 
-    // requests
-    
-    // GET
+// controllers
+const UsersController = require('../../controllers/users');
 
+users.route('/me')
     // returns the user response of the requesting user, if logged in
-    api.get('/users/me', passport.authenticate('bearer'), controllers.users.getUsersMe);
+    .get(passport.authenticate('bearer'), UsersController.getUsersMe);
 
-    return api;
-}
+module.exports = users;

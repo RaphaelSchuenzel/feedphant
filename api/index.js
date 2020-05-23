@@ -37,7 +37,7 @@ initializeDb((db) => {
     app.use(middleware({ app, config }));
 
     // api router
-    app.use('/api', routes({ db, passport }));
+    app.use('/api', routes);
 });
 
 module.exports = app;
