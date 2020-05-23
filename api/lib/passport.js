@@ -1,7 +1,8 @@
 'use strict';
 
-const express = require('express');
 const passport = require('passport');
+const cookieParser = require('cookie-parser');
+const session = require('express-session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -13,10 +14,10 @@ const BearerStrategy = require('passport-http-bearer');
 const secrets = require('../controllers/secrets');
 
 module.exports = ({ app }) => {
-    app.use(express.cookieParser());
+    app.use(cookieParser());
 
     // todo: make secret a config option / env var
-    app.use(express.session({ secret: 'keyboard cat' }));
+    app.use(session({ secret: 'keyboard cat' }));
 
     passport.serializeUser((user, done) => {
         done(null, user.id);
