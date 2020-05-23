@@ -1,7 +1,7 @@
 'use strict';
 
 const users = require('express').Router();
-// const passport = require('../../lib/passport')
+const passport = require('passport');
 
 // controllers
 const UsersController = require('../../controllers/users');
