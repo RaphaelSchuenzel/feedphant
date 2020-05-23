@@ -11,7 +11,7 @@ const app = express();
 
 // lib
 const error = require('./lib/error');
-const passport = require('./lib/passport')({ app });
+require('./lib/passport')({ app });
 
 // stay safe
 app.use(helmet());
