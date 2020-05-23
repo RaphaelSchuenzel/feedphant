@@ -19,7 +19,9 @@ module.exports = async (callback) => {
 
     db.models = require('./models');
 
-    db.sequelize.sync();
+    console.log(db.models.hub);
+
+    // db.sequelize.sync();
 
     // pass connection object in callback
     callback(db);
