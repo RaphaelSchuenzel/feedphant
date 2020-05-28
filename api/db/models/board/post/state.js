@@ -1,4 +1,4 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = (sequelize, DataTypes) => {
     return sequelize.define('board_post_state', {
         id: {
             type: DataTypes.STRING,

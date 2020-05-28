@@ -3,9 +3,7 @@ const consola = require('consola');
 const config = require('../../config/config.json');
 
 module.exports = async (callback) => {
-    const db = {};
-
-    db.sequelize = new Sequelize(config.api.db.database, config.api.db.user, config.api.db.password, {
+    const sequelize = new Sequelize(config.api.db.database, config.api.db.user, config.api.db.password, {
         host: config.api.db.host,
         dialect: config.api.db.dialect,
         port: config.api.db.port,
@@ -19,16 +17,23 @@ module.exports = async (callback) => {
     });
 
     // test connection
-    await db.sequelize.authenticate();
+    await sequelize.authenticate();
 
     consola.success('Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
 
-    db.models = require('./models');
+    // import sequelize models
+    const models = require('./models')({ sequelize });
 
-    console.log(db.models.hub);
+    // associate models where applicable
+    Object.keys(models).forEach((key) => {
+        if ('associate' in models[key]) {
+            models[key].associate(models);
+        }
+    });
 
-    // db.sequelize.sync({ force: true });
+    // hard sync with database
+    sequelize.sync({ force: true });
 
     // pass connection object in callback
-    callback(db);
+    callback(sequelize);
 }
