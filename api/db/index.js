@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const consola = require('consola');
-const config = require('../../../config/config.json');
+const config = require('../../config/config.json');
 
 module.exports = async (callback) => {
     const db = {};
@@ -9,7 +9,11 @@ module.exports = async (callback) => {
         host: config.api.db.host,
         dialect: config.api.db.dialect,
         port: config.api.db.port,
-        logging: config.api.debug ? consola.log : false
+        logging: config.api.debug ? consola.log : false,
+        define: {
+            // prevent sequelize from pluralizing table names
+            freezeTableName: true
+        }
     });
 
     // test connection
