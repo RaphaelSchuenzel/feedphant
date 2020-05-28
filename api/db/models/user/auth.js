@@ -1,8 +1,10 @@
 module.exports = (sequelize, DataTypes) => {
     return sequelize.define('user_auth', {
-        id: {
+        userId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true,
+            unique: true
         },
         adapter: {
             type: DataTypes.STRING,
@@ -14,11 +16,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         accessToken: {
             type: DataTypes.STRING(4096),
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         refreshToken: {
             type: DataTypes.STRING(4096),
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         createdAt: {
             type: DataTypes.DATE,

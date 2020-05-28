@@ -2,7 +2,9 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define('setting', {
         hubId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true,
+            unique: true
         },
         stripeCustomerId: {
             type: DataTypes.STRING(2048),
@@ -10,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         stripeSubscriptionId: {
             type: DataTypes.STRING(2048),
-            allowNull: true
+            allowNull: true,
+            unique: true
         },
         currentPeriodEnds: {
             type: DataTypes.DATE,

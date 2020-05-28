@@ -2,7 +2,9 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define('setting_brand', {
         hubId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true,
+            unique: true
         },
         name: {
             type: DataTypes.STRING,

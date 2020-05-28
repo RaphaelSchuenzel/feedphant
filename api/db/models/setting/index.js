@@ -2,7 +2,9 @@ module.exports = (sequelize, DataTypes) => {
     return sequelize.define('setting', {
         hubId: {
             type: DataTypes.UUID,
-            allowNull: false
+            allowNull: false,
+            primaryKey: true,
+            unique: true
         },
         public: {
             type: DataTypes.BOOLEAN,
@@ -22,11 +24,13 @@ module.exports = (sequelize, DataTypes) => {
         },
         subdomain: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         domain_custom: {
             type: DataTypes.STRING,
-            allowNull: false
+            allowNull: false,
+            unique: true
         },
         createdAt: {
             type: DataTypes.DATE,
