@@ -12,7 +12,9 @@ module.exports = async (callback) => {
         logging: config.api.debug ? consola.log : false,
         define: {
             // prevent sequelize from pluralizing table names
-            freezeTableName: true
+            freezeTableName: true,
+            // make sequelize automatically create timestamp columns (created_at & updated_at)
+            timestamps: true
         }
     });
 
@@ -25,7 +27,7 @@ module.exports = async (callback) => {
 
     console.log(db.models.hub);
 
-    // db.sequelize.sync();
+    // db.sequelize.sync({ force: true });
 
     // pass connection object in callback
     callback(db);
