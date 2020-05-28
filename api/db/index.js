@@ -12,7 +12,9 @@ module.exports = async (callback) => {
             // prevent sequelize from pluralizing table names
             freezeTableName: true,
             // make sequelize automatically create timestamp columns (created_at & updated_at)
-            timestamps: true
+            timestamps: true,
+            // automatically convert camelCase table attributes to snake_case
+            underscored: true
         }
     });
 
