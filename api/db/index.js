@@ -19,7 +19,7 @@ module.exports = async (callback) => {
     // test connection
     await sequelize.authenticate();
 
-    consola.success('Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
+    consola.success('Sequelize: Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
 
     // import sequelize models
     const models = require('./models')({ sequelize });
@@ -32,7 +32,9 @@ module.exports = async (callback) => {
     });
 
     // hard sync with database
-    sequelize.sync({ force: true });
+    await sequelize.sync({ force: true, schema: 'hub', logging: false });
+
+    consola.success('Sequelize: Successfully synced all models.');
 
     // pass connection object in callback
     callback(sequelize);

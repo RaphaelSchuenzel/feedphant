@@ -1,17 +1,19 @@
 'use strict';
 
+import { DataTypes } from 'sequelize';
+
 module.exports = ({ sequelize }) => {
     return {
-        boards: sequelize.import('./board'),
-        boardPosts: sequelize.import('./board/post'),
-        boardPostStates: sequelize.import('./board/post/state'),
-        boardPostVotes: sequelize.import('./board/post/vote'),
-        boardPostComments: sequelize.import('./board/post/comment'),
-        boardPostCommentVotes: sequelize.import('./board/post/comment/vote'),
-        hub: sequelize.import('./setting'),
-        hubBrand: sequelize.import('./setting/brand'),
-        subscriptions: sequelize.import('./subscription'),
-        users: sequelize.import('./user'),
-        userAuth: sequelize.import('./user/auth')
+        boards: require('./board')({ sequelize, DataTypes }),
+        boardPosts: require('./board/post')({ sequelize, DataTypes }),
+        boardPostStates: require('./board/post/state')({ sequelize, DataTypes }),
+        boardPostVotes: require('./board/post/vote')({ sequelize, DataTypes }),
+        boardPostComments: require('./board/post/comment')({ sequelize, DataTypes }),
+        boardPostCommentVotes: require('./board/post/comment/vote')({ sequelize, DataTypes }),
+        hub: require('./setting')({ sequelize, DataTypes }),
+        hubBrand: require('./setting/brand')({ sequelize, DataTypes }),
+        subscriptions: require('./subscription')({ sequelize, DataTypes }),
+        users: require('./user')({ sequelize, DataTypes }),
+        userAuth: require('./user/auth')({ sequelize, DataTypes })
     }
 }

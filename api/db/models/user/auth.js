@@ -1,4 +1,4 @@
-module.exports = (sequelize, DataTypes) => {
+module.exports = ({ sequelize, DataTypes }) => {
     return sequelize.define('user_auth', {
         userId: {
             type: DataTypes.UUID,
