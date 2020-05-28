@@ -32,8 +32,6 @@ This project requires a PostgreSQL database. We will use this database to store 
 
 To get started, create a new PostgreSQL database. A walkthrough can be found [here](https://www.postgresql.org/docs/9.0/tutorial-createdb.html).
 
-Once set up, run the `base.sql` script found within [api/db](api/db).
-
 #### Configuring
 
 Now that we've set up the database, it's time to configure our application.
