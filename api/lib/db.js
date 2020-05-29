@@ -24,7 +24,7 @@ module.exports = async (callback) => {
     consola.success('Sequelize: Connected to database ' + '\x1B[42m\x1B[30m%s\x1B[0m', config.api.db.database);
 
     // import sequelize models
-    const models = require('./models')({ sequelize });
+    const models = require('../models')({ sequelize });
 
     // associate models where applicable
     Object.keys(models).forEach((key) => {

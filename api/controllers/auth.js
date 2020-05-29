@@ -11,7 +11,7 @@ const controllers = {
 }
 
 // models
-const models = require('../db/models')
+const models = require('../models')
 
 module.exports = ({ api, db, passport }) => ({
     createAccount: (req, res, next) => {
