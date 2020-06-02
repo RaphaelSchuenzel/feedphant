@@ -8,7 +8,7 @@ module.exports = {
             
             return module.get(hub.id);
         } catch (err) {
-
+            // todo: handle error
         }
     },
 
@@ -30,12 +30,16 @@ module.exports = {
 
             return hub;
         } catch (err) {
-
+            // todo: handle error
         }
     },
 
     // update a table column by hub id
     update: async (hubId, details) => {
+        try {
 
+        } catch (err) {
+            // todo: handle error
+        }
     }
 };
