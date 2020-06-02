@@ -12,12 +12,14 @@ module.exports = ({ api, db, passport }) => ({
     },
 
     // create a new hub on the requested subdomain (${url}.feedphant.com)
-    createHub: (req, res, next) => {
-        return res.status(501).send('NOT IMPLEMENTED: POST Hub');
+    createHub: async (req, res, next) => {
+        const hub = await HubInterface.create();
+
+        return res.json(hub);
     },
 
     // update an existing hub on the requested subdomain (${url}.feedphant.com)
-    updateHub: (req, res, next) => {
+    updateHub: async (req, res, next) => {
         return res.status(501).send('NOT IMPLEMENTED: PUT Hub');
     }
 });
