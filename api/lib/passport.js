@@ -105,8 +105,5 @@ module.exports = ({ app }) => {
 
     app.use(passport.initialize());
 
-    // only required if using sessions
-    // app.use(passport.session());
-
     return passport;
 }
