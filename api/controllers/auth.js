@@ -3,6 +3,7 @@
 const EmailValidator = require('email-validator');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const config = require('../../config')
 
 // controllers
 const controllers = {
@@ -108,22 +109,18 @@ module.exports = ({ api, db, passport }) => ({
     },
     generateAccessToken: (user) => {
         return new Promise((resolve, reject) => {
-            controllers.secrets.getSecret('auth')
-                .then(function (secret) {
-                    jwt.sign({
-                        id: user.id,
-                        expiresIn: '14 days'
-                    }, secret, (err, token) => {
-                        if (err) {
-                            reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
-                        }
-        
-                        resolve(token);
-                    });
-                })
-                .catch(function (err) {
-                    return reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
-                });
+            const authSecret = process.env.AUTH_SECRET || config.api.secrets.auth;
+
+            jwt.sign({
+                id: user.id,
+                expiresIn: '14 days'
+            }, authSecret, (err, token) => {
+                if (err) {
+                    reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, err));
+                }
+
+                resolve(token);
+            });
         });
     }
 });

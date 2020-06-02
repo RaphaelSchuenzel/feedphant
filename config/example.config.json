@@ -10,6 +10,10 @@
 			"database": "local",
 			"dialect": "postgres",
 			"port": "5432"
+		},
+		"secrets": {
+			"auth": "replace_me",
+			"session": "replace_me"
 		}
 	}
 }

@@ -1,22 +1,19 @@
 'use strict';
 
 const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const BearerStrategy = require('passport-http-bearer');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-
-// strategies
-const LocalStrategy = require('passport-local');
-const BearerStrategy = require('passport-http-bearer');
-
-// controllers
-const secrets = require('../controllers/secrets');
+const config = require('../../config');
 
 module.exports = ({ app }) => {
     app.use(cookieParser());
 
-    // todo: make secret a config option / env var
+    const sessionSecret = process.env.SESSION_SECRET || config.api.secrets.session;
+
     app.use(session({ secret: 'keyboard cat' }));
 
     passport.serializeUser((user, done) => {
@@ -73,10 +70,10 @@ module.exports = ({ app }) => {
     }));
 
     passport.use(new BearerStrategy(
-        async (token, done) => {
-            const secret = await secrets.getSecret('auth');
+        (token, done) => {
+            const authSecret = process.env.AUTH_SECRET || config.api.secrets.auth;
 
-            jwt.verify(token, secret, function (err, decoded) {
+            jwt.verify(token, authSecret, function (err, decoded) {
                 if (err) {
                     return done(null, false, 'Invalid Access Token.');
                 } else if (decoded) {
