@@ -7,7 +7,7 @@ const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const config = require('../../config');
+const config = require('../../config/config.json');
 
 module.exports = ({ app }) => {
     app.use(cookieParser());

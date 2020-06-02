@@ -31,13 +31,10 @@ if (config.api.debug) {
     consola.warn('API is running with debugging tools activated. For use in production, make sure to disable the debug option within the API config.');
 }
 
-// connect to db
-initializeDb((db) => {
-    // internal middleware
-    app.use(middleware({ app, config }));
+// internal middleware
+app.use(middleware({ app, config }));
 
-    // api router
-    app.use('/api', routes);
-});
+// api router
+app.use('/api', routes);
 
 module.exports = app;
