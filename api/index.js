@@ -3,7 +3,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const consola = require('consola');
 const config = require('../config/config.json');
-const { initializeDb } = require('./lib/db');
 const middleware = require('./middleware');
 const routes = require('./routes');
 

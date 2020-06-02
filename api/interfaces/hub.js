@@ -1,8 +1,10 @@
+const { models } = require('./lib/db');
+
 module.exports = {
     // create a new hub
     create: async (details) => {
         try {
-            const hub = await HubModel.create(details);
+            const hub = await models.hub.create(details);
             
             return module.get(hub.id);
         } catch (err) {
@@ -10,14 +12,14 @@ module.exports = {
         }
     },
 
-    // get a table column by hub id
+    // get a table row by hub id
     get: async (hubId, { tableName }) => {
         try {
             if (!hubId) {
                 throw new Error('Hub ID not specified.');
             }
 
-            const hub = await HubModel.findOne({
+            const hub = await models.hub.findOne({
                 where: {
                     hubId
                 },

@@ -1,16 +1,12 @@
 'use strict';
 
-// import models from '../db/models'
+import HubInterface from '../interfaces/hub'
 
 module.exports = ({ api, db, passport }) => ({
 
     // retrieve hub on requested subdomain (${url}.feedphant.com)
     getHub: async (req, res, next) => {
-        const hub = await db.models.hub.findAll({
-            where: {
-                id: '1b20abec-4001-4479-92b9-03365cc06c3a'
-            }
-        });
+        const hub = await HubInterface.get('1b20abec-4001-4479-92b9-03365cc06c3a');
 
         return res.json(hub);
 
