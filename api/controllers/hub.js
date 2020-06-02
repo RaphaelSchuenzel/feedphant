@@ -9,8 +9,6 @@ module.exports = ({ api, db, passport }) => ({
         const hub = await HubInterface.get('1b20abec-4001-4479-92b9-03365cc06c3a');
 
         return res.json(hub);
-
-        // return res.status(501).send('NOT IMPLEMENTED: GET Hub');
     },
 
     // create a new hub on the requested subdomain (${url}.feedphant.com)
