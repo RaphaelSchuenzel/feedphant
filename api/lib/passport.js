@@ -14,7 +14,7 @@ module.exports = ({ app }) => {
 
     const sessionSecret = process.env.SESSION_SECRET || config.api.secrets.session;
 
-    app.use(session({ secret: 'keyboard cat' }));
+    app.use(session({ secret: sessionSecret }));
 
     passport.serializeUser((user, done) => {
         done(null, user.id);
