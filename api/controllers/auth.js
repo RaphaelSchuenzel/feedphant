@@ -7,8 +7,7 @@ const config = require('../../config')
 
 // controllers
 const controllers = {
-    users: require('./users'),
-    secrets: require('./secrets')
+    users: require('./users')
 }
 
 // models

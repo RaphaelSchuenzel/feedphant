@@ -2,7 +2,6 @@
 **/config.js
 **/config.json
 **/bundle.js
-**/secrets
 
 # Logs
 /logs
