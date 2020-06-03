@@ -22,14 +22,6 @@ module.exports = ({ sequelize, Sequelize }) => {
         hidden: {
             type: Sequelize.BOOLEAN,
             allowNull: false
-        },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
         }
     });
 }

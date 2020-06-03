@@ -22,14 +22,6 @@ module.exports = ({ sequelize, Sequelize }) => {
         avatarUrl: {
             type: Sequelize.STRING(4096),
             allowNull: true
-        },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
         }
     });
 }

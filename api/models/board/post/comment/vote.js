@@ -18,14 +18,6 @@ module.exports = ({ sequelize, Sequelize }) => {
         state: {
             type: Sequelize.BOOLEAN,
             allowNull: false
-        },
-        createdAt: {
-            type: Sequelize.DATE,
-            allowNull: false
-        },
-        updatedAt: {
-            type: Sequelize.DATE,
-            allowNull: false
         }
     });
 }
