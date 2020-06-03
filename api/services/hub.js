@@ -1,6 +1,6 @@
 'use strict';
 
-import HubInterface from '../interfaces/hub'
+const HubInterface = require('../interfaces/hub');
 
 module.exports = {
     getHub: async (body) => {

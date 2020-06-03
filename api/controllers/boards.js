@@ -1,6 +1,6 @@
 'use strict';
 
-import BoardsService from '../services/boards'
+const BoardsService = require('../services/boards');
 
 module.exports = {
     getBoards: async (req, res, next) => {

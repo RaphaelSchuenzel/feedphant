@@ -1,6 +1,6 @@
 'use strict';
 
-import HubService from '../services/hub'
+const HubService = require('../services/hub');
 
 module.exports = {
 

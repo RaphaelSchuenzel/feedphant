@@ -1,6 +1,6 @@
 'use strict';
 
-import UsersService from '../services/users'
+const UsersService = require('../services/users');
 
 module.exports = {
 

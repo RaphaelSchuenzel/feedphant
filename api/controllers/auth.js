@@ -1,6 +1,6 @@
 'use strict';
 
-import AuthService from '../services/auth'
+const AuthService = require('../services/auth');
 
 module.exports = {
     createAccount: async (req, res, next) => {
