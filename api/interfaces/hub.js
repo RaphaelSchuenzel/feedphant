@@ -12,24 +12,32 @@ module.exports = {
         }
     },
 
-    // get a table row by hub id
-    get: async (hubId, { tableName }) => {
+    // get a model table row by hub id
+    get: async (hubId, { model }) => {
         try {
             if (!hubId) {
                 throw new Error('Hub ID not specified.');
             }
+            
+            if (!model) {
+                throw new Error('Model not specified.');
+            }
 
-            const hub = await models.hub.findOne({
+            const hub = await models[model].findOne({
                 where: {
-                    hubId
-                },
+                    id: hubId
+                }
+                /* todo: define attributes based on role
                 attributes: [
                     'hub_id'
-                ]
+                ] */
             });
+
+            console.log(hub);
 
             return hub;
         } catch (err) {
+            console.log(err);
             // todo: handle error
         }
     },
