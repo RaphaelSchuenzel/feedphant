@@ -1,6 +1,6 @@
 'use strict';
 
-import BoardsService from '../services/board'
+import BoardsService from '../services/boards'
 
 module.exports = {
     getBoards: async (req, res, next) => {
