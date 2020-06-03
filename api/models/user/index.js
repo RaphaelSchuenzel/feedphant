@@ -1,34 +1,34 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('user', {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         hubId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false
         },
         email: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         username: {
-            type: DataTypes.STRING(50),
+            type: Sequelize.STRING(50),
             allowNull: false
         },
         avatarUrl: {
-            type: DataTypes.STRING(4096),
+            type: Sequelize.STRING(4096),
             allowNull: true
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

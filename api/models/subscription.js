@@ -1,30 +1,30 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('setting', {
         hubId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         stripeCustomerId: {
-            type: DataTypes.STRING(2048),
+            type: Sequelize.STRING(2048),
             allowNull: true
         },
         stripeSubscriptionId: {
-            type: DataTypes.STRING(2048),
+            type: Sequelize.STRING(2048),
             allowNull: true,
             unique: true
         },
         currentPeriodEnds: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: true
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

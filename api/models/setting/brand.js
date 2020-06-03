@@ -1,41 +1,41 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('setting_brand', {
         hubId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         name: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         logoUrl: {
-            type: DataTypes.STRING(4096),
+            type: Sequelize.STRING(4096),
             allowNull: true
         },
         iconUrl: {
-            type: DataTypes.STRING(4096),
+            type: Sequelize.STRING(4096),
             allowNull: true
         },
         backgroundUrl: {
-            type: DataTypes.STRING(4096),
+            type: Sequelize.STRING(4096),
             allowNull: true
         },
         colorsPrimary: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: true
         },
         colorsBackground: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: true
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

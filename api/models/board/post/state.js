@@ -1,26 +1,26 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('board_post_state', {
         id: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         hubId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false
         },
         name: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

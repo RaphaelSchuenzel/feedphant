@@ -1,34 +1,34 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('board_post_comment', {
         id: {
-            type: DataTypes.UUID,
-            defaultValue: DataTypes.UUIDV4,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         postId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false
         },
         owner: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false
         },
         content: {
-            type: DataTypes.STRING(4096),
+            type: Sequelize.STRING(4096),
             allowNull: false
         },
         hidden: {
-            type: DataTypes.BOOLEAN,
+            type: Sequelize.BOOLEAN,
             allowNull: false
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

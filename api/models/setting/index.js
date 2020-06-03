@@ -1,43 +1,43 @@
-module.exports = ({ sequelize, DataTypes }) => {
+module.exports = ({ sequelize, Sequelize }) => {
     return sequelize.define('setting', {
         hubId: {
-            type: DataTypes.UUID,
+            type: Sequelize.UUID,
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         public: {
-            type: DataTypes.BOOLEAN,
+            type: Sequelize.BOOLEAN,
             allowNull: false
         },
         title: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING(2048),
+            type: Sequelize.STRING(2048),
             allowNull: true
         },
         whitelabel: {
-            type: DataTypes.BOOLEAN,
+            type: Sequelize.BOOLEAN,
             allowNull: false
         },
         subdomain: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
         domain_custom: {
-            type: DataTypes.STRING,
+            type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
         createdAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         },
         updatedAt: {
-            type: DataTypes.DATE,
+            type: Sequelize.DATE,
             allowNull: false
         }
     });

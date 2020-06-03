@@ -7,7 +7,7 @@ async function createConnection () {
         host: config.api.db.host,
         dialect: config.api.db.dialect,
         port: config.api.db.port,
-        logging: config.api.debug ? consola.log : false,
+        logging: config.api.debug ? console.log : false,
         define: {
             // prevent sequelize from pluralizing table names
             freezeTableName: true,
@@ -34,7 +34,7 @@ async function createConnection () {
     });
 
     // hard sync with database
-    await sequelize.sync({ force: true, schema: 'hub', logging: false })
+    await sequelize.sync({ schema: 'hub' })
 
     consola.success('Sequelize: Successfully synced all models.');
 
