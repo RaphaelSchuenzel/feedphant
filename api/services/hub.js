@@ -4,7 +4,7 @@ const HubInterface = require('../interfaces/hub');
 
 module.exports = {
     getHub: async (body) => {
-        const hub = await HubInterface.get('1b20abec-4001-4479-92b9-03365cc06c3a', { tableName: 'setting' });
+        const hub = await HubInterface.get('c5290736-b505-4696-8bf4-a359ce36022f', { tableName: 'setting' });
 
         return hub;
     },

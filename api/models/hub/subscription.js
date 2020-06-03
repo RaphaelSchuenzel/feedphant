@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize }) => {
-    return sequelize.define('setting', {
+    return sequelize.define('index_subscription', {
         hubId: {
             type: Sequelize.UUID,
             allowNull: false,

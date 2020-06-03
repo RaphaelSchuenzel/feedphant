@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize }) => {
-    return sequelize.define('setting_brand', {
+    return sequelize.define('index_brand', {
         hubId: {
             type: Sequelize.UUID,
             allowNull: false,
