@@ -1,6 +1,6 @@
 'use strict';
 
-module.exports = ({ api, db, passport }) => ({
+module.exports = {
     getUser: (condition, value) => {
         return new Promise((resolve, reject) => {
             if (condition && value) {
@@ -37,4 +37,4 @@ module.exports = ({ api, db, passport }) => ({
             return res.status(err.status).json(err);
         }
     }
-});
+};

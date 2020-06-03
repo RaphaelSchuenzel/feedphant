@@ -3,7 +3,7 @@
 // controllers
 const users = require('./users');
 
-module.exports = ({ api, db, passport }) => ({
+module.exports = {
     getBoards: (req, res, next) => {
         try {
             /* db.query(`SELECT * FROM organizations_hubs_boards WHERE hub_id = ` + id, async (error, results, fields) => {
@@ -104,4 +104,4 @@ module.exports = ({ api, db, passport }) => ({
             return res.status(err.status).json(err);
         }
     }
-});
+};

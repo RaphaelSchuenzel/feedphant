@@ -2,7 +2,7 @@
 
 import HubService from '../services/hub'
 
-module.exports = ({ api, db, passport }) => ({
+module.exports = {
 
     // retrieve hub on requested subdomain (${url}.feedphant.com)
     getHub: async (req, res, next) => {
@@ -24,4 +24,4 @@ module.exports = ({ api, db, passport }) => ({
 
         return res.json(hub);
     }
-});
+};

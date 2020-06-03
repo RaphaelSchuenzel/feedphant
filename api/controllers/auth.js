@@ -13,7 +13,7 @@ const controllers = {
 // models
 const models = require('../models')
 
-module.exports = ({ api, db, passport }) => ({
+module.exports = {
     createAccount: (req, res, next) => {
         try {
             // todo: check for auth adapter
@@ -122,4 +122,4 @@ module.exports = ({ api, db, passport }) => ({
             });
         });
     }
-});
+};
