@@ -1,4 +1,4 @@
-module.exports = ({ sequelize, Sequelize }) => {
+module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('index_brand', {
         hubId: {
             type: Sequelize.UUID,
@@ -30,5 +30,7 @@ module.exports = ({ sequelize, Sequelize }) => {
             type: Sequelize.STRING,
             allowNull: true
         }
+    }, {
+        schema
     });
 }

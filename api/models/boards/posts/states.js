@@ -1,4 +1,4 @@
-module.exports = ({ sequelize, Sequelize }) => {
+module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('board_post_state', {
         id: {
             type: Sequelize.STRING,
@@ -15,5 +15,7 @@ module.exports = ({ sequelize, Sequelize }) => {
             allowNull: false,
             unique: true
         }
+    }, {
+        schema
     });
 }

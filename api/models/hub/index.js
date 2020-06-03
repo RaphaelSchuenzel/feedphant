@@ -1,4 +1,4 @@
-module.exports = ({ sequelize, Sequelize }) => {
+module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('index', {
         id: {
             type: Sequelize.UUID,
@@ -33,5 +33,7 @@ module.exports = ({ sequelize, Sequelize }) => {
             allowNull: true,
             unique: true
         }
+    }, {
+        schema
     });
 }

@@ -1,4 +1,4 @@
-module.exports = ({ sequelize, Sequelize }) => {
+module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('board_post', {
         id: {
             type: Sequelize.UUID,
@@ -27,5 +27,7 @@ module.exports = ({ sequelize, Sequelize }) => {
             type: Sequelize.STRING,
             allowNull: false
         }
+    }, {
+        schema
     });
 }

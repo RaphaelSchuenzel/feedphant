@@ -34,7 +34,7 @@ Object.keys(models).forEach((key) => {
 });
 
 // hard sync with database
-sequelize.sync({ schema: 'hub' })
+sequelize.sync()
     .then(() => {
         consola.success('Sequelize: Successfully synced all models.');
     })
