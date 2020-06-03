@@ -1,4 +1,4 @@
-const { models } = require('./lib/db');
+const { models } = require('../lib/db');
 
 module.exports = {
     // create a new hub
