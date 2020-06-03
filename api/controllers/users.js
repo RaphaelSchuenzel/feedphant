@@ -1,40 +1,20 @@
 'use strict';
 
-module.exports = {
-    getUser: (condition, value) => {
-        return new Promise((resolve, reject) => {
-            if (condition && value) {
-                // allow lookup for unique conditions only
+import UsersService from '../services/users'
 
-                if (condition === 'id' || condition === 'email') {
-                    /* db.query(`SELECT * FROM users WHERE ${condition} = '${value}'`, function (error, results, fields) {
-                        if (error) {
-                            reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
-                        } else if (results) {
-                            const response = {};
-                            
-                            response.id = results[0].id;
-                            response.username = results[0].username;
-                            response.avatar = results[0].avatar_url;
-                            
-                            return resolve(response);
-                        } else {
-                            return resolve({});
-                        }
-                    }); */
-                } else {
-                    reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, 'Invalid condition.'));
-                }
-            } else {
-                reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, 'Missing arguments.'));
-            }
-        });
+module.exports = {
+
+    // get a user by id or email, defined by hub id
+    getUser: async (req, res, next) => {
+        const user = await UsersService.getUser(req.body);
+
+        return res.json(user);
     },
-    getUsersMe: (req, res, next) => {
-        try {
-            return res.json(req.user);
-        } catch (err) {
-            return res.status(err.status).json(err);
-        }
+
+    // return the requesting user by access token
+    getUsersMe: async (req, res, next) => {
+        const user = await UsersService.getUser(req.body);
+
+        return res.json(user);
     }
 };
