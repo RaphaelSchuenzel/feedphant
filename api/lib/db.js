@@ -34,7 +34,7 @@ Object.keys(models).forEach((key) => {
 });
 
 // hard sync with database
-sequelize.sync()
+sequelize.sync({ force: config.api.debug })
     .then(() => {
         consola.success('Sequelize: Successfully synced all models.');
     })
