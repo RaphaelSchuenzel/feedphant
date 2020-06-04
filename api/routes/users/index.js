@@ -2,7 +2,6 @@
 
 const users = require('express').Router();
 const passport = require('passport');
-const { celebrate, Joi, Segments } = require('celebrate');
 
 // controllers
 const UsersController = require('../../controllers/users');
