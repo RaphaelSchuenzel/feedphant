@@ -14,7 +14,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         },
         title: {
             type: Sequelize.STRING,
-            allowNull: false
+            allowNull: true
         },
         description: {
             type: Sequelize.STRING(2048),
