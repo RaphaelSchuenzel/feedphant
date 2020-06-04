@@ -9,7 +9,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         },
         public: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: false
         },
         title: {
             type: Sequelize.STRING,
@@ -21,7 +22,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         },
         whitelabel: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: true
         },
         subdomain: {
             type: Sequelize.STRING,

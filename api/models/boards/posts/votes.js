@@ -17,7 +17,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         },
         state: {
             type: Sequelize.BOOLEAN,
-            allowNull: false
+            allowNull: false,
+            defaultValue: true
         }
     }, {
         schema
