@@ -6,25 +6,31 @@ module.exports = {
         try {
             const subdomain = 'generate subdomain';
 
-            const hubId = await sequelize.transaction(async (t) => {
+            const accessToken = await sequelize.transaction(async (t) => {
+
+                // create hub table row
                 const hub = await models.hub.create({
                     subdomain
                 }, {
                     transaction: t
                 });
 
+                // create hub brand row
                 await models.hubBrand.create({
+                    hubId: hub.id,
                     name: details.productName
                 }, {
                     transaction: t
                 });
 
-                return hub.id;
+                // create admin user
+                const accessToken = 'replace';
+
+                // return access token
+                return accessToken;
             });
             
-            return module.get(hubId, {
-                model: 'hub'
-            });
+            return accessToken;
         } catch (err) {
             // todo: handle error
         }
