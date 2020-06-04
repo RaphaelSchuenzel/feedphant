@@ -8,7 +8,7 @@ module.exports = {
 
         return hub;
     },
-    createHub: async (body) => {
+    createHub: async (details) => {
         const hub = await HubInterface.create(details);
 
         return hub;

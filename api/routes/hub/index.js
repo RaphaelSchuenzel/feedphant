@@ -12,7 +12,13 @@ hub.route('/')
             host: Joi.string().uri().required()
         })
     }), HubController.getHub)
-    .post(HubController.createHub)
+    .post(celebrate({
+        [Segments.BODY]: Joi.object().keys({
+            productName: Joi.string().required(),
+            contactName: Joi.string().required(),
+            contactEmail: Joi.string().email().required()
+        })
+    }), HubController.createHub)
     .put(HubController.updateHub);
 
 module.exports = hub;

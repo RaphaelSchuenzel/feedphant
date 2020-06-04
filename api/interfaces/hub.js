@@ -1,12 +1,30 @@
-const { models } = require('../lib/db');
+const { sequelize, models } = require('../lib/db');
 
 module.exports = {
     // create a new hub
     create: async (details) => {
         try {
-            const hub = await models.hub.create(details);
+            const subdomain = 'generate subdomain';
+
+            const hubId = await sequelize.transaction(async (t) => {
+                const hub = await models.hub.create({
+                    subdomain
+                }, {
+                    transaction: t
+                });
+
+                await models.hubBrand.create({
+                    name: details.productName
+                }, {
+                    transaction: t
+                });
+
+                return hub.id;
+            });
             
-            return module.get(hub.id);
+            return module.get(hubId, {
+                model: 'hub'
+            });
         } catch (err) {
             // todo: handle error
         }
