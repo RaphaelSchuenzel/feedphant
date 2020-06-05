@@ -1,7 +1,9 @@
+const _ = require('lodash');
+
 const { models } = require('../lib/db');
 
 module.exports = {
-    /**	Create a table row in the defined model with the given hub id and query.
+    /**	Create a table row in the defined model with the given hub id & query.
      *	@param {Object} transaction	- Sequelize transaction object
      *	@param {Object} model	    - Sequelize model object
      *  @param {uuid} hubId	        - ID of the hub to create within.
@@ -27,28 +29,36 @@ module.exports = {
         }
     },
 
-    // get a model table row by hub id
-    get: async (hubId, { model }) => {
+    /**	Get a single model row by hub id & query.
+     *	@param {Object} transaction	- Sequelize transaction object
+     *	@param {Object} model	    - Sequelize model object
+     *  @param {uuid} hubId	        - ID of the hub to create within.
+     *  @param {Object} query	    - Sequelize query parameters.
+     *
+     *	@example
+     *		await HubInterface.create(t, 'hubBrand', hub.id, {
+     *           name: details.productName
+     *      });
+     */
+    getOne: async (transaction, model, hubId, query) => {
         try {
             if (!hubId) {
                 throw new Error('Hub ID not specified.');
-            }
-            
-            if (!model) {
+            } else if (!model) {
                 throw new Error('Model not specified.');
             }
 
-            const hub = await models[model].findOne({
+            const hubQuery = {
                 where: {
                     id: hubId
                 }
-                /* todo: define attributes based on role
-                attributes: [
-                    'hub_id'
-                ] */
-            });
+            }
 
-            console.log(hub);
+            const mergedQuery = _.merge(hubQuery, query)
+
+            const hub = await models[model].findOne(mergedQuery, {
+                transaction
+            });
 
             return hub;
         } catch (err) {
@@ -60,7 +70,7 @@ module.exports = {
     // update a table column by hub id
     update: async (hubId, details) => {
         try {
-
+            
         } catch (err) {
             // todo: handle error
         }
