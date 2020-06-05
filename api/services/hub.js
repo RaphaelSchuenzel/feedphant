@@ -1,17 +1,32 @@
 'use strict';
 
+const { sequelize } = require('../lib/db');
 const HubInterface = require('../interfaces/hub');
 
 module.exports = {
-    getHub: async (body) => {
-        const hub = await HubInterface.get('c5290736-b505-4696-8bf4-a359ce36022f', { model: 'hub' });
+    createHub: async (body) => {
+        const subdomain = 'generate subdomain';
 
-        return hub;
+        const result = await sequelize.transaction(async (t) => {
+            const hub = await HubInterface.create(t, 'hub', null, {
+                subdomain
+            });
+
+            await HubInterface.create(t, 'hub', hub.id, {
+                name: details.productName
+            });
+        });
+
+        return result;
     },
-    createHub: async (details) => {
-        const hub = await HubInterface.create(details);
+    getHub: async (body) => {
+        const result = await sequelize.transaction(async (t) => {
+            const hub = await HubInterface.get(t, 'hub', body.hubId);
 
-        return hub;
+            return hub;
+        });
+
+        return result;
     },
     updateHub: async (body) => {
         return false;

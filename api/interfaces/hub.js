@@ -1,36 +1,27 @@
-const { sequelize, models } = require('../lib/db');
+const { models } = require('../lib/db');
 
 module.exports = {
-    // create a new hub
-    create: async (details) => {
+    /**	Create a table row in the defined model with the given hub id and query.
+     *	@param {Object} transaction	- Sequelize transaction object
+     *	@param {Object} model	    - Sequelize model object
+     *  @param {uuid} hubId	        - ID of the hub to create within.
+     *  @param {Object} query	    - Sequelize query parameters.
+     *
+     *	@example
+     *		await HubInterface.create(t, 'hubBrand', hub.id, {
+     *           name: details.productName
+     *      });
+     */
+    create: async (transaction, model, hubId, query) => {
         try {
-            const subdomain = 'generate subdomain';
-
-            const accessToken = await sequelize.transaction(async (t) => {
-
-                // create hub table row
-                const hub = await models.hub.create({
-                    subdomain
-                }, {
-                    transaction: t
-                });
-
-                // create hub brand row
-                await models.hubBrand.create({
-                    hubId: hub.id,
-                    name: details.productName
-                }, {
-                    transaction: t
-                });
-
-                // create admin user
-                const accessToken = 'replace';
-
-                // return access token
-                return accessToken;
+            const result = await models[model].create({
+                hubId,
+                ...query
+            }, {
+                transaction
             });
-            
-            return accessToken;
+
+            return result;
         } catch (err) {
             // todo: handle error
         }
