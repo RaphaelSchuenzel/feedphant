@@ -25,7 +25,7 @@ module.exports = {
     },
     getHub: async (body) => {
         const result = await sequelize.transaction(async (t) => {
-            const hub = await HubInterface.getOne(t, 'hub', body.hubId);
+            const hub = await HubInterface.get(t, 'hub', body.hubId);
 
             return hub;
         });

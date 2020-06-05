@@ -40,7 +40,7 @@ module.exports = {
      *           name: details.productName
      *      });
      */
-    getOne: async (transaction, model, hubId, query) => {
+    get: async (transaction, model, hubId, query) => {
         try {
             if (!hubId) {
                 throw new Error('Hub ID not specified.');
@@ -70,7 +70,7 @@ module.exports = {
     // update a table column by hub id
     update: async (hubId, details) => {
         try {
-            
+
         } catch (err) {
             // todo: handle error
         }
