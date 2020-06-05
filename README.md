@@ -1,16 +1,33 @@
-# hub
+<p align="center">
+    <a href="https://feedphant.com">
+        <h2 align="center">Feedphant</h2>
+    </a>
+    <p align="center">Tenant Web Application</p>
+</p>
 
-Tenant hub web application.
+---
 
 ## Table of Contents
 
-- [What's What](#whats-what)
-- [Installation](#installation)
-- [Build Setup](#build-setup)
+- [Introduction](#introduction)
+- [Overview](#overview)
+- [Installing](#installing)
+- [Developing](#development)
+- [Deploying](#deploying)
 
-## What's What
+## Introduction
 
-This repository consists of a web application built using [Nuxt.js](https://nuxtjs.org).
+Within this repository you'll find the main tenant web application.
+
+The application is built to support multi-tenancy at core.
+
+Instances shall be deployed centralized, meaning that there shall *not* be instance of this application for each tenant.
+
+Instead, each tenant will be connecting to a shared instance. Tenants are matched by request URL.
+
+## Overview
+
+The web application built using [Nuxt.js](https://nuxtjs.org).
 
 Nuxt is a framework based on [Vue.js](https://vuejs.org/).
 
@@ -26,58 +43,44 @@ Application highlights include:
 
 First, clone the repository.
 
-#### Setting up the Database
+1. Create a PostgreSQL database
 
-This project requires a PostgreSQL database. We will use this database to store tenant account data.
+This project requires a PostgreSQL database. The database will be used to store tenant data.
 
 To get started, create a new PostgreSQL database. A walkthrough can be found [here](https://www.postgresql.org/docs/9.0/tutorial-createdb.html).
 
-#### Configuring
+2. Configuration
 
-Now that we've set up the database, it's time to configure our application.
+Fill out the example config found [here](config/example.config.json), then save it as `config.json`.
 
-Fill out the example config found [here](config/example.config.json), then save it as `config.json` (within the same folder).
+## Developing
 
-## Build Setup
-
-#### Development Enviroment
-
-In order to get our application running, we will have to install it's dependencies.
-
-To do so, run:
+1. Install all dependencies.
 
 ``` bash
 $ npm install
 ```
 
-Once all dependencies have been installed, run:
+2. Spin up a local web server with hot reloads.
 
 ``` bash
 $ npm run dev
 ```
 
-The application is now be running in development mode. 🎉
+> Tip: For Sequelize to hard-sync the database schema, deleting all tables & creating new ones based on the given models, use `-- sync-hard`.
 
-#### Production Enviroment
-
-Running the application in production mode is largely similar to the process pointed out within the [Installation](#installation) section.
-
-There is, however, a few things that we have to keep in mind.
+## Deploying
 
 Ensure that you have _disabled_ the `debug` option within the [config](config).
 
-Further, we're __not__ going to be running `npm run dev`. Instead, the build process now consists of 2 stages.
-
-To build the application, run:
+1. Build the application.
 
 ``` bash
 $ npm run build
 ```
 
-Once built, fire up the web server using:
+2. Fire up the web server.
 
 ``` bash
 $ npm run start
 ```
-
-The application is now be running in production mode. ✅
