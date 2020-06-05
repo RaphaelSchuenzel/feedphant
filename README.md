@@ -67,11 +67,13 @@ $ npm install
 $ npm run dev
 ```
 
-> Tip: For Sequelize to hard-sync the database schema, deleting all tables & creating new ones based on the given models, use `-- sync-hard`.
+> Tip: For Sequelize to hard-sync the database schema, use `-- sync-hard`. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
 
 ## Deploying
 
-Ensure that you have _disabled_ the `debug` option within the [config](config).
+Detailed production documentation coming soon.
+
+---
 
 1. Build the application.
 
@@ -79,7 +81,7 @@ Ensure that you have _disabled_ the `debug` option within the [config](config).
 $ npm run build
 ```
 
-2. Fire up the web server.
+2. Fire up a web server.
 
 ``` bash
 $ npm run start
