@@ -1,6 +1,6 @@
 <p align="center">
     <a href="https://feedphant.com">
-        <h2 align="center">Feedphant</h2>
+        <h3 align="center">Feedphant</h3>
     </a>
     <p align="center">Tenant Web Application</p>
 </p>
@@ -11,8 +11,8 @@
 
 - [Introduction](#introduction)
 - [Overview](#overview)
-- [Installing](#installing)
-- [Developing](#development)
+- [Installation](#installation)
+- [Developing](#developing)
 - [Deploying](#deploying)
 
 ## Introduction
