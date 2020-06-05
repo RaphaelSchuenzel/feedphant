@@ -13,9 +13,12 @@ module.exports = {
                 subdomain
             });
 
-            await HubInterface.create(t, 'hubIndex', hub.id, {
+            // create a row in hub brand model
+            await HubInterface.create(t, 'hubBrand', hub.dataValues.id, {
                 name: body.productName
             });
+
+            // todo: create admin user
         });
 
         return result;
