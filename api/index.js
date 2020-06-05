@@ -25,14 +25,6 @@ app.use(morgan(config.api.debug ? 'dev' : 'tiny'));
 require('./middleware/cors')({ app, config });
 require('./middleware/bodyParser')({ app, config });
 
-// handle uncaught exceptions
-process.on('uncaughtException', (err) => {
-    consola.error(err)
-
-    // mandatory (as per the Node docs)
-    process.exit(1)
-});
-
 // api router
 app.use('/api', routes);
 

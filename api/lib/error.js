@@ -42,6 +42,14 @@ class ApplicationError extends Error {
     }
 }
 
+// handle uncaught exceptions
+process.on('uncaughtException', (err) => {
+    consola.error(err)
+
+    // mandatory (as per the Node docs)
+    process.exit(1)
+});
+
 global.ErrorCodes = ErrorCodes;
 global.ApplicationError = ApplicationError;
 
