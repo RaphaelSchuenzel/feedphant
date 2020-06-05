@@ -3,7 +3,6 @@ const helmet = require('helmet');
 const morgan = require('morgan');
 const consola = require('consola');
 const config = require('../config/config.json');
-const middleware = require('./middleware');
 const routes = require('./routes');
 
 const app = express();
@@ -31,7 +30,8 @@ if (config.api.debug) {
 }
 
 // internal middleware
-app.use(middleware({ app, config }));
+require('./middleware/cors')({ app, config });
+require('./middleware/bodyParser')({ app, config });
 
 // api router
 app.use('/api', routes);
