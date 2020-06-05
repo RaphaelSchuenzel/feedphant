@@ -5,15 +5,16 @@ const HubInterface = require('../interfaces/hub');
 
 module.exports = {
     createHub: async (body) => {
-        const subdomain = 'generate subdomain';
+        // todo: convert product name to subdomain string (ex. Product Name => productname)
+        const subdomain = body.productName;
 
         const result = await sequelize.transaction(async (t) => {
             const hub = await HubInterface.create(t, 'hub', null, {
                 subdomain
             });
 
-            await HubInterface.create(t, 'hub', hub.id, {
-                name: details.productName
+            await HubInterface.create(t, 'hubIndex', hub.id, {
+                name: body.productName
             });
         });
 
