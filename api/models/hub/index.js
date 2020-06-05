@@ -12,14 +12,6 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             allowNull: false,
             defaultValue: false
         },
-        title: {
-            type: Sequelize.STRING,
-            allowNull: true
-        },
-        description: {
-            type: Sequelize.STRING(2048),
-            allowNull: true
-        },
         whitelabel: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
