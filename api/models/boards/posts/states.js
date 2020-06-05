@@ -1,6 +1,6 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('board_post_state', {
-        id: {
+        stateId: {
             type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true,

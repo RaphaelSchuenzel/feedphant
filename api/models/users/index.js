@@ -1,6 +1,6 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     return sequelize.define('user', {
-        id: {
+        userId: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,
