@@ -1,3 +1,5 @@
+const consola = require('consola');
+
 const ErrorCodes = {
     'INTERNAL_ERROR': {
         id: 'INTERNAL_ERROR',
