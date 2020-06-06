@@ -66,17 +66,12 @@ $ npm install
 2. Spin up a local web server with hot reloads.
 
 ``` bash
-$ npm run dev
+$ npm run dev [-- <arguments>]
 ```
 
-Additional available parameters:
-- `sync-hard` - Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
-- `log-queries` - Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
-
-Example usage
-``` bash
-$ npm run dev -- sync-hard log-queries
-```
+Available arguments for use *within development only* are:
+- `sync-hard` - Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications.
+- `log-queries` - Have Sequelize output all performed SQL queries.
 
 ## Deployment
 
