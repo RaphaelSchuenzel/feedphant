@@ -14,10 +14,11 @@ hub.route('/')
     }), HubController.getHub)
     .post(celebrate({
         [Segments.BODY]: Joi.object().keys({
+            subdomain: Joi.string().required(),
             productName: Joi.string().required(),
-            userName: Joi.string().required(),
-            userEmail: Joi.string().email().required(),
-            userPassword: Joi.string()
+            name: Joi.string().required(),
+            email: Joi.string().email().required(),
+            password: Joi.string()
         })
     }), HubController.createHub)
     .put(HubController.updateHub);

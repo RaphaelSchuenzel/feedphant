@@ -13,7 +13,15 @@ module.exports = {
 
     // create a new hub on the requested subdomain (${url}.feedphant.com)
     createHub: async (req, res, next) => {
-        const hub = await HubService.createHub(req.body);
+        const credentials = req.body;
+
+        // todo: specify adapter, generate access & refresh token
+        credentials.adapter = 'email';
+        
+        credentials.accessToken = require('crypto').randomBytes(36).toString('hex');
+        credentials.refreshToken = require('crypto').randomBytes(36).toString('hex');
+
+        const hub = await HubService.createHub(credentials);
 
         return res.json(hub);
     },

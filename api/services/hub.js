@@ -7,18 +7,9 @@ const UserInterface = require('../interfaces/user');
 
 module.exports = {
     createHub: async (body) => {
-        // todo: convert product name to subdomain string (ex. Product Name => productname)
-        const subdomain = body.productName;
-
-        // todo: specify adapter, generate access & refresh token
-        const adapter = 'email';
-        
-        const accessToken = require('crypto').randomBytes(36).toString('hex');
-        const refreshToken = require('crypto').randomBytes(36).toString('hex');
-
         const result = await sequelize.transaction(async (t) => {
             const hub = await HubInterface.create(t, 'hub', null, {
-                subdomain
+                subdomain: body.subdomain
             });
 
             // create a record in hub brand model
@@ -28,15 +19,16 @@ module.exports = {
 
             // create a record in user model
             const user = await UserInterface.create(t, 'users', null, hub.dataValues.hubId, {
-                name: body.userName,
-                email: body.userEmail
+                name: body.name,
+                email: body.email
             });
 
             // create a record in user auth model
             const auth = await UserInterface.create(t, 'usersAuth', user.dataValues.userId, hub.dataValues.hubId, {
-                adapter,
-                accessToken,
-                refreshToken
+                adapter: body.adapter,
+                hash: body.password,
+                accessToken: body.accessToken,
+                refreshToken: body.refreshToken
             });
 
             return auth.dataValues.accessToken;
