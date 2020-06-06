@@ -6,6 +6,7 @@ module.exports = {
     /**	Create a table row in the defined model with the given user id & query.
      *	@param {Object} transaction	- Sequelize transaction object
      *	@param {Object} model	    - Sequelize model object
+     *  @param {uuid} hubId	        - ID of the hub to query for.
      *  @param {uuid} userId	    - ID of the user to create the record for.
      *  @param {Object} query	    - Sequelize query parameters.
      *
@@ -14,17 +15,17 @@ module.exports = {
      *           email: 'example@johndoe.com'
      *      });
      */
-    create: async (transaction, model, userId, query) => {
+    create: async (transaction, model, userId, hubId, query) => {
         try {
-            const result = await models[model].create({
-                userId,
-                ...query
-            }, {
+            const mergedQuery = userId != null ? { userId, hubId, ...query } : { hubId, ...query };
+            
+            const result = await models[model].create(mergedQuery, {
                 transaction
             });
 
             return result;
         } catch (err) {
+            console.log(err);
             // todo: handle error
         }
     },
@@ -32,21 +33,23 @@ module.exports = {
     /**	Get a single model row by user id & query.
      *	@param {Object} transaction	- Sequelize transaction object
      *	@param {Object} model	    - Sequelize model object
+     *  @param {uuid} hubId	        - ID of the hub to query for.
      *  @param {uuid} userId	    - ID of the user to query for.
      *  @param {Object} query	    - Sequelize query parameters.
      *
      *	@example
-     *		await UserInterface.create(t, 'users', user.id, {
+     *		await UserInterface.create(t, 'users', hub.id, user.id, {
      *           where: {
      *              email: 'example@johndoe.com'
      *           }
      *      });
      */
-    get: async (transaction, model, userId, query) => {
+    get: async (transaction, model, userId, hubId, query) => {
         try {
             const mergedQuery = _.merge({
                 where: {
-                    id: userId
+                    userId,
+                    hubId
                 }
             }, query)
 

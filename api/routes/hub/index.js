@@ -15,8 +15,9 @@ hub.route('/')
     .post(celebrate({
         [Segments.BODY]: Joi.object().keys({
             productName: Joi.string().required(),
-            contactName: Joi.string().required(),
-            contactEmail: Joi.string().email().required()
+            userName: Joi.string().required(),
+            userEmail: Joi.string().email().required(),
+            userPassword: Joi.string()
         })
     }), HubController.createHub)
     .put(HubController.updateHub);

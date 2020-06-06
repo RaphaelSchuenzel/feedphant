@@ -16,10 +16,9 @@ module.exports = {
      */
     create: async (transaction, model, hubId, query) => {
         try {
-            const result = await models[model].create({
-                hubId,
-                ...query
-            }, {
+            const mergedQuery = hubId != null ? { hubId, ...query } : query;
+
+            const result = await models[model].create(mergedQuery, {
                 transaction
             });
 
@@ -46,9 +45,9 @@ module.exports = {
         try {
             const mergedQuery = _.merge({
                 where: {
-                    id: hubId
+                    hubId
                 }
-            }, query)
+            }, query);
 
             const hub = await models[model].findOne(mergedQuery, {
                 transaction
