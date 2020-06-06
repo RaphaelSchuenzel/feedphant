@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    return sequelize.define('user_auth', {
+    const Model = sequelize.define('user_auth', {
         userId: {
             type: Sequelize.UUID,
             allowNull: false,
@@ -27,4 +27,10 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     }, {
         schema
     });
+
+    Model.associate = function (models) {
+        models.UserAuth.belongsTo(models.User);
+    };
+
+    return Model;
 }
