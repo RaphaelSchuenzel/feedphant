@@ -27,21 +27,21 @@ Instead, each tenant will be connecting to a shared instance. Tenants are matche
 
 ## Overview
 
-The web application built using [Nuxt.js](https://nuxtjs.org).
+This application is built using [Nuxt.js](https://nuxtjs.org). Nuxt is a framework based on [Vue.js](https://vuejs.org/).
 
-Nuxt is a framework based on [Vue.js](https://vuejs.org/).
+The integrated REST API is built using [Express](https://expressjs.com/) and the [Sequelize ORM](https://sequelize.org/).
+
+Find the API Documentation [here](api/).
 
 Application highlights include:
 
 - A highly customizable end-user view.
 - A restricted administration panel for tenants.
-- A REST [Express](http://expressjs.com/) API, used to interact with tenant data.
+- A REST API to interact with tenant data.
 - Server-Side Rendering, allowing for strong SEO and a better user experience.
 - [Pug](https://pugjs.org/) & [Sass](https://sass-lang.com/) Template Syntax.
 
 ## Installation
-
-First, clone the repository.
 
 1. Create a PostgreSQL database
 
@@ -49,7 +49,7 @@ This project requires a PostgreSQL database. The database will be used to store 
 
 To get started, create a new PostgreSQL database. A walkthrough can be found [here](https://www.postgresql.org/docs/9.0/tutorial-createdb.html).
 
-2. Configuration
+2. Configure the application
 
 Fill out the example config found [here](config/example.config.json), then save it as `config.json`.
 
