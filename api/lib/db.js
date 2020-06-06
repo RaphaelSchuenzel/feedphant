@@ -6,7 +6,7 @@ const sequelize = new Sequelize(config.api.db.database, config.api.db.user, conf
     host: config.api.db.host,
     dialect: config.api.db.dialect,
     port: config.api.db.port,
-    logging: config.api.debug ? console.log : false,
+    logging: process.argv.slice(2).includes('log-queries') && config.api.debug ? console.log : false,
     define: {
         // prevent sequelize from pluralizing table names
         freezeTableName: true,

@@ -9,7 +9,12 @@ module.exports = {
     createHub: async (body) => {
         // todo: convert product name to subdomain string (ex. Product Name => productname)
         const subdomain = body.productName;
+
+        // todo: specify adapter, generate access & refresh token
         const adapter = 'email';
+        const accessToken = 'replace';
+        const refreshToken = 'repalce';
+
 
         const result = await sequelize.transaction(async (t) => {
             const hub = await HubInterface.create(t, 'hub', null, {
@@ -28,9 +33,13 @@ module.exports = {
             });
 
             // create a record in user auth model
-            await UserInterface.create(t, 'usersAuth', user.dataValues.userId, hub.dataValues.hubId, {
-                adapter
+            const auth = await UserInterface.create(t, 'usersAuth', user.dataValues.userId, hub.dataValues.hubId, {
+                adapter,
+                accessToken,
+                refreshToken
             });
+
+            return auth.dataValues.accessToken;
         });
 
         return result;
