@@ -12,8 +12,8 @@
 - [Introduction](#introduction)
 - [Overview](#overview)
 - [Installation](#installation)
-- [Developing](#developing)
-- [Deploying](#deploying)
+- [Development](#development)
+- [Deployment](#deployment)
 
 ## Introduction
 
@@ -53,7 +53,7 @@ To get started, create a new PostgreSQL database. A walkthrough can be found [he
 
 Fill out the example config found [here](config/example.config.json), then save it as `config.json`.
 
-## Developing
+## Development
 
 ### Build Process
 
@@ -69,16 +69,16 @@ $ npm install
 $ npm run dev
 ```
 
-#### Additional Development Parameters:
-- `sync-hard` Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
-- `log-queries` Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
+Additional available parameters:
+- `sync-hard` - Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
+- `log-queries` - Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
 
 Example usage
 ``` bash
 $ npm run dev -- sync-hard log-queries
 ```
 
-## Deploying
+## Deployment
 
 Detailed production documentation coming soon.
 
