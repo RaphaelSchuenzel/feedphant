@@ -12,9 +12,9 @@ module.exports = {
 
         // todo: specify adapter, generate access & refresh token
         const adapter = 'email';
-        const accessToken = 'replace';
-        const refreshToken = 'repalce';
-
+        
+        const accessToken = require('crypto').randomBytes(36).toString('hex');
+        const refreshToken = require('crypto').randomBytes(36).toString('hex');
 
         const result = await sequelize.transaction(async (t) => {
             const hub = await HubInterface.create(t, 'hub', null, {
