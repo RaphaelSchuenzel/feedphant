@@ -55,6 +55,8 @@ Fill out the example config found [here](config/example.config.json), then save 
 
 ## Developing
 
+### Build Process
+
 1. Install all dependencies.
 
 ``` bash
@@ -67,13 +69,22 @@ $ npm install
 $ npm run dev
 ```
 
-> Tip: For Sequelize to hard-sync the database schema, use `-- sync-hard`. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
+#### Additional Development Parameters:
+- `sync-hard` Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
+- `log-queries` Have Sequelize hard-sync the database schema. This will delete all tables & create new ones based on the model specifications. **Do not use in production.**
+
+Example usage
+``` bash
+$ npm run dev -- sync-hard log-queries
+```
 
 ## Deploying
 
 Detailed production documentation coming soon.
 
 ---
+
+### Build Process
 
 1. Build the application.
 
