@@ -65,14 +65,13 @@ module.exports = {
             console.log(err);
             // todo: handle error
         }
-    },
+    }
 
-    // update a table column by hub id
-    update: async (hubId, details) => {
+    /* update: async (hubId, details) => {
         try {
-
+            // todo: add update method logic
         } catch (err) {
             // todo: handle error
         }
-    }
+    } */
 };
