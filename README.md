@@ -5,8 +5,6 @@
     <p align="center">Tenant Web Application</p>
 </p>
 
----
-
 ## Table of Contents
 
 - [Introduction](#introduction)
@@ -44,8 +42,6 @@ Application highlights include:
 ## Installation
 
 1. Create a PostgreSQL database
-
-This project requires a PostgreSQL database. The database will be used to store tenant data.
 
 To get started, create a new PostgreSQL database. A walkthrough can be found [here](https://www.postgresql.org/docs/9.0/tutorial-createdb.html).
 
