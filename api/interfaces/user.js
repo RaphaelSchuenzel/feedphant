@@ -3,21 +3,21 @@ const _ = require('lodash');
 const { models } = require('../lib/db');
 
 module.exports = {
-    /**	Create a table row in the defined model with the given hub id & query.
+    /**	Create a table row in the defined model with the given user id & query.
      *	@param {Object} transaction	- Sequelize transaction object
      *	@param {Object} model	    - Sequelize model object
-     *  @param {uuid} hubId	        - ID of the hub to create within.
+     *  @param {uuid} userId	    - ID of the user to create the record for.
      *  @param {Object} query	    - Sequelize query parameters.
      *
      *	@example
-     *		await HubInterface.create(t, 'hubBrand', hub.id, {
-     *           name: details.productName
+     *		await UserInterface.create(t, 'users', user.id, {
+     *           email: 'example@johndoe.com'
      *      });
      */
-    create: async (transaction, model, hubId, query) => {
+    create: async (transaction, model, userId, query) => {
         try {
             const result = await models[model].create({
-                hubId,
+                userId,
                 ...query
             }, {
                 transaction
@@ -29,39 +29,39 @@ module.exports = {
         }
     },
 
-    /**	Get a single model row by hub id & query.
+    /**	Get a single model row by user id & query.
      *	@param {Object} transaction	- Sequelize transaction object
      *	@param {Object} model	    - Sequelize model object
-     *  @param {uuid} hubId	        - ID of the hub to query for.
+     *  @param {uuid} userId	    - ID of the user to query for.
      *  @param {Object} query	    - Sequelize query parameters.
      *
      *	@example
-     *		await HubInterface.get(t, 'hubBrand', hub.id, {
+     *		await UserInterface.create(t, 'users', user.id, {
      *           where: {
-     *              name: details.productName
+     *              email: 'example@johndoe.com'
      *           }
      *      });
      */
-    get: async (transaction, model, hubId, query) => {
+    get: async (transaction, model, userId, query) => {
         try {
             const mergedQuery = _.merge({
                 where: {
-                    id: hubId
+                    id: userId
                 }
             }, query)
 
-            const hub = await models[model].findOne(mergedQuery, {
+            const user = await models[model].findOne(mergedQuery, {
                 transaction
             });
 
-            return hub;
+            return user;
         } catch (err) {
             console.log(err);
             // todo: handle error
         }
     }
 
-    /* update: async (hubId, details) => {
+    /* update: async (userId, details) => {
         try {
             // todo: add update method logic
         } catch (err) {
