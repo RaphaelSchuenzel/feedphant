@@ -11,12 +11,12 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             type: Sequelize.UUID,
             allowNull: false
         },
-        email: {
-            type: Sequelize.STRING,
+        name: {
+            type: Sequelize.STRING(50),
             allowNull: false
         },
-        username: {
-            type: Sequelize.STRING(50),
+        email: {
+            type: Sequelize.STRING,
             allowNull: false
         },
         avatarUrl: {
