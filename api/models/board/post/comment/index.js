@@ -7,10 +7,6 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        postId: {
-            type: Sequelize.UUID,
-            allowNull: false
-        },
         owner: {
             type: Sequelize.UUID,
             allowNull: false
