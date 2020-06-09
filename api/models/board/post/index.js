@@ -1,15 +1,11 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    return sequelize.define('board_post', {
+    const Model = sequelize.define('board_post', {
         postId: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,
             primaryKey: true,
             unique: true
-        },
-        boardId: {
-            type: Sequelize.UUID,
-            allowNull: false
         },
         title: {
             type: Sequelize.STRING,
@@ -31,4 +27,12 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     }, {
         schema
     });
+
+    Model.associate = function (models) {
+        models.BoardPost.belongsTo(models.Board);
+        models.BoardPost.hasMany(models.BoardPostState);
+        models.BoardPost.hasMany(models.BoardPostVote);
+    };
+
+    return Model;
 }

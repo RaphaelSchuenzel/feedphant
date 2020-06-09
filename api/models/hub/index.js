@@ -34,9 +34,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     Model.associate = function (models) {
         models.Hub.hasOne(models.HubSubscription);
         models.Hub.hasOne(models.HubBrand);
-
         models.Hub.hasMany(models.Board);
-
         models.Hub.hasMany(models.User);
     };
 
