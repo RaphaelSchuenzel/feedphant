@@ -1,6 +1,6 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     const Model = sequelize.define('index', {
-        hubId: {
+        id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,
@@ -32,7 +32,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = function (models) {
-        models.Hub.hasOne(models.HubSubscription);
+        models.Hub.hasOne(models.Subscription);
         models.Hub.hasOne(models.HubBrand);
         models.Hub.hasMany(models.Board);
         models.Hub.hasMany(models.User);
