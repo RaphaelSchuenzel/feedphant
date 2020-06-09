@@ -1,6 +1,6 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     const Model = sequelize.define('board', {
-        boardId: {
+        id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
             allowNull: false,

@@ -1,6 +1,6 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     const Model = sequelize.define('post_state', {
-        stateId: {
+        id: {
             type: Sequelize.STRING,
             allowNull: false,
             primaryKey: true,
