@@ -1,11 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    return sequelize.define('index_brand', {
-        hubId: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            primaryKey: true,
-            unique: true
-        },
+    const Model = sequelize.define('index_brand', {
         name: {
             type: Sequelize.STRING,
             allowNull: false
@@ -41,4 +35,10 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     }, {
         schema
     });
+
+    Model.associate = function (models) {
+        models.HubBrand.belongsTo(models.Hub);
+    };
+
+    return Model;
 }

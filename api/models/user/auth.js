@@ -1,11 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     const Model = sequelize.define('user_auth', {
-        userId: {
-            type: Sequelize.UUID,
-            allowNull: false,
-            primaryKey: true,
-            unique: true
-        },
         adapter: {
             type: Sequelize.STRING,
             allowNull: false

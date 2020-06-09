@@ -7,10 +7,6 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        hubId: {
-            type: Sequelize.UUID,
-            allowNull: false
-        },
         name: {
             type: Sequelize.STRING,
             allowNull: false
@@ -28,6 +24,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = function (models) {
+        models.User.belongsTo(models.Hub);
         models.User.hasOne(models.UserAuth);
     };
 
