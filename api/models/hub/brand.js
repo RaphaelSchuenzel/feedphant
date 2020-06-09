@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('index_brand', {
+    const Model = sequelize.define('hub_brand', {
         name: {
             type: Sequelize.STRING,
             allowNull: false

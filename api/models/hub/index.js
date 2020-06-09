@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('index', {
+    const Model = sequelize.define('hub', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
