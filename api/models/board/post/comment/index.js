@@ -28,4 +28,6 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         models.BoardPostComment.belongsTo(models.BoardPost);
         models.BoardPostComment.hasMany(models.BoardPostCommentVote);
     };
+
+    return Model;
 }
