@@ -17,7 +17,7 @@ module.exports = ({ sequelize }) => {
         PostComment: require('./post/comment')({ sequelize, Sequelize, schema }),
         PostCommentVote: require('./post/comment/vote')({ sequelize, Sequelize, schema }),
         User: require('./user')({ sequelize, Sequelize, schema }),
-        UserAuth: require('./user/auth')({ sequelize, Sequelize, schema })
+        Auth: require('./auth')({ sequelize, Sequelize, schema })
     }
 
     return models;

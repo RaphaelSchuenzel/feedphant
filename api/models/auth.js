@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('user_auth', {
+    const Model = sequelize.define('auth', {
         adapter: {
             type: Sequelize.STRING,
             allowNull: false
@@ -23,7 +23,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = function (models) {
-        models.UserAuth.belongsTo(models.User);
+        models.Auth.belongsTo(models.User);
     };
 
     return Model;

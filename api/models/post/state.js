@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('board_post_state', {
+    const Model = sequelize.define('post_state', {
         stateId: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -16,7 +16,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = function (models) {
-        models.BoardPostState.belongsTo(models.BoardPost);
+        models.PostState.belongsTo(models.Post);
     };
 
     return Model;

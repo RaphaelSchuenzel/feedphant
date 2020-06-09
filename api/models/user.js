@@ -25,7 +25,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
 
     Model.associate = function (models) {
         models.User.belongsTo(models.Hub);
-        models.User.hasOne(models.UserAuth);
+        models.User.hasOne(models.Auth);
     };
 
     return Model;

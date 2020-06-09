@@ -23,7 +23,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
 
     Model.associate = function (models) {
         models.Board.belongsTo(models.Hub);
-        models.Board.hasMany(models.BoardPost);
+        models.Board.hasMany(models.Post);
     };
 
     return Model;

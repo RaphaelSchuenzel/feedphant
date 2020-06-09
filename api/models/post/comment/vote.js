@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('board_post_comment_vote', {
+    const Model = sequelize.define('post_comment_vote', {
         postCommentVoteId: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal('hub.uuid_generate_v4()'),
@@ -21,7 +21,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = function (models) {
-        models.BoardPostCommentVote.belongsTo(models.BoardPostComment);
+        models.PostCommentVote.belongsTo(models.PostComment);
     };
 
     return Model;
