@@ -10,7 +10,7 @@
 			"database": "local",
 			"dialect": "postgres",
 			"port": "5432",
-			"schema": "hub"
+			"schema": "public"
 		},
 		"secrets": {
 			"auth": "replace_me",
