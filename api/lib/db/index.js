@@ -24,7 +24,7 @@ sequelize.authenticate()
     })
 
 // import sequelize models
-const models = require('../models')({ sequelize });
+const models = require('../../models')({ sequelize });
 
 // associate models where applicable
 Object.keys(models).forEach((key) => {
@@ -39,5 +39,7 @@ sequelize.sync({ force: process.argv.slice(2).includes('sync-hard') && config.ap
         consola.success('Sequelize: Successfully synced all models.');
     })
 
+const queryInterface = require('../../models')({ models });
+
 // export
-module.exports = { sequelize, models }
+module.exports = { sequelize, queryInterface }

@@ -1,13 +1,19 @@
 'use strict';
 
-const { sequelize } = require('../lib/db');
-
-const HubInterface = require('../interfaces/hub');
-const UserInterface = require('../interfaces/user');
+const { sequelize, queryInterface } = require('../lib/db');
 
 module.exports = {
     createHub: async (body) => {
         const result = await sequelize.transaction(async (t) => {
+            const hub = await queryInterface.create({
+                transaction: t,
+                model: 'Hub',
+                identifier: null,
+                query: {
+                    subdomain: body.subdomain
+                }
+            });
+
             const hub = await HubInterface.create(t, 'Hub', null, {
                 subdomain: body.subdomain
             });
