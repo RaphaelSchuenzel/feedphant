@@ -29,7 +29,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         paranoid: true
     });
 
-    Model.associate = function (models) {
+    Model.associate = (models) => {
         models.Post.belongsTo(models.Board);
         models.Post.hasMany(models.PostState);
         models.Post.hasMany(models.PostVote);

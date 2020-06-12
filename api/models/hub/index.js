@@ -32,7 +32,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         paranoid: true
     });
 
-    Model.associate = function (models) {
+    Model.associate = (models) => {
         models.Hub.hasOne(models.Subscription);
         models.Hub.hasOne(models.HubBrand);
         models.Hub.hasMany(models.Board);

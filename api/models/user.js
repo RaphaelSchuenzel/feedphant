@@ -24,7 +24,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         paranoid: true
     });
 
-    Model.associate = function (models) {
+    Model.associate = (models) => {
         models.User.belongsTo(models.Hub);
         models.User.hasOne(models.Auth);
     };

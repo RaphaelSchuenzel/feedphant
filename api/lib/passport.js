@@ -73,7 +73,7 @@ module.exports = ({ app }) => {
         (token, done) => {
             const authSecret = process.env.AUTH_SECRET || config.api.secrets.auth;
 
-            jwt.verify(token, authSecret, function (err, decoded) {
+            jwt.verify(token, authSecret, (err, decoded) => {
                 if (err) {
                     return done(null, false, 'Invalid Access Token.');
                 } else if (decoded) {

@@ -18,7 +18,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
         paranoid: true
     });
 
-    Model.associate = function (models) {
+    Model.associate = (models) => {
         models.Subscription.belongsTo(models.Hub);
     };
 
