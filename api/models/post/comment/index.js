@@ -21,7 +21,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             defaultValue: false
         }
     }, {
-        schema
+        schema,
+        paranoid: true
     });
 
     Model.associate = function (models) {
