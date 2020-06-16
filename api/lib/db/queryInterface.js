@@ -27,7 +27,7 @@ module.exports = ({ models }) => ({
     /**	Get a single model row by hub id & query.
      *	@param {Object}     transaction	- Sequelize transaction object
      *	@param {Object}     model	    - Sequelize model object
-     *  @param {string}     identifiers - Identifier object containing key and value of the identifying column.
+     *  @param {Object}     identifiers - Identifier object containing key and value of the identifying column.
      *  @param {Object}     params	    - Sequelize query parameters.
      *
      *	@example
@@ -45,7 +45,6 @@ module.exports = ({ models }) => ({
 
             return hub;
         } catch (err) {
-            console.log(err);
             // todo: handle error
         }
     }
