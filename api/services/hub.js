@@ -19,7 +19,7 @@ module.exports = {
             await queryInterface.create({
                 transaction: t,
                 model: 'HubBrand',
-                associations: [
+                foreignKeys: [
                     {
                         key: 'hub_id',
                         value: hub.dataValues.id
@@ -34,7 +34,7 @@ module.exports = {
             const user = await queryInterface.create({
                 transaction: t,
                 model: 'User',
-                associations: [
+                foreignKeys: [
                     {
                         key: 'hub_id',
                         value: hub.dataValues.id
@@ -50,7 +50,7 @@ module.exports = {
             const auth = await queryInterface.create({
                 transaction: t,
                 model: 'Auth',
-                associations: [
+                foreignKeys: [
                     {
                         key: 'user_id',
                         value: user.dataValues.id
