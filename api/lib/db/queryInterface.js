@@ -4,15 +4,15 @@ module.exports = ({ models }) => ({
     /**	Create a table row in the defined model with the given identifier & query.
      *	@param {Object}     transaction - Sequelize transaction object
      *	@param {Object}     model	    - Sequelize model object
-     *  @param {string}     identifier  - Identifier object containing key and value of the identifying column.
+     *  @param {Object}     foreignKeys - Foreign key query parameters.
      *  @param {Object}     params	    - Sequelize query parameters.
      *
      *	@example
      *  todo: provide example 
      */
-    create: async ({ transaction, model, identifier, params }) => {
+    create: async ({ transaction, model, foreignKeys, params }) => {
         try {
-            const query = identifier != null ? { ...identifier, ...params } : params;
+            const query = foreignKeys != null ? { ...foreignKeys, ...params } : params;
 
             const result = await models[model].create(query, {
                 transaction

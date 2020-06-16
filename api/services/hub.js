@@ -19,12 +19,9 @@ module.exports = {
             await queryInterface.create({
                 transaction: t,
                 model: 'HubBrand',
-                foreignKeys: [
-                    {
-                        key: 'hub_id',
-                        value: hub.dataValues.id
-                    }
-                ],
+                foreignKeys: {
+                    hubId: hub.dataValues.id
+                },
                 query: {
                     name: body.productName
                 }
@@ -34,12 +31,9 @@ module.exports = {
             const user = await queryInterface.create({
                 transaction: t,
                 model: 'User',
-                foreignKeys: [
-                    {
-                        key: 'hub_id',
-                        value: hub.dataValues.id
-                    }
-                ],
+                foreignKeys: {
+                    hubId: hub.dataValues.id
+                },
                 query: {
                     name: body.name,
                     email: body.email
@@ -50,12 +44,9 @@ module.exports = {
             const auth = await queryInterface.create({
                 transaction: t,
                 model: 'Auth',
-                foreignKeys: [
-                    {
-                        key: 'user_id',
-                        value: user.dataValues.id
-                    }
-                ],
+                foreignKeys: {
+                    userId: user.dataValues.id
+                },
                 query: {
                     adapter: body.adapter,
                     hash: body.password,
