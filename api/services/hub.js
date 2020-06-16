@@ -5,36 +5,63 @@ const { sequelize, queryInterface } = require('../lib/db');
 module.exports = {
     createHub: async (body) => {
         const result = await sequelize.transaction(async (t) => {
+
+            // create a record in hub model
             const hub = await queryInterface.create({
                 transaction: t,
                 model: 'Hub',
-                identifier: null,
                 query: {
                     subdomain: body.subdomain
                 }
             });
 
-            const hub = await HubInterface.create(t, 'Hub', null, {
-                subdomain: body.subdomain
-            });
-
             // create a record in hub brand model
-            await HubInterface.create(t, 'HubBrand', hub.dataValues.hubId, {
-                name: body.productName
+            await queryInterface.create({
+                transaction: t,
+                model: 'HubBrand',
+                associations: [
+                    {
+                        key: 'hub_id',
+                        value: hub.dataValues.id
+                    }
+                ],
+                query: {
+                    name: body.productName
+                }
             });
 
             // create a record in user model
-            const user = await UserInterface.create(t, 'User', null, hub.dataValues.hubId, {
-                name: body.name,
-                email: body.email
+            const user = await queryInterface.create({
+                transaction: t,
+                model: 'User',
+                associations: [
+                    {
+                        key: 'hub_id',
+                        value: hub.dataValues.id
+                    }
+                ],
+                query: {
+                    name: body.name,
+                    email: body.email
+                }
             });
 
-            // create a record in user auth model
-            const auth = await UserInterface.create(t, 'UserAuth', user.dataValues.userId, hub.dataValues.hubId, {
-                adapter: body.adapter,
-                hash: body.password,
-                accessToken: body.accessToken,
-                refreshToken: body.refreshToken
+            // create a record in auth model
+            const auth = await queryInterface.create({
+                transaction: t,
+                model: 'Auth',
+                associations: [
+                    {
+                        key: 'user_id',
+                        value: user.dataValues.id
+                    }
+                ],
+                query: {
+                    adapter: body.adapter,
+                    hash: body.password,
+                    accessToken: body.accessToken,
+                    refreshToken: body.refreshToken
+                }
             });
 
             return auth.dataValues.accessToken;
