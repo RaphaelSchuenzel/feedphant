@@ -10,7 +10,7 @@ module.exports = {
             const hub = await queryInterface.create({
                 transaction: t,
                 model: 'Hub',
-                query: {
+                params: {
                     subdomain: body.subdomain
                 }
             });
@@ -22,7 +22,7 @@ module.exports = {
                 foreignKeys: {
                     hubId: hub.dataValues.id
                 },
-                query: {
+                params: {
                     name: body.productName
                 }
             });
@@ -34,7 +34,7 @@ module.exports = {
                 foreignKeys: {
                     hubId: hub.dataValues.id
                 },
-                query: {
+                params: {
                     name: body.name,
                     email: body.email
                 }
@@ -47,7 +47,7 @@ module.exports = {
                 foreignKeys: {
                     userId: user.dataValues.id
                 },
-                query: {
+                params: {
                     adapter: body.adapter,
                     hash: body.password,
                     accessToken: body.accessToken,
