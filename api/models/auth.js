@@ -1,5 +1,12 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
     const Model = sequelize.define('auth', {
+        id: {
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
+            allowNull: false,
+            primaryKey: true,
+            unique: true
+        },
         adapter: {
             type: Sequelize.STRING,
             allowNull: false
