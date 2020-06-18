@@ -5,8 +5,6 @@ const config = require('../../config/config.json');
 
 const schema = config.api.db.schema;
 
-console.log(schema);
-
 module.exports = ({ sequelize }) => {
     const models = {
         Board: require('./board')({ sequelize, Sequelize, schema }),
