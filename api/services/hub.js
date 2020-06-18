@@ -62,14 +62,21 @@ module.exports = {
     },
     getHub: async (body) => {
         const result = await sequelize.transaction(async (t) => {
-            const hub = await HubInterface.get(t, 'Hub', body.hubId);
+            const hub = await queryInterface.get({
+                transaction: t,
+                model: 'Hub',
+                identifiers: {
+                    id: body.hubId
+                }
+            });
 
             return hub;
         });
 
         return result;
     },
-    updateHub: async (body) => {
+    
+    /* updateHub: async (body) => {
         return false;
-    }
+    } */
 };
