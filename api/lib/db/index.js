@@ -1,6 +1,6 @@
 const Sequelize = require('sequelize');
 const consola = require('consola');
-const config = require('../../config/config.json');
+const config = require('../../../config/config.json');
 
 const sequelize = new Sequelize(config.api.db.database, config.api.db.user, config.api.db.password, {
     host: config.api.db.host,
