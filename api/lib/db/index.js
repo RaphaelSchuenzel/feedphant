@@ -39,7 +39,7 @@ sequelize.sync({ force: process.argv.slice(2).includes('sync-hard') && config.ap
         consola.success('Sequelize: Successfully synced all models.');
     })
 
-const queryInterface = require('../../models')({ models });
+const queryInterface = require('./queryInterface')({ models });
 
 // export
 module.exports = { sequelize, queryInterface }
