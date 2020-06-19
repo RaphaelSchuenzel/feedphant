@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('post_comment_vote', {
+    const Model = sequelize.define('user', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
@@ -7,14 +7,17 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        owner: {
-            type: Sequelize.UUID,
+        name: {
+            type: Sequelize.STRING,
             allowNull: false
         },
-        state: {
-            type: Sequelize.BOOLEAN,
-            allowNull: false,
-            defaultValue: true
+        email: {
+            type: Sequelize.STRING,
+            allowNull: false
+        },
+        avatarUrl: {
+            type: Sequelize.STRING(4096),
+            allowNull: true
         }
     }, {
         schema,
@@ -22,7 +25,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.PostCommentVote.belongsTo(models.PostComment);
+        models.User.belongsTo(models.Hub);
+        models.User.hasOne(models.UserAuth);
     };
 
     return Model;

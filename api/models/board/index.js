@@ -1,12 +1,18 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('post_state', {
+    const Model = sequelize.define('board', {
         id: {
-            type: Sequelize.STRING,
+            type: Sequelize.UUID,
+            defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
             allowNull: false,
             primaryKey: true,
             unique: true
         },
         name: {
+            type: Sequelize.STRING,
+            allowNull: false,
+            unique: true
+        },
+        url: {
             type: Sequelize.STRING,
             allowNull: false,
             unique: true
@@ -17,7 +23,8 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.PostState.belongsTo(models.Post);
+        models.Board.belongsTo(models.Hub);
+        models.Board.hasMany(models.BoardPost);
     };
 
     return Model;
