@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('board_post_state', {
+    const Model = sequelize.define('hub_board_post_state', {
         id: {
             type: Sequelize.STRING,
             allowNull: false,
@@ -17,7 +17,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.BoardPostState.belongsTo(models.BoardPost);
+        models.HubBoardPostState.belongsTo(models.HubBoardPost);
     };
 
     return Model;

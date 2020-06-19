@@ -1,10 +1,10 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('subscription', {
+    const Model = sequelize.define('hub_subscription', {
         stripeCustomerId: {
             type: Sequelize.STRING(2048),
             allowNull: true
         },
-        stripeSubscriptionId: {
+        stripeHubSubscriptionId: {
             type: Sequelize.STRING(2048),
             allowNull: true,
             unique: true
@@ -19,7 +19,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.Subscription.belongsTo(models.Hub);
+        models.HubSubscription.belongsTo(models.Hub);
     };
 
     return Model;

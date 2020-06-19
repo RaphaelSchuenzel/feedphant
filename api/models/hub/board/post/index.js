@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('user_auth', {
+    const Model = sequelize.define('hub_board_post', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
@@ -7,23 +7,22 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        adapter: {
+        title: {
             type: Sequelize.STRING,
             allowNull: false
         },
-        hash: {
-            type: Sequelize.STRING(4096),
-            allowNull: true
+        content: {
+            type: Sequelize.STRING,
+            allowNull: false
         },
-        accessToken: {
-            type: Sequelize.STRING(4096),
+        hidden: {
+            type: Sequelize.BOOLEAN,
             allowNull: false,
-            unique: true
+            defaultValue: false
         },
-        refreshToken: {
-            type: Sequelize.STRING(4096),
-            allowNull: false,
-            unique: true
+        state: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
         schema,
@@ -31,7 +30,9 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.UserAuth.belongsTo(models.User);
+        models.HubBoardPost.belongsTo(models.HubBoard);
+        models.HubBoardPost.hasMany(models.HubBoardPostState);
+        models.HubBoardPost.hasMany(models.HubBoardPostVote);
     };
 
     return Model;
