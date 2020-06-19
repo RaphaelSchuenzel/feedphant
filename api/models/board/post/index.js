@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('hub_board_post_comment', {
+    const Model = sequelize.define('hub_board_post', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
@@ -7,18 +7,22 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        owner: {
-            type: Sequelize.UUID,
+        title: {
+            type: Sequelize.STRING,
             allowNull: false
         },
         content: {
-            type: Sequelize.STRING(4096),
+            type: Sequelize.STRING,
             allowNull: false
         },
         hidden: {
             type: Sequelize.BOOLEAN,
             allowNull: false,
             defaultValue: false
+        },
+        state: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
         schema,
@@ -26,8 +30,9 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.HubBoardPostComment.belongsTo(models.HubBoardPost);
-        models.HubBoardPostComment.hasMany(models.HubBoardPostCommentVote);
+        models.BoardPost.belongsTo(models.Board);
+        models.BoardPost.hasMany(models.BoardPostState);
+        models.BoardPost.hasMany(models.BoardPostVote);
     };
 
     return Model;

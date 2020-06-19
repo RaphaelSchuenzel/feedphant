@@ -7,17 +7,17 @@ const schema = config.api.db.schema;
 
 module.exports = ({ sequelize }) => {
     const models = {
+        Board: require('./board')({ sequelize, Sequelize, schema }),
+        BoardPost: require('./board/post')({ sequelize, Sequelize, schema }),
+        BoardPostState: require('./board/post/state')({ sequelize, Sequelize, schema }),
+        BoardPostVote: require('./board/post/vote')({ sequelize, Sequelize, schema }),
+        BoardPostComment: require('./board/post/comment')({ sequelize, Sequelize, schema }),
+        BoardPostCommentVote: require('./board/post/comment/vote')({ sequelize, Sequelize, schema }),
+        Brand: require('./brand')({ sequelize, Sequelize, schema }),
         Hub: require('./hub')({ sequelize, Sequelize, schema }),
-        HubBoard: require('./hub/board')({ sequelize, Sequelize, schema }),
-        HubBoardPost: require('./hub/board/post')({ sequelize, Sequelize, schema }),
-        HubBoardPostState: require('./hub/board/post/state')({ sequelize, Sequelize, schema }),
-        HubBoardPostVote: require('./hub/board/post/vote')({ sequelize, Sequelize, schema }),
-        HubBoardPostComment: require('./hub/board/post/comment')({ sequelize, Sequelize, schema }),
-        HubBoardPostCommentVote: require('./hub/board/post/comment/vote')({ sequelize, Sequelize, schema }),
-        HubBrand: require('./hub/brand')({ sequelize, Sequelize, schema }),
-        HubSubscription: require('./hub/subscription')({ sequelize, Sequelize, schema }),
-        HubUser: require('./hub/user')({ sequelize, Sequelize, schema }),
-        HubUserAuth: require('./hub/user/auth')({ sequelize, Sequelize, schema })
+        Subscription: require('./board/subscription')({ sequelize, Sequelize, schema }),
+        User: require('./user')({ sequelize, Sequelize, schema }),
+        UserAuth: require('./user/auth')({ sequelize, Sequelize, schema })
     }
 
     return models;

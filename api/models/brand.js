@@ -38,7 +38,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.HubBrand.belongsTo(models.Hub);
+        models.Brand.belongsTo(models.Hub);
     };
 
     return Model;

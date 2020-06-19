@@ -19,7 +19,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.HubSubscription.belongsTo(models.Hub);
+        models.Subscription.belongsTo(models.Hub);
     };
 
     return Model;

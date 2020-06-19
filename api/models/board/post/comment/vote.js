@@ -1,5 +1,5 @@
 module.exports = ({ sequelize, Sequelize, schema }) => {
-    const Model = sequelize.define('hub_board', {
+    const Model = sequelize.define('hub_board_post_comment_vote', {
         id: {
             type: Sequelize.UUID,
             defaultValue: Sequelize.literal(`${schema}.uuid_generate_v4()`),
@@ -7,15 +7,14 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             primaryKey: true,
             unique: true
         },
-        name: {
-            type: Sequelize.STRING,
-            allowNull: false,
-            unique: true
+        owner: {
+            type: Sequelize.UUID,
+            allowNull: false
         },
-        url: {
-            type: Sequelize.STRING,
+        state: {
+            type: Sequelize.BOOLEAN,
             allowNull: false,
-            unique: true
+            defaultValue: true
         }
     }, {
         schema,
@@ -23,8 +22,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.HubBoard.belongsTo(models.Hub);
-        models.HubBoard.hasMany(models.HubBoardPost);
+        models.BoardPostCommentVote.belongsTo(models.BoardPostComment);
     };
 
     return Model;
