@@ -15,7 +15,7 @@ module.exports = ({ sequelize }) => {
         HubBoardPostComment: require('./hub/board/post/comment')({ sequelize, Sequelize, schema }),
         HubBoardPostCommentVote: require('./hub/board/post/comment/vote')({ sequelize, Sequelize, schema }),
         HubBrand: require('./hub/brand')({ sequelize, Sequelize, schema }),
-        HubSubscription: require('./hub_subscription')({ sequelize, Sequelize, schema }),
+        HubSubscription: require('./hub/subscription')({ sequelize, Sequelize, schema }),
         HubUser: require('./hub/user')({ sequelize, Sequelize, schema }),
         HubUserAuth: require('./hub/user/auth')({ sequelize, Sequelize, schema })
     }
