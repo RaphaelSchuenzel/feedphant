@@ -5,7 +5,6 @@ const { sequelize, queryInterface } = require('../lib/db');
 module.exports = {
     createHub: async (body) => {
         const result = await sequelize.transaction(async (t) => {
-
             // create a record in hub model
             const hub = await queryInterface.create({
                 transaction: t,
@@ -18,7 +17,7 @@ module.exports = {
             // create a record in hub brand model
             await queryInterface.create({
                 transaction: t,
-                model: 'HubBrand',
+                model: 'Brand',
                 foreignKeys: {
                     hubId: hub.dataValues.id
                 },

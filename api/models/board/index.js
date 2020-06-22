@@ -24,7 +24,10 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
 
     Model.associate = (models) => {
         models.Board.belongsTo(models.Hub);
-        models.Board.hasMany(models.BoardPost);
+        
+        models.Board.hasMany(models.BoardPost, {
+            foreignKey: 'board_id'
+        });
     };
 
     return Model;

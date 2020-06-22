@@ -22,7 +22,9 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.BoardPostCommentVote.belongsTo(models.BoardPostComment);
+        models.BoardPostCommentVote.belongsTo(models.BoardPostComment, {
+            foreignKey: 'comment_id'
+        });
     };
 
     return Model;

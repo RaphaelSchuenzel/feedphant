@@ -14,7 +14,7 @@ module.exports = ({ sequelize }) => ({
     BoardPostCommentVote: require('./board/post/comment/vote')({ sequelize, Sequelize, schema }),
     Brand: require('./brand')({ sequelize, Sequelize, schema }),
     Hub: require('./hub')({ sequelize, Sequelize, schema }),
-    Subscription: require('./board/subscription')({ sequelize, Sequelize, schema }),
+    Subscription: require('./subscription')({ sequelize, Sequelize, schema }),
     User: require('./user')({ sequelize, Sequelize, schema }),
     UserAuth: require('./user/auth')({ sequelize, Sequelize, schema })
 });

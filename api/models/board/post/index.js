@@ -30,9 +30,17 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.BoardPost.belongsTo(models.Board);
-        models.BoardPost.hasMany(models.BoardPostState);
-        models.BoardPost.hasMany(models.BoardPostVote);
+        models.BoardPost.belongsTo(models.Board, {
+            foreignKey: 'board_id'
+        });
+
+        models.BoardPost.hasMany(models.BoardPostState, {
+            foreignKey: 'post_id'
+        });
+        
+        models.BoardPost.hasMany(models.BoardPostVote, {
+            foreignKey: 'post_id'
+        });
     };
 
     return Model;

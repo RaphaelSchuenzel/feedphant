@@ -26,8 +26,13 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.BoardPostComment.belongsTo(models.BoardPost);
-        models.BoardPostComment.hasMany(models.BoardPostCommentVote);
+        models.BoardPostComment.belongsTo(models.BoardPost, {
+            foreignKey: 'post_id'
+        });
+
+        models.BoardPostComment.hasMany(models.BoardPostCommentVote, {
+            foreignKey: 'comment_id'
+        });
     };
 
     return Model;

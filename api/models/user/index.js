@@ -26,7 +26,10 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
 
     Model.associate = (models) => {
         models.User.belongsTo(models.Hub);
-        models.User.hasOne(models.UserAuth);
+
+        models.User.hasMany(models.UserAuth, {
+            foreignKey: 'user_id'
+        });
     };
 
     return Model;
