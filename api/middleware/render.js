@@ -5,7 +5,7 @@ module.exports = (controller) => {
         try {
             return res.json(await controller(req))
         } catch (err) {
-            // todo: handle error
+            // todo: investigate logger modifying error object
             logger.error(err);
 
             return res.status(err.status || 500).json(err || {});
