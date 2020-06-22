@@ -1,10 +1,10 @@
 module.exports = (controller) => {
-    return (req, res, next) => {
+    return async (req, res, next) => {
         try {
-            res.json(controller(req))
+            return res.json(await controller(req))
         } catch (err) {
             // todo: handle error
-            res.json('error')
+            return res.status(err.status || 500).json(err || {});
         }
     }
 }
