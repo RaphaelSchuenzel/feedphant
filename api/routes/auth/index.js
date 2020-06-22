@@ -6,12 +6,14 @@ const passport = require('passport');
 // controllers
 const AuthController = require('../../controllers/auth');
 
-// register a new account; email & password as authentication method
-auth.route('/:adapter')
-    .post(AuthController.createAccount);
+module.exports = ({ render }) => {
+    auth.route('/:adapter')
+        // register a new account; email & password as authentication method
+        .post(render(AuthController.createAccount));
 
-// log in to an existing account; email & password as authentication method
-auth.route('/email')
-    .put(passport.authenticate('local'), AuthController.loginAccount);
+    auth.route('/email')
+        // log in to an existing account; email & password as authentication method
+        .put(passport.authenticate('local'), render(AuthController.loginAccount));
 
-module.exports = auth;
+    return auth;
+};

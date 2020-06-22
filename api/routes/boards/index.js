@@ -5,16 +5,18 @@ const boards = require('express').Router();
 // controllers
 const BoardsController = require('../../controllers/boards');
 
-// get boards within hub
-boards.route('/')
-    .get(BoardsController.getBoards);
+module.exports = ({ render }) => {
+    boards.route('/')
+        // get boards within hub
+        .get(render(BoardsController.getBoards));
 
-// get posts within the specified board; range is selected within url (from - to)
-boards.route('/:board_id/posts/:limit_from/:limit_to')
-    .get(BoardsController.getBoardPosts);
+    boards.route('/:board_id/posts/:limit_from/:limit_to')
+        // get posts within the specified board; range is selected within url (from - to)
+        .get(render(BoardsController.getBoardPosts));
 
-// get comments for the specified post; range is selected within url (from - to)
-boards.route('/:board_id/posts/:post_id/comments/:limit_from/:limit_to')
-    .get(BoardsController.getBoardPostComments);
+    boards.route('/:board_id/posts/:post_id/comments/:limit_from/:limit_to')
+        // get comments for the specified post; range is selected within url (from - to)
+        .get(render(BoardsController.getBoardPostComments));
 
-module.exports = boards;
+    return boards;
+};
