@@ -3,14 +3,14 @@
 const HubService = require('../services/hub');
 
 // retrieve hub on requested subdomain (${url}.feedphant.com)
-exports.getHub = async (req, res, next) => {
+exports.getHub = async (req) => {
     const hub = await HubService.getHub(req.body);
 
-    return res.json(hub);
+    return hub;
 };
 
 // create a new hub on the requested subdomain (${url}.feedphant.com)
-exports.createHub = async (req, res, next) => {
+exports.createHub = async (req) => {
     const credentials = req.body;
 
     // todo: specify adapter, generate access & refresh token
@@ -21,12 +21,12 @@ exports.createHub = async (req, res, next) => {
 
     const hub = await HubService.createHub(credentials);
 
-    return res.json(hub);
+    return hub;
 };
 
 // update an existing hub on the requested subdomain (${url}.feedphant.com)
-exports.updateHub = async (req, res, next) => {
+exports.updateHub = async (req) => {
     const hub = await HubService.updateHub(req.body);
 
-    return res.json(hub);
+    return hub;
 }

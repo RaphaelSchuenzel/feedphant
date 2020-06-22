@@ -2,14 +2,14 @@
 
 const AuthService = require('../services/auth');
 
-exports.createAccount = async (req, res, next) => {
+exports.createAccount = async (req) => {
     const user = await AuthService.createAccount(req.body);
 
-    return res.json(user);
+    return user;
 };
 
-exports.loginAccount = async (req, res, next) => {
+exports.loginAccount = async (req) => {
     const user = await AuthService.loginAccount(req.body);
 
-    return res.json(user);
+    return user;
 };
