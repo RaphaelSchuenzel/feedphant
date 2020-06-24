@@ -3,14 +3,14 @@
 const { sequelize, queryInterface } = require('../lib/db');
 
 module.exports = {
-    createHub: async (body) => {
+    createHub: async ({ hub, user }) => {
         const result = await sequelize.transaction(async (t) => {
             // create a record in hub model
-            const hub = await queryInterface.create({
+            const hubQuery = await queryInterface.create({
                 transaction: t,
                 model: 'Hub',
                 params: {
-                    subdomain: body.subdomain
+                    subdomain: hub.subdomain
                 }
             });
 
@@ -19,63 +19,64 @@ module.exports = {
                 transaction: t,
                 model: 'HubBrand',
                 foreignKeys: {
-                    hubId: hub.dataValues.id
+                    hubId: hubQuery.dataValues.id
                 },
                 params: {
-                    name: body.productName
+                    name: hub.brand.productName
                 }
             });
 
             // create a record in user model
-            const user = await queryInterface.create({
+            const userQuery = await queryInterface.create({
                 transaction: t,
                 model: 'HubUser',
                 foreignKeys: {
-                    hubId: hub.dataValues.id
+                    hubId: hubQuery.dataValues.id
                 },
                 params: {
-                    name: body.name,
-                    email: body.email
+                    name: user.name,
+                    email: user.email
                 }
             });
 
             // create a record in auth model
-            const auth = await queryInterface.create({
+            const authQuery = await queryInterface.create({
                 transaction: t,
                 model: 'HubUserAuth',
                 foreignKeys: {
-                    userId: user.dataValues.id
+                    userId: userQuery.dataValues.id
                 },
                 params: {
-                    adapter: body.adapter,
-                    hash: body.password,
-                    accessToken: body.accessToken,
-                    refreshToken: body.refreshToken
+                    adapter: user.auth.adapter,
+                    hash: user.auth.password,
+                    accessToken: user.auth.accessToken,
+                    refreshToken: user.auth.refreshToken
                 }
             });
 
-            return auth.dataValues.accessToken;
+            // return the access token of the newly created user
+            return authQuery.dataValues.accessToken;
         });
 
         return result;
     },
-    getHub: async (body) => {
+    getHub: async ({ id, subdomain }) => {
         const result = await sequelize.transaction(async (t) => {
-            const hub = await queryInterface.get({
+            const hubQuery = await queryInterface.get({
                 transaction: t,
                 model: 'Hub',
                 identifiers: {
-                    id: body.hubId
+                    id,
+                    subdomain
                 }
             });
 
-            return hub;
+            return hubQuery;
         });
 
         return result;
     },
-    
-    /* updateHub: async (body) => {
+    updateHub: (body) => {
         return false;
-    } */
+    }
 };
