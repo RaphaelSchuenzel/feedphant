@@ -1,31 +1,17 @@
 'use strict';
 
-exports.getUser = (condition, value) => {
-    return new Promise((resolve, reject) => {
-        if (condition && value) {
-            // allow lookup for unique conditions only
+const { sequelize, queryInterface } = require('../lib/db');
 
-            if (condition === 'id' || condition === 'email') {
-                /* db.query(`SELECT * FROM users WHERE ${condition} = '${value}'`, function (error, results, fields) {
-                    if (error) {
-                        reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, error));
-                    } else if (results) {
-                        const response = {};
-                        
-                        response.id = results[0].id;
-                        response.username = results[0].username;
-                        response.avatar = results[0].avatar_url;
-                        
-                        return resolve(response);
-                    } else {
-                        return resolve({});
-                    }
-                }); */
-            } else {
-                reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, 'Invalid condition.'));
-            }
-        } else {
-            reject(new ApplicationError(ErrorCodes.INTERNAL_ERROR, 'Missing arguments.'));
-        }
+exports.getUser = async ({ identifier }) => {
+    const result = await sequelize.transaction(async (t) => {
+        const userQuery = await queryInterface.get({
+            transaction: t,
+            model: 'HubUser',
+            params: identifier
+        });
+
+        return userQuery;
     });
+
+    return result;
 }
