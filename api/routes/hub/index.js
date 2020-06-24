@@ -18,9 +18,9 @@ module.exports = ({ render }) => {
             [Segments.BODY]: Joi.object().keys({
                 subdomain: Joi.string().required(),
                 productName: Joi.string().required(),
-                name: Joi.string().required(),
-                email: Joi.string().email().required(),
-                password: Joi.string()
+                userName: Joi.string().required(),
+                userEmail: Joi.string().email().required(),
+                userPassword: Joi.string()
             })
         }), render(HubController.createHub))
         

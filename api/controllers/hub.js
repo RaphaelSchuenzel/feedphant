@@ -19,10 +19,10 @@ exports.createHub = async (req) => {
             }
         },
         user: {
-            name: req.body.name,
-            email: req.body.email,
+            name: req.body.userName,
+            email: req.body.userEmail,
             auth: {
-                password: req.body.password
+                password: req.body.userPassword
             }
         }
     };
