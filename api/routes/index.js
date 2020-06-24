@@ -1,7 +1,7 @@
 'use strict';
 
 const router = require('express').Router();
-const render = require('../middleware/render');
+const render = require('../lib/render');
 
 router.use('/hub', require('./hub')({ render }))
 router.use('/boards', require('./boards')({ render }))
