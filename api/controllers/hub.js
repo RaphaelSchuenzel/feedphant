@@ -11,15 +11,29 @@ exports.getHub = async (req) => {
 
 // create a new hub on the requested subdomain (${url}.feedphant.com)
 exports.createHub = async (req) => {
-    const credentials = req.body;
+    const payload = {
+        hub: {
+            subdomain: req.body.subdomain,
+            brand: {
+                productName: req.body.productName
+            }
+        },
+        user: {
+            name: req.body.name,
+            email: req.body.email,
+            auth: {
+                password: req.body.password
+            }
+        }
+    };
 
     // todo: specify adapter, generate access & refresh token
-    credentials.adapter = 'email';
+    payload.user.auth.adapter = 'email';
     
-    credentials.accessToken = require('crypto').randomBytes(36).toString('hex');
-    credentials.refreshToken = require('crypto').randomBytes(36).toString('hex');
+    payload.user.auth.accessToken = require('crypto').randomBytes(36).toString('hex');
+    payload.user.auth.refreshToken = require('crypto').randomBytes(36).toString('hex');
 
-    const hub = await HubService.createHub(credentials);
+    const hub = await HubService.createHub(payload);
 
     return hub;
 };
