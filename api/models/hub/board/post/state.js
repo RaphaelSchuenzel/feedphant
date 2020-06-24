@@ -17,7 +17,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.BoardPostState.belongsTo(models.BoardPost, {
+        models.HubBoardPostState.belongsTo(models.HubBoardPost, {
             foreignKey: 'post_id'
         });
     };

@@ -31,7 +31,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.UserAuth.belongsTo(models.User, {
+        models.HubUserAuth.belongsTo(models.HubUser, {
             foreignKey: 'user_id'
         });
     };

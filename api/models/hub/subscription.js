@@ -4,7 +4,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
             type: Sequelize.STRING(2048),
             allowNull: true
         },
-        stripeHubSubscriptionId: {
+        stripeHubHubSubscriptionId: {
             type: Sequelize.STRING(2048),
             allowNull: true,
             unique: true
@@ -19,7 +19,7 @@ module.exports = ({ sequelize, Sequelize, schema }) => {
     });
 
     Model.associate = (models) => {
-        models.Subscription.belongsTo(models.Hub);
+        models.HubSubscription.belongsTo(models.Hub);
     };
 
     return Model;
