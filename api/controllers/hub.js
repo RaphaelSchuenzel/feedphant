@@ -1,6 +1,9 @@
 'use strict';
 
+const { sequelize } = require('../lib/db');
+
 const HubService = require('../services/hub');
+const UsersService = require('../services/users');
 
 // retrieve hub on requested subdomain (${url}.feedphant.com)
 exports.getHub = async (req) => {
@@ -11,31 +14,42 @@ exports.getHub = async (req) => {
 
 // create a new hub on the requested subdomain (${url}.feedphant.com)
 exports.createHub = async (req) => {
-    const payload = {
+    const params = {
         hub: {
             subdomain: req.body.subdomain,
-            brand: {
-                productName: req.body.productName
-            }
+            productName: req.body.productName
         },
         user: {
             name: req.body.userName,
             email: req.body.userEmail,
-            auth: {
-                password: req.body.userPassword
-            }
+            password: req.body.userPassword
         }
     };
 
     // todo: specify adapter, generate access & refresh token
-    payload.user.auth.adapter = 'email';
+    params.user.adapter = 'email';
     
-    payload.user.auth.accessToken = require('crypto').randomBytes(36).toString('hex');
-    payload.user.auth.refreshToken = require('crypto').randomBytes(36).toString('hex');
+    params.user.accessToken = require('crypto').randomBytes(36).toString('hex');
+    params.user.refreshToken = require('crypto').randomBytes(36).toString('hex');
 
-    const hub = await HubService.createHub(payload);
+    const result = await sequelize.transaction(async (t) => {
+        const hub = await HubService.createHub({
+            transaction: t,
+            params: params.hub
+        });
 
-    return hub;
+        const user = await UsersService.createUser({
+            transaction: t,
+            params: {
+                hubId: hub.id,
+                ...params.user
+            }
+        });
+
+        return user;
+    });
+
+    return result;
 };
 
 // update an existing hub on the requested subdomain (${url}.feedphant.com)
