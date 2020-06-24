@@ -42,7 +42,7 @@ module.exports = {
             // create a record in auth model
             const auth = await queryInterface.create({
                 transaction: t,
-                model: 'Auth',
+                model: 'UserAuth',
                 foreignKeys: {
                     userId: user.dataValues.id
                 },
