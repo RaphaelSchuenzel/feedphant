@@ -17,7 +17,7 @@ module.exports = {
             // create a record in hub brand model
             await queryInterface.create({
                 transaction: t,
-                model: 'Brand',
+                model: 'HubBrand',
                 foreignKeys: {
                     hubId: hub.dataValues.id
                 },
@@ -29,7 +29,7 @@ module.exports = {
             // create a record in user model
             const user = await queryInterface.create({
                 transaction: t,
-                model: 'User',
+                model: 'HubUser',
                 foreignKeys: {
                     hubId: hub.dataValues.id
                 },
@@ -42,7 +42,7 @@ module.exports = {
             // create a record in auth model
             const auth = await queryInterface.create({
                 transaction: t,
-                model: 'UserAuth',
+                model: 'HubUserAuth',
                 foreignKeys: {
                     userId: user.dataValues.id
                 },
