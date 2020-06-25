@@ -1,15 +1,16 @@
 {
-  "name": "client-web-app",
-  "version": "1.0.0",
-  "description": "Client Web App",
-  "author": "",
+  "name": "hub",
+  "version": "0.0.1",
+  "description": "Tenant Web Application",
+  "author": "Feedphant",
   "private": true,
   "scripts": {
-    "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server --watch api",
-    "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production node server/index.js",
-    "generate": "nuxt generate",
-    "lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
+    "api-dev": "cross-env NODE_ENV=development nodemon src/api/index.js --watch api",
+    "web-dev": "cross-env NODE_ENV=development nodemon src/web/server/index.js --watch server",
+    "web-build": "nuxt build",
+    "web-start": "cross-env NODE_ENV=production node server/index.js",
+    "web-generate": "nuxt generate",
+    "web-lint": "eslint --ext .js,.vue --ignore-path .gitignore ."
   },
   "dependencies": {
     "@nuxtjs/axios": "^5.3.6",
