@@ -28,7 +28,6 @@ module.exports = {
     
     // Plugins to load before mounting the App
     plugins: [
-        '@/plugins/api',
         { src: '@/plugins/moment', mode: 'client' },
         { src: '@/plugins/consoleWarning', mode: 'client' },
         { src: '@/plugins/scrollToTop', mode: 'client' }
