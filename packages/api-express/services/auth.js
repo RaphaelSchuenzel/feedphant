@@ -95,7 +95,7 @@ exports.loginAccount = async (req, res, next) => {
 
 exports.generateAccessToken = (user) => {
     return new Promise((resolve, reject) => {
-        const authSecret = process.env.AUTH_SECRET || config.api.secrets.auth;
+        const authSecret = config.api.secrets.auth;
 
         jwt.sign({
             id: user.id,

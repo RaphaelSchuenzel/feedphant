@@ -1,5 +1,6 @@
 {
 	"api": {
+		"port": "5000",
 		"bodyLimit": "100kb",
 		"corsHeaders": ["Link"],
 		"debug": false,
@@ -13,8 +14,12 @@
 			"schema": "public"
 		},
 		"secrets": {
-			"auth": "replace_me",
-			"session": "replace_me"
+			"auth": "REPLACE_ME",
+			"session": "REPLACE_ME"
 		}
+	},
+	"web": {
+		"host": "127.0.0.1",
+		"port": "6000"
 	}
 }

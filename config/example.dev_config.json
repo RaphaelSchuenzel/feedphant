@@ -1,0 +1,25 @@
+{
+	"api": {
+		"port": "5000",
+		"bodyLimit": "100kb",
+		"corsHeaders": ["Link"],
+		"debug": false,
+		"db": {
+			"host": "127.0.0.1",
+			"user": "postgres",
+			"password": "",
+			"database": "local",
+			"dialect": "postgres",
+			"port": "5432",
+			"schema": "public"
+		},
+		"secrets": {
+			"auth": "DnoVZ8JFvqkxYZtk7Vud49bOmt7BK35vbVMBCVVM",
+			"session": "keyboard cat"
+		}
+	},
+	"web": {
+		"host": "127.0.0.1",
+		"port": "6000"
+	}
+}

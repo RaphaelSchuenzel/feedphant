@@ -11,7 +11,7 @@ const config = require('../../config/config.json');
 
 const UsersService = require('../services/users');
 
-const sessionSecret = process.env.SESSION_SECRET || config.api.secrets.session;
+const sessionSecret = config.api.secrets.session;
 
 module.exports = ({ app }) => {
     passport.use(new LocalStrategy({
@@ -29,7 +29,7 @@ module.exports = ({ app }) => {
 
     passport.use(new BearerStrategy(
         async (token, done) => {
-            const authSecret = process.env.AUTH_SECRET || config.api.secrets.auth;
+            const authSecret = config.api.secrets.auth;
 
             const payload = await jwt.verify(token, authSecret);
 

@@ -1,5 +1,7 @@
 'use strict';
 
+const config = require('../../config');
+
 export default function ({ $axios, store }, inject) {
     const api = $axios.create({
         headers: {
@@ -9,7 +11,7 @@ export default function ({ $axios, store }, inject) {
         }
     });
 
-    api.setBaseURL(`http://${process.env.HOST || 'localhost'}:${process.env.PORT || 3000}` + '/api');
+    api.setBaseURL(`http://${config.api.host}:${config.api.port}` + '/api');
 
     // Inject to context as $api
     inject('api', api)

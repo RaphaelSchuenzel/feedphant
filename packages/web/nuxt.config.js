@@ -1,4 +1,6 @@
 
+const config = require('../../config');
+
 module.exports = {
     mode: 'universal',
     
@@ -58,6 +60,12 @@ module.exports = {
         */
         extend (config, ctx) {}
     },
+
+    server: {
+        port: config.web.port,
+        host: config.web.host
+    },
+
     serverMiddleware: [
         // API middleware
         '@/api/index.js'
