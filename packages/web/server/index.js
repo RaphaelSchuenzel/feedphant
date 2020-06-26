@@ -1,13 +1,13 @@
 const express = require('express')
 const consola = require('consola')
 const { Nuxt, Builder } = require('nuxt')
-const enviroment = require('../helpers/enviroment')
+const nodeEnv = require('../../../helpers/node_env')
 
 const app = express()
 
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
-config.dev = enviroment !== 'production'
+config.dev = nodeEnv !== 'production'
 
 async function start() {
     // Init Nuxt.js

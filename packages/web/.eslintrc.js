@@ -1,4 +1,4 @@
-const enviroment = require('../helpers/enviroment');
+const nodeEnv = require('../helpers/enviroment');
 
 module.exports = {
     "root": true,
@@ -23,8 +23,8 @@ module.exports = {
     // add your custom rules here
     "rules": {
         "nuxt/no-cjs-in-config": "off",
-        "no-console": enviroment === "production" ? "error" : "off",
-        "no-debugger": enviroment === "production" ? "error" : "off",
+        "no-console": nodeEnv === "production" ? "error" : "off",
+        "no-debugger": nodeEnv === "production" ? "error" : "off",
         "indent": ["error", 4],
         "no-trailing-spaces": ["error", {
             "skipBlankLines": true,
