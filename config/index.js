@@ -1,4 +1,4 @@
-const devConfig = require('./dev.json');
+const devConfig = require('./dev_config.json');
 
 const env = process.env;
 const nodeEnv = require('../helpers/node_env');
